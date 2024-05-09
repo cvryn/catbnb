@@ -43,6 +43,10 @@
 //   }
 // );
 
+// module.exports = router;
+
+/* ^^^ COMMENT IN THIS TO TEST THE USER AUTH MIDDLEWARE ^^^ */
+
 const router = require("express").Router();
 const { restoreUser } = require("../../utils/auth.js");
 
