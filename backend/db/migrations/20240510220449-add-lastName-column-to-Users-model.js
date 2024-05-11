@@ -1,15 +1,14 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.addColumn('Users', 'lastName', {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.addColumn("Users", "lastName", {
       type: Sequelize.STRING,
-
-    })
+    });
   },
 
-  async down (queryInterface, Sequelize) {
-await queryInterface.removeColumn('User', 'lastName')
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.removeColumn("Users", "lastName");
+  },
 };
