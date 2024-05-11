@@ -31,7 +31,7 @@ router.post(
   '/',
   validateLogin,
   async (req, res, next) => {
-    const { credential, password, firstName, lastName } = req.body;
+    const { credential, password } = req.body;
 
     const user = await User.unscoped().findOne({
       where: {
@@ -54,8 +54,8 @@ router.post(
       id: user.id,
       email: user.email,
       username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      // firstName: user.firstName,
+      // lastName: user.lastName,
     };
 
     await setTokenCookie(res, safeUser);
