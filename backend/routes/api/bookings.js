@@ -12,5 +12,17 @@ const { Spot, User, Booking, Review, ReviewImage, SpotImage } = require('../../d
 const router = express.Router();
 
 
+//Get all bookings -- TESTING WORKS
+router.get('/', async (req,res) => {
+    let booking = await Booking.findAll({
+        where: {
+            spotId: 1
+        }
+    })
+    res.json(booking)
+
+})
+
+
 
 module.exports = router;
