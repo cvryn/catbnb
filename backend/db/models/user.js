@@ -1,10 +1,11 @@
 'use strict';
 const { Model, Validator } = require('sequelize');
+const spot = require('./spot');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // define association here
+      User.hasMany(models.Spot, {foreignKey: 'ownerId'})
     }
   };
 
