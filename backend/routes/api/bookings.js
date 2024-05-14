@@ -13,22 +13,4 @@ const router = express.Router();
 
 
 
-
-//Get all Spots
-router.get("/", async (req, res, next) => {
-    const spots = await Spot.findAll()
-
-    res.json(spots)
-} );
-
-
-
-// Get All Current Spots
-router.get('/current', requireAuth, async (req, res) => {
-
-
-})
-
-
-
 module.exports = router;

@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === "production") {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    
+
     await Spot.bulkCreate(
       [
         {
@@ -56,15 +56,11 @@ module.exports = {
     );
   },
 
-  async down(queryInterface, Sequelize) {
-    options.tableName = "Spots";
+  async down (queryInterface, Sequelize) {
+
+    options.tableName = 'Spots';
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(
-      options,
-      {
-        name: { [Op.in]: ["Cat Box", "Cat Tree", "Cat House"] },
-      },
-      {}
-    );
-  },
+
+    await queryInterface.bulkDelete(options, null, {});
+  }
 };
