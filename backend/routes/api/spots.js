@@ -7,13 +7,13 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require('sequelize');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, User,  Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
+const { Spot, User, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 
 const router = express.Router();
 
 
 //Get all Spots
-router.get("/spots", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     const spots = await Spot.findAll()
 
     res.json(spots)
@@ -22,7 +22,7 @@ router.get("/spots", async (req, res, next) => {
 
 
 // Get All Current Spots
-router.get('/spots/current', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res) => {
 
 
 })
