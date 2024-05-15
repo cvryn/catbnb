@@ -65,7 +65,7 @@ async function numReviews(spots) {
   }
 }
 
-//Get all Spots
+//Get all Spots -----------------------------------------------------------------------------
 router.get("/", async (req, res, next) => {
   const spots = await Spot.findAll();
   await avgRatings(spots);
@@ -74,7 +74,7 @@ router.get("/", async (req, res, next) => {
   res.json({ Spots: spots });
 });
 
-// Get All Spots owned by the Current User
+// Get All Spots owned by the Current User --------------------------------------------------
 router.get("/current", requireAuth, async (req, res) => {
   // console.log(req.user)
   const { id } = req.user;
@@ -90,7 +90,7 @@ router.get("/current", requireAuth, async (req, res) => {
   res.json({ Spots: ownedSpots });
 });
 
-// Get details of a Spot from an id
+// Get details of a Spot from an id --------------------------------------------------------
 router.get("/:spotId", async (req, res) => {
   // console.log(req.params.spotId)
   let id = req.params.spotId
@@ -120,8 +120,7 @@ router.get("/:spotId", async (req, res) => {
   // console.log(id > totalLength)
   // console.log((typeof numId))
   if (id > totalLength) {
-    res.status(404);
-    return res.json({
+    return res.status(404).json({
       "message": "Spot couldn't be found"
     })
   }
@@ -133,9 +132,69 @@ router.get("/:spotId", async (req, res) => {
 });
 
 
-// Create a Spot
+// Create a Spot ----------------------------------------------------------------------------
+router.post('/', requireAuth, async (req, res) => {
+  const { ownerId, address, city, state, country, lat, lng, name, description, price} = req.body
+
+
+  // ERROR RESPONSE BODY FOR CREATING SPOT
+    let err = new Error("Bad Request");
+    err.status = 400;
+    err.errors = {};
+
+    if(!address) {
+      err.errors.address = "Street address is required"
+    };
+    if(!city) {
+      err.errors.city = "City is required"
+    };
+    if(!state) {
+      err.errors.state = "State is required"
+    };
+    if(!country) {
+      err.errors.country = "Country is required"
+    };
+    if(!lat || lat < -90 || lat > 90) {
+      err.errors.lat = "Latitude must be within -90 and 90"
+    };
+    if(!lng || lng < -180 || lng > 180) {
+      err.errors.lng = "Longitude must be within -180 and 180"
+    };
+    if(!name || name.length > 50) {
+      err.errors.name = "Name must be less than 50 characters"
+    };
+    if(!description) {
+      err.errors.description = "Description is required"
+    };
+    if(!price || price < 0) {
+      err.errors.price = "Price per day must be a positive number"
+    };
+    if(Object.keys(err.errors).length) throw err;
+
+
+    // REQUEST CREATE SPOT
+  let newSpot = await Spot
+  .create({
+    ownerId,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  })
+
+  // await Spot.save()
+  res.json(newSpot)
+})
+
 
 // Add an Image to a Spot based on the Spot's id
+
+
 
 // Edit a Spot
 
