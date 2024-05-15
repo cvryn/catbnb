@@ -17,12 +17,12 @@ module.exports = {
           spotId: 1,
           userId: 1,
           review: "Great for a little snooze! :3",
-          stars: 4,
+          stars: 3,
         },
         {
           spotId: 1,
           userId: 2,
-          review: "Nice box!",
+          review: "Not a bad box.",
           stars: 2,
         },
         {
