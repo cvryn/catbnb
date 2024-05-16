@@ -151,31 +151,31 @@ router.post("/", requireAuth, async (req, res) => {
   err.status = 400;
   err.errors = {};
 
-  if (!address) {
+  if (!address || address.trim() === '') {
     err.errors.address = "Street address is required";
   }
-  if (!city) {
+  if (!city || city.trim() === '') {
     err.errors.city = "City is required";
   }
-  if (!state) {
+  if (!state || state.trim() === '') {
     err.errors.state = "State is required";
   }
-  if (!country) {
+  if (!country || country.trim() === '') {
     err.errors.country = "Country is required";
   }
-  if (!lat || lat < -90 || lat > 90) {
+  if (!lat || lat < -90 || lat > 90 || lat.toString().trim() === '') {
     err.errors.lat = "Latitude must be within -90 and 90";
   }
-  if (!lng || lng < -180 || lng > 180) {
+  if (!lng || lng < -180 || lng > 180 || lng.toString().trim() === '') {
     err.errors.lng = "Longitude must be within -180 and 180";
   }
-  if (!name || name.length > 50) {
+  if (!name || name.length > 50 || name.trim() === '') {
     err.errors.name = "Name must be less than 50 characters";
   }
-  if (!description) {
+  if (!description || description.trim() === '') {
     err.errors.description = "Description is required";
   }
-  if (!price || price < 0) {
+  if (!price || price < 0 || price.toString().includes(" ")) {
     err.errors.price = "Price per day must be a positive number";
   }
   if (Object.keys(err.errors).length) throw err;
@@ -314,34 +314,29 @@ router.put("/:spotId", requireAuth, async (req, res) => {
 
 // Delete a Spot -------------------------------------------------------------------------------------------------------
 router.delete("/:spotId", requireAuth, async (req, res) => {
+  let spotId = parseInt(req.params.spotId);
+  let currentOwnerId = req.user.id;
 
-let spotId = parseInt(req.params.spotId);
-let currentOwnerId = req.user.id;
+  let currentSpot = await Spot.findByPk(spotId);
 
-let currentSpot = await Spot.findByPk(spotId);
+  if (!currentSpot) {
+    return res.status(404).json({
+      message: "Spot couldn't be found -- doesn't exists",
+    });
+  }
 
-if (!currentSpot) {
-  return res.status(404).json({
-    message: "Spot couldn't be found -- doesn't exists",
-  });
-}
+  let owner = currentSpot.ownerId;
 
-let owner = currentSpot.ownerId;
-
-if (currentOwnerId === owner) {
-
-  currentSpot.destroy()
-  res.json({
-    message: "Successfully deleted",
-  });
-
-
-} else {
-  return res.status(404).json({
-    message: "Wrong User",
-  });
-}
-
+  if (currentOwnerId === owner) {
+    currentSpot.destroy();
+    res.json({
+      message: "Successfully deleted",
+    });
+  } else {
+    return res.status(404).json({
+      message: "Wrong User",
+    });
+  }
 });
 
 module.exports = router;
