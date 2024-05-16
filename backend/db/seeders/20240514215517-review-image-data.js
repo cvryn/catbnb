@@ -33,6 +33,22 @@ module.exports = {
           reviewId: 5,
           url: 'image url 5'
         },
+        {
+          reviewId: 6,
+          url: 'image url 5'
+        },
+        {
+          reviewId: 7,
+          url: 'image url 5'
+        },
+        {
+          reviewId: 8,
+          url: 'image url 5'
+        },
+        {
+          reviewId: 9,
+          url: 'image url 5'
+        },
       ]
     )
 
