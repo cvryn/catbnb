@@ -25,6 +25,7 @@ module.exports = {
           url: '/cat-tree.jpg',
           preview: true,
         },
+        
         {
           spotId: 3,
           url: '/cat-house.jpg',

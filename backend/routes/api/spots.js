@@ -93,11 +93,11 @@ router.get("/current", requireAuth, async (req, res) => {
 // Get details of a Spot from an id --------------------------------------------------------
 router.get("/:spotId", async (req, res) => {
   // console.log(req.params.spotId)
-  let id = req.params.spotId
+  let id = req.params.spotId;
   // console.log(id)
 
   let total = await Spot.findAll();
-  let totalLength = total.length
+  let totalLength = total.length;
   // console.log(totalLength)
 
   let spots = await Spot.findAll({
@@ -106,14 +106,15 @@ router.get("/:spotId", async (req, res) => {
     },
     include: [
       {
-      model: SpotImage,
-      attributes: ['id', 'url', 'preview'],
-     },
+        model: SpotImage,
+        attributes: ["id", "url", "preview"],
+      },
       {
-        model: User, as: "Owner",
-        attributes: ['id', 'firstName', 'lastName']
-       }
-      ],
+        model: User,
+        as: "Owner",
+        attributes: ["id", "firstName", "lastName"],
+      },
+    ],
   });
 
   // let numId = +id
@@ -121,60 +122,18 @@ router.get("/:spotId", async (req, res) => {
   // console.log((typeof numId))
   if (id > totalLength) {
     return res.status(404).json({
-      "message": "Spot couldn't be found"
-    })
+      message: "Spot couldn't be found",
+    });
   }
   await avgRatings(spots);
   await numReviews(spots);
 
   res.json(spots);
-
 });
 
-
 // Create a Spot ----------------------------------------------------------------------------
-router.post('/', requireAuth, async (req, res) => {
-  const { ownerId, address, city, state, country, lat, lng, name, description, price} = req.body
-
-
-  // ERROR RESPONSE BODY FOR CREATING SPOT
-    let err = new Error("Bad Request");
-    err.status = 400;
-    err.errors = {};
-
-    if(!address) {
-      err.errors.address = "Street address is required"
-    };
-    if(!city) {
-      err.errors.city = "City is required"
-    };
-    if(!state) {
-      err.errors.state = "State is required"
-    };
-    if(!country) {
-      err.errors.country = "Country is required"
-    };
-    if(!lat || lat < -90 || lat > 90) {
-      err.errors.lat = "Latitude must be within -90 and 90"
-    };
-    if(!lng || lng < -180 || lng > 180) {
-      err.errors.lng = "Longitude must be within -180 and 180"
-    };
-    if(!name || name.length > 50) {
-      err.errors.name = "Name must be less than 50 characters"
-    };
-    if(!description) {
-      err.errors.description = "Description is required"
-    };
-    if(!price || price < 0) {
-      err.errors.price = "Price per day must be a positive number"
-    };
-    if(Object.keys(err.errors).length) throw err;
-
-
-    // REQUEST CREATE SPOT
-  let newSpot = await Spot
-  .create({
+router.post("/", requireAuth, async (req, res) => {
+  const {
     ownerId,
     address,
     city,
@@ -184,17 +143,100 @@ router.post('/', requireAuth, async (req, res) => {
     lng,
     name,
     description,
-    price
-  })
+    price,
+  } = req.body;
+
+  // ERROR RESPONSE BODY FOR CREATING SPOT
+  let err = new Error("Bad Request");
+  err.status = 400;
+  err.errors = {};
+
+  if (!address) {
+    err.errors.address = "Street address is required";
+  }
+  if (!city) {
+    err.errors.city = "City is required";
+  }
+  if (!state) {
+    err.errors.state = "State is required";
+  }
+  if (!country) {
+    err.errors.country = "Country is required";
+  }
+  if (!lat || lat < -90 || lat > 90) {
+    err.errors.lat = "Latitude must be within -90 and 90";
+  }
+  if (!lng || lng < -180 || lng > 180) {
+    err.errors.lng = "Longitude must be within -180 and 180";
+  }
+  if (!name || name.length > 50) {
+    err.errors.name = "Name must be less than 50 characters";
+  }
+  if (!description) {
+    err.errors.description = "Description is required";
+  }
+  if (!price || price < 0) {
+    err.errors.price = "Price per day must be a positive number";
+  }
+  if (Object.keys(err.errors).length) throw err;
+
+  // REQUEST CREATE SPOT
+  let newSpot = await Spot.create({
+    ownerId,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+  });
 
   // await Spot.save()
-  res.json(newSpot)
-})
-
+  return res.status(201).json(newSpot);
+});
 
 // Add an Image to a Spot based on the Spot's id
 
+router.post("/:spotId/images", requireAuth, async (req, res) => {
+  let spotId = req.params.spotId; // that is being entered into the url
+  let currentOwnerId = req.user.id; // currently logged in user - 3
 
+  let currentSpot = await Spot.findByPk(spotId);
+
+  let allSpots = await Spot.findAll(
+    // {
+    //   where: {
+    //     ownerId: currentOwnerId
+    //   }
+    // }
+  ); // find all spots
+  let length = allSpots.length; // find how many spots are total
+  console.log(length)
+
+  if (spotId > length) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  }
+    let owner = currentSpot.ownerId;
+
+    if (currentOwnerId === owner) {
+      const { url, preview } = req.body;
+      let newImg = await SpotImage.create({
+        where: { spotId: spotId },
+        url,
+        preview,
+      });
+      res.json(newImg);
+    } else {
+      return res.status(404).json({
+        message: "Wrong User",
+      });
+    }
+});
 
 // Edit a Spot
 
