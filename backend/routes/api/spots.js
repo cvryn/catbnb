@@ -70,11 +70,70 @@ async function numReviews(spots) {
 
 //Get all Spots -----------------------------------------------------------------------------
 router.get("/", async (req, res, next) => {
-  const spots = await Spot.findAll();
+
+  // It's query time ==================================================================
+  let { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
+
+
+  // Create empty errors obj to store errors
+  const errors = {};
+
+  // Validate query parameters
+  if (isNaN(page) || page < 1) {
+    errors.page = "Page must be greater than or equal to 1";
+  }
+  if (isNaN(size) || size < 1 || size > 20) {
+    errors.size = "Size must be greater than or equal to 1 and less than or equal to 20";
+  }
+  if (minLat !== undefined && isNaN(minLat)) {
+    errors.minLat = "Minimum latitude is invalid";
+  }
+  if (maxLat !== undefined && isNaN(maxLat)) {
+    errors.maxLat = "Maximum latitude is invalid";
+  }
+  if (minLng !== undefined && isNaN(minLng)) {
+    errors.minLng = "Minimum longitude is invalid";
+  }
+  if (maxLng !== undefined && isNaN(maxLng)) {
+    errors.maxLng = "Maximum longitude is invalid";
+  }
+  if (minPrice !== undefined && (isNaN(minPrice) || minPrice < 0)) {
+    errors.minPrice = "Minimum price must be greater than or equal to 0";
+  }
+  if (maxPrice !== undefined && (isNaN(maxPrice) || maxPrice < 0)) {
+    errors.maxPrice = "Maximum price must be greater than or equal to 0";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return res.status(400).json({
+      message: "Bad Request",
+      errors,
+    });
+  }
+
+  page = +page;
+  size = +size;
+
+  const pagination = {};
+  if (minLat) pagination.lat = { [Op.gte]: +(minLat) };
+  if (maxLat) pagination.lat = { ...pagination.lat, [Op.lte]: +(maxLat) };
+  if (minLng) pagination.lng = { [Op.gte]: +(minLng) };
+  if (maxLng) pagination.lng = { ...pagination.lng, [Op.lte]: +(maxLng) };
+  if (minPrice) pagination.price = { [Op.gte]: +(minPrice) };
+  if (maxPrice) pagination.price = { ...pagination.price, [Op.lte]: +(maxPrice) };
+
+  // precious code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  const spots = await Spot.findAll({
+    where: pagination,
+    limit: size,
+    offset: size * (page - 1),
+  });
+
   await avgRatings(spots);
   await previewImage(spots);
 
-  res.json({ Spots: spots });
+  res.status(200).json({ Spots: spots, page, size });
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 });
 
 // Get All Spots owned by the Current User --------------------------------------------------
