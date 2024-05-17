@@ -138,7 +138,7 @@ router.post("/", requireAuth, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
 
-  let ownerId = req.user.id;
+  let ownerId = +req.user.id;
 
   // ERROR RESPONSE BODY FOR CREATING SPOT
   let err = new Error("Bad Request");
@@ -277,6 +277,7 @@ router.put("/:spotId", requireAuth, async (req, res) => {
   let allSpots = await Spot.findAll();
   let length = allSpots.length;
 
+  // if spot doesn't exist
   if (spotId > length || spotId <= 0) {
     return res.status(404).json({
       message: "Spot couldn't be found",
@@ -284,7 +285,8 @@ router.put("/:spotId", requireAuth, async (req, res) => {
   }
 
   let owner = updateSpot.ownerId;
-
+  // spot belongs to the owner
+  // already checked if the attributes exist above, so can remove that part
   if (currentOwnerId === owner) {
     if (address !== undefined) updateSpot.address = address;
     if (city !== undefined) updateSpot.city = city;
@@ -599,10 +601,10 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     res.status(200).json(notMySpot);
     // You ARE THE OWNER of this spot
   } else {
-    res.status(401).json({
+    res.status(403).json({
       message:
-        "You are not authorized to make a booking as because you own this place, lol.",
-        // ! take out the lol later to be serious, lol
+        "You are not authorized to make a booking because you own this place",
+
     });
   }
 });

@@ -146,7 +146,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     });
   }
   // ! Can't edit a booking that's past the end date -- wonky?
-  if (currentBooking.endDate < new Date()) {
+  if (currentBooking.endDate < new Date(endDate)) {
     return res.status(400).json({
       message: "Past bookings can't be modified",
     });
@@ -180,9 +180,9 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
     });
   }
   // ! Check if the booking's start date is in the past -- not too sure how to test this
-  const currentDate = new Date();
+  const currentDate = new Date(); // the time right now
   if (currentBooking.startDate < currentDate) {
-    return res.status(400).json({
+    return res.status(403).json({
       message: "Bookings that have been started can't be deleted",
     });
   }

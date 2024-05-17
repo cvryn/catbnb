@@ -14,12 +14,27 @@ const router = express.Router();
 
 // ENDPOINTS!
 
-router.get('/', async (req, res)=> {
+// Delete a Spot Image ---------------------------------------------------------
 
-    const images = await SpotImage.findAll()
-    res.json(images)
-})
+// router.delete('/:imageId', requireAuth, async (req, res) => {
+//     const imageId = req.params.imageId
+//     const user = req.user.id
+//     // console.log(imageId)
 
+//     // Couldn't find spot
+//     const currentImage = await SpotImage.findByPk(imageId);
+
+//     if (!currentImage) {
+//         res.status(404).json({
+//             message: " Spot Image couldn't be found"
+//         })
+//     }
+
+
+//     // Spot must belong to the current user, then delete
+//     if (user)
+//     res.status(200).json('hello')
+// })
 
 
 
