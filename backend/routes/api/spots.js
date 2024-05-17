@@ -44,12 +44,15 @@ async function previewImage(spots) {
   for (let spot of spots) {
     // console.log(spots)
     let images = await SpotImage.findAll({
-      attributes: ["url"],
+      // attributes: ["url"],
       where: {
         spotId: spot.id,
       },
     });
-    spot.dataValues.previewImage = images[0].url;
+
+    let url = images[0].url;
+
+    spot.dataValues.previewImage = url;
   }
 }
 
@@ -98,7 +101,6 @@ router.get("/:spotId", async (req, res) => {
 
   let total = await Spot.findAll();
   let totalLength = total.length;
-  // console.log(totalLength)
 
   let spots = await Spot.findAll({
     where: {
@@ -120,7 +122,7 @@ router.get("/:spotId", async (req, res) => {
   // let numId = +id
   // console.log(id > totalLength)
   // console.log((typeof numId))
-  if (id > totalLength) {
+  if (id > totalLength || id <= 0) {
     return res.status(404).json({
       message: "Spot couldn't be found",
     });
@@ -133,46 +135,38 @@ router.get("/:spotId", async (req, res) => {
 
 // Create a Spot ------------------------------------------------------------------------------------------
 router.post("/", requireAuth, async (req, res) => {
-  const {
-    ownerId,
-    address,
-    city,
-    state,
-    country,
-    lat,
-    lng,
-    name,
-    description,
-    price,
-  } = req.body;
+  const { address, city, state, country, lat, lng, name, description, price } =
+    req.body;
+
+  let ownerId = req.user.id;
 
   // ERROR RESPONSE BODY FOR CREATING SPOT
   let err = new Error("Bad Request");
   err.status = 400;
   err.errors = {};
 
-  if (!address || address.trim() === '') {
+  if (!address || address.trim() === "") {
     err.errors.address = "Street address is required";
   }
-  if (!city || city.trim() === '') {
+  if (!city || city.trim() === "") {
     err.errors.city = "City is required";
   }
-  if (!state || state.trim() === '') {
+  if (!state || state.trim() === "") {
     err.errors.state = "State is required";
   }
-  if (!country || country.trim() === '') {
+  if (!country || country.trim() === "") {
     err.errors.country = "Country is required";
   }
-  if (!lat || lat < -90 || lat > 90 || lat.toString().trim() === '') {
+  if (!lat || lat < -90 || lat > 90 || lat.toString().trim() === "") {
     err.errors.lat = "Latitude must be within -90 and 90";
   }
-  if (!lng || lng < -180 || lng > 180 || lng.toString().trim() === '') {
+  if (!lng || lng < -180 || lng > 180 || lng.toString().trim() === "") {
     err.errors.lng = "Longitude must be within -180 and 180";
   }
-  if (!name || name.length > 50 || name.trim() === '') {
+  if (!name || name.length > 50 || name.trim() === "") {
     err.errors.name = "Name must be less than 50 characters";
   }
-  if (!description || description.trim() === '') {
+  if (!description || description.trim() === "") {
     err.errors.description = "Description is required";
   }
   if (!price || price < 0 || price.toString().includes(" ")) {
@@ -182,7 +176,7 @@ router.post("/", requireAuth, async (req, res) => {
 
   // REQUEST CREATE SPOT
   let newSpot = await Spot.create({
-    ownerId,
+    ownerId: ownerId,
     address,
     city,
     state,
@@ -216,7 +210,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     ();
   let length = allSpots.length; // find how many spots are total
 
-  if (spotId > length) {
+  if (spotId > length || spotId <= 0) {
     return res.status(404).json({
       message: "Spot couldn't be found",
     });
@@ -251,31 +245,31 @@ router.put("/:spotId", requireAuth, async (req, res) => {
   err.status = 400;
   err.errors = {};
 
-  if (!address) {
+  if (!address || address.trim() === "") {
     err.errors.address = "Street address is required";
   }
-  if (!city) {
+  if (!city || city.trim() === "") {
     err.errors.city = "City is required";
   }
-  if (!state) {
+  if (!state || state.trim() === "") {
     err.errors.state = "State is required";
   }
-  if (!country) {
+  if (!country || country.trim() === "") {
     err.errors.country = "Country is required";
   }
-  if (!lat || lat < -90 || lat > 90) {
+  if (!lat || lat < -90 || lat > 90 || lat.toString().trim() === "") {
     err.errors.lat = "Latitude must be within -90 and 90";
   }
-  if (!lng || lng < -180 || lng > 180) {
+  if (!lng || lng < -180 || lng > 180 || lng.toString().trim() === "") {
     err.errors.lng = "Longitude must be within -180 and 180";
   }
-  if (!name || name.length > 50) {
+  if (!name || name.length > 50 || name.trim() === "") {
     err.errors.name = "Name must be less than 50 characters";
   }
-  if (!description) {
+  if (!description || description.trim() === "") {
     err.errors.description = "Description is required";
   }
-  if (!price || price < 0) {
+  if (!price || price < 0 || price.toString().includes(" ")) {
     err.errors.price = "Price per day must be a positive number";
   }
   if (Object.keys(err.errors).length) throw err;
@@ -283,7 +277,7 @@ router.put("/:spotId", requireAuth, async (req, res) => {
   let allSpots = await Spot.findAll();
   let length = allSpots.length;
 
-  if (spotId > length) {
+  if (spotId > length || spotId <= 0) {
     return res.status(404).json({
       message: "Spot couldn't be found",
     });
@@ -321,7 +315,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
 
   if (!currentSpot) {
     return res.status(404).json({
-      message: "Spot couldn't be found -- doesn't exists",
+      message: "Spot couldn't be found -- doesn't exist",
     });
   }
 
@@ -338,5 +332,101 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
     });
   }
 });
+
+// Get All Reviews by a Spot's Id -------------------------------------------------------------------
+
+router.get("/:spotId/reviews", async (req, res) => {
+  let spotId = req.params.spotId;
+
+  let spotReviews = await Review.findAll({
+    where: {
+      spotId: spotId,
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+      {
+        model: ReviewImage,
+        attributes: ["id", "url"],
+      },
+    ],
+  });
+
+  let total = await Spot.findAll();
+  let totalLength = total.length;
+
+  if (spotId > totalLength || spotId <= 0) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  }
+
+  res.status(200).json({ Reviews: spotReviews });
+});
+
+// Create a Review for a Spot based on SpotId -------------------
+
+router.post("/:spotId/reviews", requireAuth, async (req, res) => {
+  let spotId = req.params.spotId; // spot in url
+  let userId = req.user.id; // current user -- 2
+
+  // find total spots
+  let total = await Spot.findAll();
+  let totalLength = total.length;
+
+  if (spotId > totalLength || spotId <= 0) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  }
+
+  const { review, stars } = req.body;
+
+  // throw error if creating new review is left blank or null
+  let err = new Error("Bad Request");
+  err.status = 400;
+  err.errors = {};
+
+  if (!review || review.trim() === "") {
+    err.errors.review = "Review text is required";
+  }
+  if (!stars || stars > 5 || stars < 1 || stars.toString().trim() === "") {
+    err.errors.stars = "Stars must be an integer from 1 to 5";
+  }
+
+  if (Object.keys(err.errors).length) throw err;
+
+  // user already left review for this spot
+  let leftReview = await Review.findOne({
+    where: {
+      spotId: spotId,
+      userId: userId,
+    },
+  });
+
+  if (!leftReview) {
+    // user already reviewed
+    let newReview = await Review.create({
+      userId: userId,
+      spotId: +spotId,
+      review,
+      stars,
+    });
+
+    // if(ownerId) newReview.userId = ownerId
+    // if(spotId) newReview.spotId = +spotId
+    res.status(201).json(newReview);
+  } else {
+    return res.status(403).json({
+      message: "You have already left a review for this place",
+    });
+  }
+});
+
+
+
+
 
 module.exports = router;

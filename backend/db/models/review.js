@@ -25,8 +25,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       onDelete: "CASCADE",
     },
-    review: DataTypes.STRING,
-    stars: DataTypes.INTEGER
+    review: {
+      type: DataTypes.STRING,
+      // validate: {
+      //   notEmpty:true
+      // }
+    },
+    stars: {
+      type: DataTypes.INTEGER,
+      // validate: {
+      //   notEmpty:true
+      // }
+    },
   }, {
     sequelize,
     modelName: 'Review',
