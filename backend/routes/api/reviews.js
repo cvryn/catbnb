@@ -143,7 +143,6 @@ router.put("/:reviewId", requireAuth, async (req, res) => {
     });
   }
 
-  // checking if review belongs to current user
   let currentReview = await Review.findByPk(reviewId);
 
   const { review, stars } = req.body;
@@ -160,6 +159,7 @@ router.put("/:reviewId", requireAuth, async (req, res) => {
   }
 
   if (Object.keys(err.errors).length) throw err;
+  // checking if review belongs to current user
 
   if (currentReview.userId === user) {
     if (review !== undefined) currentReview.review = review;

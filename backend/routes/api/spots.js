@@ -425,8 +425,186 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
   }
 });
 
+// Get all Bookings for a Spot based on the Spot's id ---------------------
 
+router.get("/:spotId/bookings", requireAuth, async (req, res) => {
+  const spotId = req.params.spotId; // 2
+  let user = req.user.id; // 2
 
+  // find info on current Spot
+  let currentSpot = await Spot.findByPk(spotId);
 
+  if (!currentSpot) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  }
+
+  let owner = currentSpot.ownerId;
+  // console.log(owner) // 2
+
+  // You are NOT the owner
+  if (owner !== user) {
+    let notMyBookings = await Booking.findAll({
+      where: {
+        spotId: spotId,
+      },
+    });
+
+    res.status(200).json({
+      Bookings: notMyBookings.map((booking) => ({
+        spotId: booking.spotId,
+        startDate: booking.startDate,
+        endDate: booking.endDate,
+      })),
+    });
+
+    // You ARE THE OWNER
+  } else {
+    let myBookings = await Booking.findAll({
+      where: {
+        spotId: spotId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "firstName", "lastName"],
+        },
+      ],
+    });
+    // res.status(200).json({ Bookings: notMyBookings });
+
+    // * In the same order as API docs
+
+    res.status(200).json({
+      Bookings: myBookings.map((booking) => ({
+        User: {
+          id: booking.User.id,
+          firstName: booking.User.firstName,
+          lastName: booking.User.lastName,
+        },
+        id: booking.id,
+        spotId: booking.spotId,
+        userId: booking.userId,
+        startDate: booking.startDate,
+        endDate: booking.endDate,
+        createdAt: booking.createdAt,
+        updatedAt: booking.updatedAt,
+      })),
+    });
+  }
+});
+
+// Create a Booking from a Spot based on the Spot's id ----------------------------
+
+router.post("/:spotId/bookings", requireAuth, async (req, res) => {
+  let spotId = req.params.spotId; // 2 -- yes to owned?
+  let user = req.user.id; // logged in user -- 2
+
+  // find info on current Spot
+  let currentSpot = await Spot.findByPk(spotId);
+
+  //if spot doesn't exist
+  if (!currentSpot) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  }
+
+  let owner = currentSpot.ownerId;
+  // console.log(owner) // 2
+
+  const { startDate, endDate } = req.body;
+
+  //throw error is any input is left blank or whitespace
+  let err = new Error("Bad Request");
+  err.status = 400;
+  err.errors = {};
+
+  if (!startDate || startDate.trim() === "") {
+    err.errors.startDate = "startDate is required";
+  } else {
+    let currentDate = new Date();
+    let startDateDate = new Date(startDate);
+
+    if (startDateDate < currentDate) {
+      err.errors.startDate = "startDate cannot be in the past";
+    }
+  }
+  if (!endDate || endDate.trim() === "") {
+    err.errors.endDate = "endDate is required";
+  } else {
+    let startDateDate = new Date(startDate);
+    let endDateDate = new Date(endDate);
+
+    if (endDateDate <= startDateDate) {
+      err.errors.endDate = "endDate cannot be on or before startDate";
+    }
+  }
+
+  if (Object.keys(err.errors).length) throw err;
+
+  // Check for overlapping bookings
+  let overlappingBookings = await Booking.findOne({
+    where: {
+      spotId: spotId,
+      [Op.or]: [
+        {
+          startDate: {
+            [Op.between]: [startDate, endDate],
+          },
+        },
+        {
+          endDate: {
+            [Op.between]: [startDate, endDate],
+          },
+        },
+        {
+          [Op.and]: [
+            {
+              startDate: {
+                [Op.lte]: startDate,
+              },
+            },
+            {
+              endDate: {
+                [Op.gte]: endDate,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  });
+
+  if (overlappingBookings) {
+    let errors = {
+      startDate: "Start date conflicts with an existing booking",
+      endDate: "End date conflicts with an existing booking",
+    };
+    return res.status(403).json({
+      message: "Sorry, this spot is already booked for the specified dates",
+      errors: errors,
+    });
+  }
+
+  // You are NOT the owner of this spot
+  if (owner !== user) {
+    let notMySpot = await Booking.create({
+      spotId: spotId,
+      userId: user,
+      startDate,
+      endDate,
+    });
+    res.status(200).json(notMySpot);
+    // You ARE THE OWNER of this spot
+  } else {
+    res.status(401).json({
+      message:
+        "You are not authorized to make a booking as because you own this place, lol.",
+        // ! take out the lol later to be serious, lol
+    });
+  }
+});
 
 module.exports = router;
