@@ -145,7 +145,6 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       message: "Sorry, this spot is already booked for the specified dates",
     });
   }
-  // ! Can't edit a booking that's past the end date -- wonky?
   if (currentBooking.endDate < new Date(endDate)) {
     return res.status(400).json({
       message: "Past bookings can't be modified",
@@ -179,16 +178,19 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
       message: "Booking couldn't be found",
     });
   }
-  // ! Check if the booking's start date is in the past -- not too sure how to test this
   const currentDate = new Date(); // the time right now
-  if (currentBooking.startDate < currentDate) {
-    return res.status(403).json({
-      message: "Bookings that have been started can't be deleted",
-    });
-  }
 
-  // Booking belongs to current user or spot belongs to current User
   if (currentBooking.userId === user) {
+    if (new Date(currentBooking.startDate) >= currentDate) {
+      return res.status(403).json({
+        message: "Bookings that have been started can't be deleted",
+      });
+    }
+    if (new Date(currentBooking.endDate) < currentDate) {
+      return res.status(403).json({
+        message: "Bookings that have already ended can't be deleted",
+      });
+    }
     // Delete the booking and return a success message
     await currentBooking.destroy();
     return res.status(200).json({
@@ -196,9 +198,11 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
     });
   } else {
     return res.status(403).json({
-        message: "You do not have permission to delete this booking"
-    })
+      message: "You do not have permission to delete this booking",
+    });
   }
+
+  // Booking belongs to current user or spot belongs to current User
 });
 
 module.exports = router;

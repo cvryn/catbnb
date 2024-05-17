@@ -45,8 +45,8 @@ module.exports = {
         },
         {
           spotId: 2,
-          userId: 3,
-          review: "Meow meow",
+          userId: 5,
+          review: "Lovely place!",
           stars: 3,
         },
         {
@@ -58,13 +58,49 @@ module.exports = {
         {
           spotId: 3,
           userId: 2,
-          review: "It was really nice and meow-nificent!",
+          review: "Meow meow meow!",
           stars: 5,
         },
         {
           spotId: 3,
           userId: 3,
-          review: "The complimentary snacks were a nice touch!",
+          review: "It was really nice and meow-nificent!",
+          stars: 4,
+        },
+        {
+          spotId: 4,
+          userId: 4,
+          review: "Had a good time here!",
+          stars: 4,
+        },
+        {
+          spotId: 4,
+          userId: 5,
+          review: "Beautiful!!",
+          stars: 4,
+        },
+        {
+          spotId: 4,
+          userId: 1,
+          review: "Huge spot for paw-rties! :3",
+          stars: 4,
+        },
+        {
+          spotId: 5,
+          userId: 1,
+          review: "Had a great time with my besties staying here! :3",
+          stars: 5,
+        },
+        {
+          spotId: 5,
+          userId: 2,
+          review: "Meow!",
+          stars: 4,
+        },
+        {
+          spotId: 5,
+          userId: 4,
+          review: "Not bad",
           stars: 4,
         },
       ]

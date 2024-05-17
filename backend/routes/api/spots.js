@@ -529,9 +529,9 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     let currentDate = new Date();
     let startDateDate = new Date(startDate);
 
-    if (startDateDate < currentDate) {
-      err.errors.startDate = "startDate cannot be in the past";
-    }
+    // if (startDateDate < currentDate) {
+    //   err.errors.startDate = "startDate cannot be in the past";
+    // }
   }
   if (!endDate || endDate.trim() === "") {
     err.errors.endDate = "endDate is required";

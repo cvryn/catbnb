@@ -25,10 +25,20 @@ module.exports = {
           url: '/cat-tree.jpg',
           preview: true,
         },
-        
+
         {
           spotId: 3,
           url: '/cat-house.jpg',
+          preview: true,
+        },
+        {
+          spotId: 4,
+          url: '/cat-palace.jpg',
+          preview: true,
+        },
+        {
+          spotId: 5,
+          url: '/cat-manor.jpg',
           preview: true,
         },
       ]
