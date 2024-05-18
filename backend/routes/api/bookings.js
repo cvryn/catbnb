@@ -126,12 +126,12 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
           [Op.and]: [
             {
               startDate: {
-                [Op.eq]: startDate,
+                [Op.lte]: startDate,
               },
             },
             {
               endDate: {
-                [Op.eq]: endDate,
+                [Op.gte]: endDate,
               },
             },
           ],
