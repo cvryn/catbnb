@@ -277,7 +277,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
   if (currentOwnerId === owner) {
     const { url, preview } = req.body;
     let newImg = await SpotImage.create({
-      where: { spotId: spotId },
+      where: { id: spotId },
       url,
       preview,
     });
