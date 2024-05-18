@@ -107,42 +107,48 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       message: "Booking couldn't be found -- does not exist",
     });
 
-  // Check if there are overlapping bookings conflicts
-  let overlappingBookings = await Booking.findOne({
-    where: {
-      spotId: currentBooking.spotId,
-      id: {
-        [Op.not]: bookingId // Exclude the current booking from the query
+    if (new Date(startDate) >= new Date(endDate)) {
+      return res.status(400).json({
+        message: "End date must be after start date, and start and end dates cannot be the same",
+      });
+    }
+    
+    // Check if there are overlapping bookings conflicts excluding the current booking
+    let overlappingBookings = await Booking.findOne({
+      where: {
+        spotId: currentBooking.spotId,
+        id: {
+          [Op.not]: bookingId // Exclude the current booking from the query
+        },
+        [Op.or]: [
+          {
+            startDate: {
+              [Op.between]: [startDate, endDate],
+            },
+          },
+          {
+            endDate: {
+              [Op.between]: [startDate, endDate],
+            },
+          },
+          {
+            [Op.and]: [
+              {
+                startDate: {
+                  [Op.lte]: startDate,
+                },
+              },
+              {
+                endDate: {
+                  [Op.gte]: endDate,
+                },
+              },
+            ],
+          },
+        ],
       },
-      [Op.or]: [
-        {
-          startDate: {
-            [Op.between]: [startDate, endDate],
-          },
-        },
-        {
-          endDate: {
-            [Op.between]: [startDate, endDate],
-          },
-        },
-        {
-          [Op.and]: [
-            {
-              startDate: {
-                [Op.lte]: startDate,
-              },
-            },
-            {
-              endDate: {
-                [Op.gte]: endDate,
-              },
-            },
-          ],
-        },
-      ],
-    },
-  });
-  
+    });
+
   if (overlappingBookings) {
     return res.status(403).json({
       message: "Sorry, this spot is already booked for the specified dates",
