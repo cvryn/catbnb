@@ -23,7 +23,7 @@ router.delete("/:imageId", requireAuth, async (req, res) => {
   const imageId = req.params.imageId;
   const user = req.user.id;
 
-  // Find the current image by ID
+  // Find the current image by Id
   const currentReviewImage = await ReviewImage.findByPk(imageId);
 
   // If the image doesn't exist
@@ -40,7 +40,13 @@ router.delete("/:imageId", requireAuth, async (req, res) => {
     },
   });
 
-//   console.log(review.userId)
+  // If the review does not exist or its userId is null
+  if (!review || !review.userId) {
+    return res.status(404).json({
+      message: "Review couldn't be found or doesn't have a valid user",
+    });
+  }
+
   // If the review does belong to the current user
   if (review.userId === user) {
     await currentReviewImage.destroy();
@@ -53,5 +59,6 @@ router.delete("/:imageId", requireAuth, async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;
