@@ -557,13 +557,13 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
 // Create a Booking from a Spot based on the Spot's id ----------------------------
 
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
-  let spotId = req.params.spotId; // 2 -- yes to owned?
-  let user = req.user.id; // logged in user -- 2
+  let spotId = req.params.spotId;
+  let user = req.user.id;
 
-  // find info on current Spot
+  // Current spot with Id
   let currentSpot = await Spot.findByPk(spotId);
 
-  //if spot doesn't exist
+  // If spot doesn't exist
   if (!currentSpot) {
     return res.status(404).json({
       message: "Spot couldn't be found",
@@ -571,11 +571,10 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   }
 
   let owner = currentSpot.ownerId;
-  // console.log(owner) // 2
 
   const { startDate, endDate } = req.body;
 
-  //throw error is any input is left blank or whitespace
+  // Throw error if any input is left blank or whitespace
   let err = new Error("Bad Request");
   err.status = 400;
   err.errors = {};
@@ -604,12 +603,11 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   if (Object.keys(err.errors).length) throw err;
 
   // Check if the user is the owner of the spot
-
-if (owner === user) {
-  return res.status(403).json({
-    message: "You are not authorized to make a booking because you own this place",
-  });
-}
+  if (owner === user) {
+    return res.status(403).json({
+      message: "You are not authorized to make a booking because you own this place",
+    });
+  }
 
   // Check for overlapping bookings
   let overlappingBookings = await Booking.findOne({
@@ -655,6 +653,7 @@ if (owner === user) {
     });
   }
 
+  // Create the booking
   let newBooking = await Booking.create({
     spotId: spotId,
     userId: user,
@@ -663,7 +662,6 @@ if (owner === user) {
   });
   
   res.status(200).json(newBooking);
-  
 });
 
 module.exports = router;
