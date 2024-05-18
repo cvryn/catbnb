@@ -42,7 +42,7 @@ async function previewImage(spots) {
   for (let spot of spots) {
     // console.log(spots)
     let images = await SpotImage.findAll({
-      // attributes: ["url"],
+      attributes: ["url"],
       where: {
         spotId: spot.id,
       },
