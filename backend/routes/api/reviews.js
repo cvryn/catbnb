@@ -108,14 +108,13 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
 
   // Create a new review image
   const { url } = req.body;
-  try {
+
     const newReviewImage = await ReviewImage.create({
       reviewId: reviewId,
       url: url,
     });
     
     return res.status(201).json(newReviewImage);
-  }
 });
 // !  WHAT IF THE IMAGE IS LEFT BLANK???
 
