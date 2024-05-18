@@ -40,7 +40,6 @@ async function avgRatings(spots) {
 
 async function previewImage(spots) {
   for (let spot of spots) {
-    // console.log(spots)
     let images = await SpotImage.findAll({
       attributes: ["url"],
       where: {
@@ -48,9 +47,13 @@ async function previewImage(spots) {
       },
     });
 
-    let url = images[0].url;
-
-    spot.dataValues.previewImage = url;
+    if (images.length > 0) {
+      let url = images[0].url;
+      spot.dataValues.previewImage = url;
+    } else {
+      // If no images found, set a default preview image
+      spot.dataValues.previewImage = "default_image_url";
+    }
   }
 }
 
