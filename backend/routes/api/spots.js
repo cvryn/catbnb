@@ -560,7 +560,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   let spotId = req.params.spotId;
   let user = req.user.id;
 
-  // Current spot with Id
+  // Find current spot by Id
   let currentSpot = await Spot.findByPk(spotId);
 
   // If spot doesn't exist
@@ -653,7 +653,6 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     });
   }
 
-  // Create the booking
   let newBooking = await Booking.create({
     spotId: spotId,
     userId: user,
