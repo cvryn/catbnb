@@ -428,61 +428,58 @@ router.get("/:spotId/reviews", async (req, res) => {
 // Create a Review for a Spot based on SpotId -------------------
 
 router.post("/:spotId/reviews", requireAuth, async (req, res) => {
-  let spotId = req.params.spotId; // spot in url
-  let userId = req.user.id; // current user -- 2
-
-  // find total spots
-  let total = await Spot.findAll();
-  let totalLength = total.length;
-
-  if (spotId > totalLength || spotId <= 0) {
-    return res.status(404).json({
-      message: "Spot couldn't be found",
-    });
-  }
-
+  const { spotId } = req.params;
+  const userId = req.user.id;
   const { review, stars } = req.body;
 
-  // throw error if creating new review is left blank or null
-  let err = new Error("Bad Request");
-  err.status = 400;
-  err.errors = {};
+    // Check if spot exists
+    const spot = await Spot.findByPk(spotId);
+    if (!spot) {
+      return res.status(404).json({
+        message: "Spot couldn't be found",
+      });
+    }
 
-  if (!review || review.trim() === "") {
-    err.errors.review = "Review text is required";
-  }
-  if (!stars || stars > 5 || stars < 1 || stars.toString().trim() === "") {
-    err.errors.stars = "Stars must be an integer from 1 to 5";
-  }
+    // Validate review and stars
+    const errors = {};
+    if (!review || review.trim() === "") {
+      errors.review = "Review text is required";
+    }
+    if (!stars || stars > 5 || stars < 1 || stars.toString().trim() === "") {
+      errors.stars = "Stars must be an integer from 1 to 5";
+    }
 
-  if (Object.keys(err.errors).length) throw err;
+    if (Object.keys(errors).length > 0) {
+      return res.status(400).json({
+        message: "Bad Request",
+        errors,
+      });
+    }
 
-  // user already left review for this spot
-  let leftReview = await Review.findOne({
-    where: {
-      spotId: spotId,
-      userId: userId,
-    },
-  });
+    // Check if user already left a review for this spot
+    const leftReview = await Review.findOne({
+      where: {
+        spotId: spotId,
+        userId: userId,
+      },
+    });
 
-  if (!leftReview) {
-    // user already reviewed
-    let newReview = await Review.create({
-      userId: userId,
-      spotId: +spotId,
+    if (leftReview) {
+      return res.status(403).json({
+        message: "You have already left a review for this place",
+      });
+    }
+
+    // Create new review
+    const newReview = await Review.create({
+      userId,
+      spotId,
       review,
       stars,
     });
 
-    // if(ownerId) newReview.userId = ownerId
-    // if(spotId) newReview.spotId = +spotId
     res.status(201).json(newReview);
-  } else {
-    return res.status(403).json({
-      message: "You have already left a review for this place",
-    });
-  }
-});
+  });
 
 // Get all Bookings for a Spot based on the Spot's id ---------------------
 
