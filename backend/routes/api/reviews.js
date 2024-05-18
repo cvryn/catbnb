@@ -79,50 +79,42 @@ router.get("/current", requireAuth, async (req, res) => {
 // Add an Image to a Review based on the Review's id ----------------------------------------
 
 router.post("/:reviewId/images", requireAuth, async (req, res) => {
-  const reviewId = req.params.reviewId; // 1
-  const user = req.user.id; // 2
+  const reviewId = req.params.reviewId;
+  const userId = req.user.id;
 
-  // find all reviews
-  let allReviews = await Review.findAll();
-  let numReviews = allReviews.length;
+  // Find the review by ID
+  const review = await Review.findByPk(reviewId);
 
-  if (reviewId > numReviews || reviewId <= 0) {
+  if (!review) {
     return res.status(404).json({
-      message: "Review couldn't be found",
+      message: "Review not found",
     });
   }
 
-  // cannot submit more than 10 images to one place, find all reviews on that review that belong to that place
-  let allRevImages = await ReviewImage.findAll({
-    where: {
-      reviewId: reviewId,
-    },
-  });
-  // console.log(allRevImages.length)
-  console.log(allRevImages);
-
-  // find reviews by current review
-  let currentReview = await Review.findByPk(reviewId);
-
-  if (allRevImages.length >= 10) {
+  // Check if the authenticated user is the owner of the review
+  if (review.userId !== userId) {
     return res.status(403).json({
-      message: "Maximum number of images for this resource was reached",
+      message: "You are not authorized to add an image to this review",
     });
   }
 
-  if (currentReview.userId === user) {
-    const { url } = req.body;
+  // Check if the maximum number of images has been reached
+  const numImages = await ReviewImage.count({ where: { reviewId } });
+  if (numImages >= 10) {
+    return res.status(403).json({
+      message: "Maximum number of images for this review has been reached",
+    });
+  }
 
-    let newReview = await ReviewImage.create({
+  // Create a new review image
+  const { url } = req.body;
+  try {
+    const newReviewImage = await ReviewImage.create({
       reviewId: reviewId,
-      url,
+      url: url,
     });
-
-    res.status(200).json({ id: newReview.id, url: newReview.url });
-  } else {
-    return res.status(404).json({
-      message: "This user is unable to add an image to this review",
-    });
+    
+    return res.status(201).json(newReviewImage);
   }
 });
 // !  WHAT IF THE IMAGE IS LEFT BLANK???
