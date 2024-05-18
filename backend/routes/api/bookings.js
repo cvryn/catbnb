@@ -107,12 +107,19 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       message: "Booking couldn't be found -- does not exist",
     });
 
-    // Check if startDate is in the past
-    if (new Date(startDate) < new Date()) {
-      return res.status(400).json({
-        message: "Start date cannot be in the past",
-      });
-    }
+  // Check if the booking belongs to the current User
+  if (currentBooking.userId !== user) {
+    return res.status(403).json({
+      message: "You are not authorized to update this booking",
+    });
+  }
+
+  // Check if startDate is in the past
+  if (new Date(startDate) < new Date()) {
+    return res.status(400).json({
+      message: "Start date cannot be in the past",
+    });
+  }
 
   if (new Date(startDate) >= new Date(endDate)) {
     return res.status(400).json({
@@ -161,24 +168,19 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       message: "Sorry, this spot is already booked for the specified dates",
     });
   }
+  
   if (currentBooking.endDate < new Date(endDate)) {
     return res.status(400).json({
       message: "Past bookings can't be modified",
     });
   }
-  // Check if the booking belongs to the current User -- yes
-  if (currentBooking.userId === user) {
-    if (startDate !== undefined) currentBooking.startDate = startDate;
-    if (endDate !== undefined) currentBooking.endDate = endDate;
+  
+  if (startDate !== undefined) currentBooking.startDate = startDate;
+  if (endDate !== undefined) currentBooking.endDate = endDate;
 
-    await currentBooking.save();
+  await currentBooking.save();
 
-    res.status(200).json(currentBooking);
-  } else {
-    res.status(401).json({
-      message: "You are not authorized to update this booking",
-    });
-  }
+  res.status(200).json(currentBooking);
 });
 
 // Delete a Booking ----------------------------------------------------------------------
@@ -218,7 +220,6 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
     });
   }
 
-  // Booking belongs to current user or spot belongs to current User
 });
 
 module.exports = router;
