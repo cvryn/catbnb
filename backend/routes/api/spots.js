@@ -15,8 +15,6 @@ const {
   ReviewImage,
   SpotImage,
 } = require("../../db/models");
-const review = require("../../db/models/review");
-const spot = require("../../db/models/spot");
 
 const router = express.Router();
 
@@ -235,7 +233,7 @@ router.post("/", requireAuth, async (req, res) => {
 
   // REQUEST CREATE SPOT
   let newSpot = await Spot.create({
-    ownerId: ownerId,
+    ownerId: +ownerId,
     address,
     city,
     state,
