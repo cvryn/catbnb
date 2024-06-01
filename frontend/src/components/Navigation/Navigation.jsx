@@ -35,7 +35,7 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <div id='navbar'>
-        <NavLink id='home-icon' to="/">CatBnB</NavLink>
+        <NavLink id='home-icon' to="/"><img src="/CatBnB-logo.jpg" style={{height: '50px', width: 'auto'}} alt="CatBnB logo" />CatBnB</NavLink>
 
         {isLoaded && sessionLinks}
       </div>
