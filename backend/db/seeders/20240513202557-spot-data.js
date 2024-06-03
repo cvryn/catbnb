@@ -34,7 +34,7 @@ module.exports = {
           lng: -122.12236669999999,
           name: "Cat Tree",
           description: "A place to lounge, to relax, and to bat at things",
-          price: 19.99,
+          price: 9.99,
         },
 
         {
@@ -59,7 +59,7 @@ module.exports = {
           lng: -122.3004154,
           name: "Purr Palace",
           description: "A luxurious retreat for pampered pets",
-          price: 59.99,
+          price: 99.99,
         },
         {
           ownerId: 4,

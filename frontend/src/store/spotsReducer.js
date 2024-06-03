@@ -1,0 +1,113 @@
+/** Action Type Constants: */
+export const LOAD_SPOTS = "spots/LOAD_SPOTS";
+export const REMOVE_SPOT = "spots/REMOVE_SPOT";
+export const GET_SPOT = "spots/GET_SPOT";
+
+/**  Action Creators: */
+
+// Load all the spots
+export const loadSpots = (spots) => ({
+  type: LOAD_SPOTS,
+  spots,
+});
+
+// Get single spot by id
+export const getSpot = (spot) => ({
+  type: GET_SPOT,
+  spot,
+});
+
+// Delete spot by id
+export const removeSpot = (spotId) => ({
+  type: REMOVE_SPOT,
+  spotId,
+});
+
+/** Thunk Action Creators: */
+
+// GET all spots /api/spots
+export const getAllSpots = () => async (dispatch) => {
+  try {
+    const response = await fetch("/api/spots");
+    if (response.ok) {
+      const data = await response.json();
+      // console.log('this is the daataaa', data)
+      let spots = data.Spots;
+      // console.log('THIS IS SPOTS!', spots)
+      if (Array.isArray(spots)) {
+        dispatch(loadSpots(spots));
+      } else {
+        console.log('Error: spots is not an array', spots);
+      }
+    } else {
+      const error = await response.json();
+      console.log(error);
+    }
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+// GET spot by id /api/spot/:spotId
+
+export const getSpotById = (spotId) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/spots/${spotId}`);
+
+    if (response.ok) {
+      const spot = await response.json();
+      dispatch(getSpot(spot));
+    } else {
+      const error = await response.json();
+      console.log(error);
+    }
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+// DELETE delete spot by id /api/spots/:spotId
+
+export const deleteSpot = (spotId) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/spots/${spotId}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      dispatch(removeSpot(spotId));
+    } else {
+      const error = await response.json();
+      console.log(error);
+    }
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+/** Reducer: */
+let initialState = {};
+const spotsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case LOAD_SPOTS: {
+      const spotsState = { ...state };
+      action.spots.forEach((spot) => {
+        spotsState[spot.id] = spot;
+      });
+      return spotsState;
+    }
+    case GET_SPOT: {
+      return { ...state, [action.spot.id]: action.spot };
+    }
+    case REMOVE_SPOT: {
+      const newState = { ...state };
+      delete newState[action.spotId];
+      return newState;
+    }
+    default:
+      return state;
+  }
+};
+
+export default spotsReducer;

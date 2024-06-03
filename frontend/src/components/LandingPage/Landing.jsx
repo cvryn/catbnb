@@ -1,0 +1,34 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import "./Landing.css";
+
+import { PiPawPrintFill } from "react-icons/pi";
+
+export default function Landing() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/spots");
+  };
+
+  return (
+    <div id="landing-container">
+      <h1 className="landing-title">catbnb</h1>
+      <img
+        className="feijai-landing-image"
+        src="https://res.cloudinary.com/dfj8lsesn/image/upload/v1717368083/catbnb/feijai.jpg"
+        alt="kitty-image"
+      />
+      <h2>Hello Everynyan!</h2>
+
+      <div onClick={handleSubmit}>
+      <button className="enter-website-button"
+       ><PiPawPrintFill /> let's look at some spots! <PiPawPrintFill /></button>
+       </div>
+
+    </div>
+  );
+}

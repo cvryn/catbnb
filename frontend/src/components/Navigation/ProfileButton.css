@@ -1,0 +1,63 @@
+.button-normal,
+.button-active {
+    border: solid 1px #DDDDDD;
+    border-radius: 25px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: box-shadow 0.5s ease;
+
+}
+
+.button-normal:hover,
+.button-active {
+    box-shadow: 1px 3px 10px #ababab;
+}
+
+.fas.fa-user-circle{
+    /* border: solid 2px pink; */
+    /* padding: 10px 20px; */
+    /* width: 25px;
+    height: 25px; */
+    font-size: 30px;
+    color: #6A6A6A;
+
+}
+
+.profile-button-lines {
+    /* border: solid 2px green; */
+    width: 20px;
+    height: 20px;
+    color: #585858;
+}
+
+
+.profile-dropdown {
+    position: absolute;
+    top: 55px; right: 10px;
+    border: solid 2px pink;
+    list-style-type: none;
+    border: solid 1px #DDDDDD;
+    border-radius: 15px;
+    background-color: white;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .logout-button {
+    border-top: solid 1px #e1e1e1;
+    padding-top: 10px;
+    text-align: center;
+  }
+
+.ulClassName {
+    list-style-type: none;
+    border: solid 2px blue;
+}

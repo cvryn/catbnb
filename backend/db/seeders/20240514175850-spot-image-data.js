@@ -17,28 +17,28 @@ module.exports = {
       [
         {
           spotId: 1,
-          url: '/cat-box.jpg',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717385330/catbnb/cat-box_q8k1et.jpg',
           preview: true,
         },
         {
           spotId: 2,
-          url: '/cat-tree.jpg',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386381/catbnb/cat-tree2_k3ho9t.png',
           preview: true,
         },
 
         {
           spotId: 3,
-          url: '/cat-house.jpg',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717385287/catbnb/cat-house_s0kuyk.png',
           preview: true,
         },
         {
           spotId: 4,
-          url: '/cat-palace.jpg',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386565/catbnb/cat-palace_cugto5.png',
           preview: true,
         },
         {
           spotId: 5,
-          url: '/cat-manor.jpg',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717385426/catbnb/cat-manor_ur2y73.png',
           preview: true,
         },
       ]

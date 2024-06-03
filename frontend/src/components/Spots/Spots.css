@@ -1,0 +1,10 @@
+.spots-container {
+    /* border: solid 2px purple; */
+    display: flex;
+    /* flex-wrap: 25%; */
+    /* flex-direction: row; */
+    gap: 20px;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+
+}
