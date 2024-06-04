@@ -12,7 +12,9 @@ const SpotDetails = () => {
 
     const spot = useSelector((state) => state.spots[spotId]);
     console.log("THIS IS THE SPOT!", spot);
-    
+
+
+
 
     useEffect(() => {
         dispatch(getSpotById(spotId)).then(() => setIsLoaded(true));
@@ -56,7 +58,7 @@ const SpotDetails = () => {
                         <div className="reserve-top">
                             <div className="price-details">${spot.price} <span className="price-span-details">night</span></div>
                             <div className="reviews-details">
-                                <TiStarFullOutline /> {spot.avgRating} ({spot.numReviews} reviews)
+                                <TiStarFullOutline /> {spot.avgRating} · {spot?.numReviews} # reviews
                             </div>
                         </div>
                         <button className='reserve-button' onClick={reserveButtonClick}>Reserve</button>
