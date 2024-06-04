@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 /** Action Type Constants: */
 export const LOAD_SPOTS = "spots/LOAD_SPOTS";
 export const REMOVE_SPOT = "spots/REMOVE_SPOT";
@@ -31,13 +33,14 @@ export const getAllSpots = () => async (dispatch) => {
     const response = await fetch("/api/spots");
     if (response.ok) {
       const data = await response.json();
-      // console.log('this is the daataaa', data)
+      console.log("this is the daataaa", data);
       let spots = data.Spots;
       // console.log('THIS IS SPOTS!', spots)
       if (Array.isArray(spots)) {
         dispatch(loadSpots(spots));
+        return spots;
       } else {
-        console.log('Error: spots is not an array', spots);
+        console.log("Error: spots is not an array", spots);
       }
     } else {
       const error = await response.json();
@@ -48,23 +51,12 @@ export const getAllSpots = () => async (dispatch) => {
     return err;
   }
 };
+
 // GET spot by id /api/spot/:spotId
-
 export const getSpotById = (spotId) => async (dispatch) => {
-  try {
-    const response = await fetch(`/api/spots/${spotId}`);
-
-    if (response.ok) {
-      const spot = await response.json();
-      dispatch(getSpot(spot));
-    } else {
-      const error = await response.json();
-      console.log(error);
-    }
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
+  const res = await fetch(`/api/spots/${spotId}`);
+  const spot = await res.json();
+  dispatch(getSpot(spot));
 };
 
 // DELETE delete spot by id /api/spots/:spotId
@@ -98,7 +90,12 @@ const spotsReducer = (state = initialState, action) => {
       return spotsState;
     }
     case GET_SPOT: {
-      return { ...state, [action.spot.id]: action.spot };
+      {
+        const newSpotState = { ...state };
+        const spot = action.spot;
+        newSpotState[spot.id] = spot;
+        return newSpotState;
+      }
     }
     case REMOVE_SPOT: {
       const newState = { ...state };

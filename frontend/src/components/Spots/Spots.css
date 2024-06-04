@@ -1,9 +1,9 @@
 .spots-container {
-    /* border: solid 2px purple; */
+    border: solid 2px purple;
     display: flex;
     /* flex-wrap: 25%; */
     /* flex-direction: row; */
-    gap: 20px;
+    gap: 25px;
     /* justify-content: space-between; */
     flex-wrap: wrap;
 

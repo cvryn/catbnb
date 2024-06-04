@@ -15,27 +15,24 @@ const Spots = () => {
     dispatch(getAllSpots());
   }, [dispatch]);
 
-  const handleDelete = (spotId) => {
-    const remove = dispatch(deleteSpot(spotId));
-    if (remove) {
-      console.log("Successfully removed spot");
-    } else {
-      console.log("Failed to remove spot");
-    }
-  };
+  // const handleDelete = (spotId) => {
+  //   const remove = dispatch(deleteSpot(spotId));
+  //   if (remove) {
+  //     console.log("Successfully removed spot");
+  //   } else {
+  //     console.log("Failed to remove spot");
+  //   }
+  // };
 
   return (
     <section>
       <ul>
         <div className="spots-container">
           {spots.map((spot) => {
-            return <SpotItems spot={spot} key={spot.id} onDelete={handleDelete} />
+            return <SpotItems spot={spot} key={spot.id} />
 })}
         </div>
       </ul>
-      <Link className="back-button new" to="/spots/new">
-        New Spot
-      </Link>
     </section>
   );
 };

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { RiStarFill } from "react-icons/ri";
+import { TiStarFullOutline } from "react-icons/ti";
 
 import { Tooltip } from "react-tooltip";
 
 import "./SpotItems.css";
 
 const SpotItems = ({ spot }) => {
-  console.log(spot);
+  // console.log(spot);
 
   return (
     <>
@@ -19,7 +19,7 @@ const SpotItems = ({ spot }) => {
           <Link to={`/spots/${spot.id}`} style={{ textDecoration: "none" }}>
             {/* <div className="spot-container"> */}
             <div className="spot-image-container">
-              <img className="image" src={spot.previewImage} />
+              <img className="spots-image" src={spot.previewImage} />
             </div>
 
             <div className="spot-text-container">
@@ -34,7 +34,7 @@ const SpotItems = ({ spot }) => {
                 </div>
               </div>
               <div className="rating">
-                <RiStarFill /> {spot.avgRating}
+              <TiStarFullOutline /> {spot.avgRating}
               </div>
               {/* </div> */}
             </div>
