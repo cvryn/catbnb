@@ -22,7 +22,7 @@ module.exports = {
         {
           spotId: 1,
           userId: 2,
-          review: "Not a bad box.",
+          review: "Meow meow meow meow meow meow.",
           stars: 2,
         },
         {
@@ -102,6 +102,54 @@ module.exports = {
           userId: 4,
           review: "Not bad",
           stars: 4,
+        },
+        {
+          spotId: 6,
+          userId: 1,
+          review: "Purrrfect spot for a catnap! :3",
+          stars: 4
+        },
+        {
+          spotId: 6,
+          userId: 2,
+          review: "Meow!",
+          stars: 3
+        },
+        {
+          spotId: 7,
+          userId: 3,
+          review: "Such a cozy hideout!",
+          stars: 5
+        },
+        {
+          spotId: 7,
+          userId: 4,
+          review: "Not bad, but could use more toys.",
+          stars: 3
+        },
+        {
+          spotId: 8,
+          userId: 5,
+          review: "Absolutely purrfect place for exploring!",
+          stars: 5
+        },
+        {
+          spotId: 8,
+          userId: 1,
+          review: "Great spot for a catventure! :3",
+          stars: 4
+        },
+        {
+          spotId: 10,
+          userId: 4,
+          review: "Had a pawsome time exploring this spot!",
+          stars: 5
+        },
+        {
+          spotId: 10,
+          userId: 5,
+          review: "Not bad, could use more sunbeams.",
+          stars: 3
         },
       ]
     )

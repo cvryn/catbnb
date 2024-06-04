@@ -73,6 +73,38 @@ module.exports = {
           reviewId: 15,
           url: 'image url 5'
         },
+        {
+          reviewId: 16,
+          url: 'image url 6'
+        },
+        {
+          reviewId: 17,
+          url: 'image url 7'
+        },
+        {
+          reviewId: 18,
+          url: 'image url 8'
+        },
+        {
+          reviewId: 19,
+          url: 'image url 9'
+        },
+        {
+          reviewId: 20,
+          url: 'image url 10'
+        },
+        {
+          reviewId: 21,
+          url: 'image url 11'
+        },
+        {
+          reviewId: 22,
+          url: 'image url 12'
+        },
+        {
+          reviewId: 23,
+          url: 'image url 13'
+        },
       ]
     )
 

@@ -79,29 +79,46 @@ export const deleteSpot = (spotId) => async (dispatch) => {
 };
 
 /** Reducer: */
-let initialState = {};
+const initialState = { allSpots: {}, currentSpot: {} };
+
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_SPOTS: {
-      const spotsState = { ...state };
+      const newState = { ...state, allSpots: {} };
       action.spots.forEach((spot) => {
-        spotsState[spot.id] = spot;
+        newState.allSpots[spot.id] = spot;
       });
-      return spotsState;
+      return newState;
     }
     case GET_SPOT: {
-      {
-        const newSpotState = { ...state };
-        const spot = action.spot;
-        newSpotState[spot.id] = spot;
-        return newSpotState;
-      }
+      return { ...state, currentSpot: action.spot };
     }
     case REMOVE_SPOT: {
       const newState = { ...state };
-      delete newState[action.spotId];
+      delete newState.allSpots[action.spotId];
       return newState;
     }
+    
+    // case LOAD_SPOTS: {
+    //   const spotsState = { ...state };
+    //   action.spots.forEach((spot) => {
+    //     spotsState[spot.id] = spot;
+    //   });
+    //   return spotsState;
+    // }
+    // case GET_SPOT: {
+    //   {
+    //     const newSpotState = { ...state };
+    //     const spot = action.spot;
+    //     newSpotState[spot.id] = spot;
+    //     return newSpotState;
+    //   }
+    // }
+    // case REMOVE_SPOT: {
+    //   const newState = { ...state };
+    //   delete newState[action.spotId];
+    //   return newState;
+    // }
     default:
       return state;
   }

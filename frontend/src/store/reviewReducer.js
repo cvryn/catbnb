@@ -12,11 +12,13 @@ export const loadReviews = (reviews) => ({
 /** Thunk Action Creators: */
 export const getReviews = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}/reviews`);
-  const reviews = await response.json();
-  console.log('the revssssssssssssssssssssss', reviews)
-  dispatch(loadReviews(reviews));
+  if (response.ok) {
+      const reviews = await response.json();
+    //   console.log('the revssssssssssssssssssssss', reviews)
+      dispatch(loadReviews(reviews));
+      return reviews;
+  }
 
-  return reviews;
 };
 
 /** Reducer: */

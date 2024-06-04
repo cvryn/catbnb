@@ -59,7 +59,7 @@ module.exports = {
           lng: -122.3004154,
           name: "Purr Palace",
           description: "A luxurious retreat for pampered pets",
-          price: 99.99,
+          price: 999.99,
         },
         {
           ownerId: 4,
@@ -73,7 +73,66 @@ module.exports = {
           description: "A stylish space for the discerning feline",
           price: 54.99,
         },
-
+        {
+          ownerId: 2,
+          address: "789 Whisker Way",
+          city: "Oakland",
+          state: "California",
+          country: "United States of America",
+          lat: 37.8044,
+          lng: -122.2711,
+          name: "Paws Play Place",
+          description: "A playful haven for feline friends",
+          price: 79.99
+        },
+        {
+          ownerId: 3,
+          address: "101 Meow St",
+          city: "Berkeley",
+          state: "California",
+          country: "United States of America",
+          lat: 37.8716,
+          lng: -122.2727,
+          name: "Whisker Wonderland",
+          description: "A cozy retreat for whiskered companions",
+          price: 69.99
+        },
+        {
+          ownerId: 4,
+          address: "123 Purr Lane",
+          city: "San Mateo",
+          state: "California",
+          country: "United States of America",
+          lat: 37.5629,
+          lng: -122.3255,
+          name: "Cat's Corner",
+          description: "An enchanting hideaway for pampered cats",
+          price: 89.99
+        },
+        {
+          ownerId: 5,
+          address: "246 Feline Blvd",
+          city: "Sausalito",
+          state: "California",
+          country: "United States of America",
+          lat: 37.8591,
+          lng: -122.4853,
+          name: "Furry Feline Retreat",
+          description: "A serene escape for purring pals",
+          price: 99.99
+        },
+        {
+          ownerId: 1,
+          address: "369 Claw Ct",
+          city: "Palo Alto",
+          state: "California",
+          country: "United States of America",
+          lat: 37.4419,
+          lng: -122.1430,
+          name: "Purrfect Paradise",
+          description: "A paradise for playful kitties",
+          price: 109.99
+        }
       ],
       { validate: true }
     );

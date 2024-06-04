@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import "./Spots.css";
 
 const Spots = () => {
-  let spots = useSelector((state) => Object.values(state.spots));
+  let spots = useSelector((state) => Object.values(state.spots.allSpots));
   let dispatch = useDispatch();
 
   useEffect(() => {
