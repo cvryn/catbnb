@@ -15,7 +15,6 @@ const SpotDetails = () => {
 
 
 
-
     useEffect(() => {
         dispatch(getSpotById(spotId)).then(() => setIsLoaded(true));
     }, [dispatch, spotId]);
