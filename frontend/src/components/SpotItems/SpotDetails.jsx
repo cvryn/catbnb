@@ -26,7 +26,7 @@ const SpotDetails = () => {
   console.log("SHOW DEM REVIEWS", reviews);
 
   const user = useSelector((state) => state.session.user);
-  console.log("WHOOOOOOOOOOOOOOO DIS", user);
+  console.log(`%c WHOOOOOOOOOOOOOOO DIS`, "color: orange", user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,10 +52,13 @@ const SpotDetails = () => {
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
+          alignItems: 'center'
         }}
       >
         <h1>Loading right meow...</h1>
         <img
+          style={{ width: "1000px"}}
           src="https://res.cloudinary.com/dfj8lsesn/image/upload/v1717520571/catbnb/loading-cat_egosvf.gif"
           alt="Loading Cat"
         />

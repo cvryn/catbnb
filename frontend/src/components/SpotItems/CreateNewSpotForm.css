@@ -1,0 +1,46 @@
+
+.create-spot-key-input {
+    /* border: solid 2px green; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+}
+
+
+.errors-object {
+    color: red;
+}
+
+
+#form-country-street-city-state{
+    padding-bottom: 20px;
+
+}
+
+.city-state-input {
+    /* border: solid 2px blue; */
+    display: flex;
+}
+
+
+#description-container {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+
+
+
+
+@media screen and (min-width: 650px) {
+    #spot-form-container {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+  }

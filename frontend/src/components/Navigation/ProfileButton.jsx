@@ -74,14 +74,16 @@ function ProfileButton({ user }) {
         )}
         {user && (
           <>
-            <li>
-              {user.firstName} {user.lastName}
-            </li>
+            <li>Hello, {user.firstName}</li>
+            {/* <li>{user.lastName}</li> */}
             <li>{user.email}</li>
+            {/* // ! REMEMBER TO ADD A LINK OR NAVLINK TO THISSSSS */}
             <li>Manage Spots</li>
             <li>
               <div className="logout-button">
-                <button onClick={logout}>Log Out</button>
+                <button onClick={logout} style={{ cursor: "pointer" }}>
+                  Log Out
+                </button>
               </div>
             </li>
           </>

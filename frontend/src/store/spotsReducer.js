@@ -40,7 +40,7 @@ export const getAllSpots = () => async (dispatch) => {
     const response = await fetch("/api/spots");
     if (response.ok) {
       const data = await response.json();
-      console.log("this is the daataaa", data);
+      // console.log("this is the daataaa", data);
       let spots = data.Spots;
       // console.log('THIS IS SPOTS!', spots)
       if (Array.isArray(spots)) {
@@ -62,22 +62,32 @@ export const getAllSpots = () => async (dispatch) => {
 // GET spot by id /api/spot/:spotId
 export const getSpotById = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`);
-  const spot = await response.json();
-  dispatch(getSpot(spot));
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(getSpot(spot));
+  } else {
+    const error = await response.json();
+    console.log(error);
+  }
 };
 
 // POST create new spot /api/spots/new
 
-// export const createSpot = (spot) => async (dispatch) => {
-//   const response = await csrfFetch('/api/spots', {
-//     method: "POST",
-//     body: JSON.stringify(spot),
-//   });
+export const createNewSpot = (spotKeys) => async (dispatch) => {
+  const response = await csrfFetch('/api/spots', {
+    method: "POST",
+    body: JSON.stringify(spotKeys),
+  });
 
-//   if (response.ok) {
-
-//   }
-// }
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(createSpot(spot))
+    return spot;
+  } else {
+    const error = await response.json();
+    console.log(error);
+  }
+}
 
 // DELETE delete spot by id /api/spots/:spotId
 
@@ -112,6 +122,16 @@ const spotsReducer = (state = initialState, action) => {
     }
     case GET_SPOT: {
       return { ...state, currentSpot: action.spot };
+    }
+    case CREATE_SPOT: {
+      const newState = action.spot;
+      return {
+        ...state,
+        allSpots: {
+          ...state.allSpots,
+          [newState.id]: newState,
+        },
+      };
     }
     case REMOVE_SPOT: {
       const newState = { ...state };
