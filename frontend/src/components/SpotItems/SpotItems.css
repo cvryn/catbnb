@@ -1,6 +1,4 @@
 
-
-
 #spots-container {
   /* border: solid 2px #ffc0cb; */
   flex: 1;
@@ -40,6 +38,8 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 15px;
+  color: var(--website-font-color);
+
 }
 
 .spot-titles {
@@ -47,6 +47,7 @@
 }
 .location-text {
   /* border: dashed 2px blue; */
+
   font-weight: 600;
   font-size: 18px;
   padding: 5px 0;

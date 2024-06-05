@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+// import OpenModalButton from "../OpenModalButton";
+// import LoginFormModal from "../LoginFormModal";
+// import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 
 import catbnblogo from "../../../src/assets/catbnb-logo.jpg";
@@ -47,10 +47,10 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <nav id="navbar">
-        <NavLink id="home-icon" to="/">
+        <NavLink id="home-icon" to="/" style={{fontSize: '20px'}}>
           <img
             src={catbnblogo}
-            style={{ height: "30px", width: "auto" }}
+            style={{ height: "35px", width: "auto" }}
             alt="CatBnB logo"
           />
           catbnb

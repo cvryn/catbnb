@@ -19,14 +19,14 @@ const SpotDetails = () => {
   const spots = useSelector((state) => state.spots.allSpots[spotId]);
   // console.log("ALLLLLLLL SPOTS", spots);
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
-  console.log("currrrrrrrrrrrrrrrrrrrrrrrrrrrrr", currentSpot);
+  console.log("%c currrrrrrrrrrrrrrrrrrrrrrrrrrrrr", "color: orange", currentSpot);
 
   // Get the reviews for the current spot
   const reviews = useSelector((state) => state.reviews.Reviews);
   console.log("SHOW DEM REVIEWS", reviews);
 
   const user = useSelector((state) => state.session.user);
-  console.log(`%c WHOOOOOOOOOOOOOOO DIS`, "color: orange", user);
+  console.log(`WHOOOOOOOOOOOOOOO DIS`, user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -184,13 +184,11 @@ const SpotDetails = () => {
                     {user && user.id === review.userId && (
                       <div id="delete-review-button">
                         <OpenModalButton
+                            buttonText={"Delete"}
                           modalComponent={
                             <DeleteReviewModal
                               reviewId={review.id}
-                              spotId={spotId}
-                            />
-                          }
-                          buttonText={"Delete"}
+                              spotId={spotId}/>}
                         />
                       </div>
                     )}

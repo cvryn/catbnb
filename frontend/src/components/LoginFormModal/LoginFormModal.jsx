@@ -93,6 +93,7 @@ function LoginFormModal() {
           Log In
         </button>
 
+{/* // ! Demo user should not flash on the input, onClick login(user password) */}
         <button
         className='demo-user-modal-button'
           type="submit"

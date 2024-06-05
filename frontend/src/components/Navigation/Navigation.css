@@ -1,3 +1,14 @@
+@import url(https://db.onlinewebfonts.com/c/02d8f1743ede250c7c9865f1574d7cc6?family=Circular+Book);
+
+* {
+  font-family: "Circular Book";
+}
+
+:root {
+  --website-font-color: black;
+}
+
+
 #nav-right-side {
   list-style-type: none;
   /* border: solid 2px pink; */
@@ -9,6 +20,7 @@
 
 .create-a-new-spot {
   /* border: dotted 2px orange; */
+  
   text-decoration: none;
   padding: 10px;
   border-radius: 25px;
@@ -34,7 +46,9 @@
   height: 100%;
   box-sizing: border-box;
   border-bottom: solid 1px #e1e1e1;
-  padding: 10px 0;
+  padding: 10px 30px;
+
+
 }
 
 #home-icon {
@@ -46,4 +60,5 @@
   align-items: center;
   padding: 10px;
   gap: 5px;
+   color: #FC807D;
 }
