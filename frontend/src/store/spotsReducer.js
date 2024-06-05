@@ -59,11 +59,13 @@ export const getSpotById = (spotId) => async (dispatch) => {
   dispatch(getSpot(spot));
 };
 
+// POST create new spot /
+
 // DELETE delete spot by id /api/spots/:spotId
 
 export const deleteSpot = (spotId) => async (dispatch) => {
   try {
-    const response = await fetch(`/api/spots/${spotId}`, {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
       method: "DELETE",
     });
     if (response.ok) {
@@ -98,7 +100,7 @@ const spotsReducer = (state = initialState, action) => {
       delete newState.allSpots[action.spotId];
       return newState;
     }
-    
+
     // case LOAD_SPOTS: {
     //   const spotsState = { ...state };
     //   action.spots.forEach((spot) => {

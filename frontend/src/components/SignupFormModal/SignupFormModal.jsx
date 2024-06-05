@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
@@ -14,6 +14,42 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  // UseEffect to catch any blank inputs or those that don't pass validations
+
+  useEffect(() => {
+    const errors = {};
+
+    if (!email) {
+      errors.email = "";
+    }
+
+    if (username.length < 4) {
+      errors.username = "";
+    }
+
+    if (!firstName) {
+      errors.firstName = "";
+    }
+
+    if (!lastName) {
+      errors.lastName = "";
+    }
+
+    if (password.length < 6) {
+      errors.password = "";
+    }
+
+    if (!confirmPassword) {
+      errors.confirmPassword = ""
+    }
+
+    if (password !== confirmPassword) {
+      errors.confirmPassword = "";
+    }
+
+    setErrors(errors);
+  }, [email, username, firstName, lastName, password, confirmPassword]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +86,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={email}
+            placeholder='Email'
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -60,6 +97,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={username}
+            placeholder='Username'
             onChange={(e) => setUsername(e.target.value)}
             required
           />
@@ -70,6 +108,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={firstName}
+            placeholder='First Name'
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
@@ -80,6 +119,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={lastName}
+            placeholder='Last Name'
             onChange={(e) => setLastName(e.target.value)}
             required
           />
@@ -90,6 +130,7 @@ function SignupFormModal() {
           <input
             type="password"
             value={password}
+            placeholder='Password'
             onChange={(e) => setPassword(e.target.value)}
             required
           />
@@ -100,12 +141,13 @@ function SignupFormModal() {
           <input
             type="password"
             value={confirmPassword}
+            placeholder='Confirm Password'
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={Object.values(errors).length > 0}>Sign Up</button>
       </form>
     </>
   );

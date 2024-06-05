@@ -3,32 +3,40 @@ import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import { Navigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
+  const sessionUser = useSelector((state) => state.session.user);
 
+  //useEffect to reset state upon opening modal
 
+  useEffect(() => {
+    setCredential("");
+    setPassword("");
+    setErrors({});
+  }, []);
 
+  //useEffect to store errors
 
-  //useEffect
   useEffect(() => {
     const errors = {};
 
     if (credential.length < 4) {
-      errors.credential = "Username must be 4 characters or more";
+      errors.credential = "";
     }
 
     if (password.length < 6) {
-      errors.password = "Password must be 6 characters or more";
+      errors.password = "";
     }
 
-    setErrors(errors)
-
+    setErrors(errors);
   }, [credential, password]);
 
   // Handle Submit
@@ -44,6 +52,8 @@ function LoginFormModal() {
         }
       });
   };
+
+  if (sessionUser) return <Navigate to="/" replace={true} />;
 
   return (
     <>
@@ -67,8 +77,25 @@ function LoginFormModal() {
             required
           />
         </label>
+        {Object.values(errors).map((key, index) => (
+          <p key={index}>{errors[key]}</p>
+        ))}
+        {/* Shows the error messages */}
         {errors.credential && <p>{errors.credential}</p>}
-        <button type="submit">Log In</button>
+        {errors.password && <p>{errors.password}</p>}
+        <button type="submit" disabled={Object.values(errors).length > 0}>
+          Log In
+        </button>
+        <button
+          type="submit"
+          onClick={() => {
+            setCredential("Mama");
+            setPassword("password");
+          }}
+        >
+          {" "}
+          Demo User
+        </button>
       </form>
     </>
   );

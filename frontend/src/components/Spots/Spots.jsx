@@ -9,6 +9,7 @@ import "./Spots.css";
 
 const Spots = () => {
   let spots = useSelector((state) => Object.values(state.spots.allSpots));
+  // console.log('SPOTS PLZ', spots)
   let dispatch = useDispatch();
 
   useEffect(() => {

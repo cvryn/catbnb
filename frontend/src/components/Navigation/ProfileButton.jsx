@@ -2,10 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { IoMenu } from "react-icons/io5";
+
+// import SignupFormModal from "../SignupFormModal";
+// import LoginFormModal from "../LoginFormModal";
+
 import "./ProfileButton.css";
+import { useNavigate } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+ const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [isActive, setIsActive] = useState(false); // New state to track if the button is active
   const ulRef = useRef();
@@ -32,6 +38,8 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+
+    navigate("/");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -46,10 +54,10 @@ function ProfileButton({ user }) {
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        <li>Hello, {user.username}</li>
-        {/* <li>
+        {/* <li>{user.username}</li> */}
+        <li>
           {user.firstName} {user.lastName}
-        </li> */}
+        </li>
         <li>{user.email}</li>
         {/* // ! Link this to manage spots */}
         <li>Manage Spots</li>

@@ -1,10 +1,16 @@
-.spots-container {
-    border: solid 2px purple;
-    display: flex;
-    /* flex-wrap: 25%; */
-    /* flex-direction: row; */
-    gap: 25px;
-    /* justify-content: space-between; */
-    flex-wrap: wrap;
+@import url(https://db.onlinewebfonts.com/c/02d8f1743ede250c7c9865f1574d7cc6?family=Circular+Book);
 
+* {
+  font-family: "Circular Book";
+}
+
+.spots-container {
+  /* border: solid 2px purple; */
+  display: flex;
+  /* flex-wrap: 25%; */
+  /* flex-direction: row; */
+  gap: 25px;
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+  justify-content: center;
 }

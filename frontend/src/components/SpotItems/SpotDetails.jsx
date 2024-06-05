@@ -11,103 +11,158 @@ const SpotDetails = () => {
   const { spotId } = useParams();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // const spot = useSelector((state) => state.spots[spotId]);
-  // const currentSpot = useSelector((state) => state.spots.currentSpot);
+  // Get all spots and current spot from the Redux store
+  const spots = useSelector((state) => state.spots.allSpots[spotId]);
+  // console.log("ALLLLLLLL SPOTS", spots);
+  const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
+  // console.log("currrrrrrrrrrrrrrrrrrrrrrrrrrrrr", currentSpot);
 
-  const allSpots = useSelector((state) => state.spots.allSpots);
-  const currentSpot = useSelector((state) => state.spots.currentSpot);
+  // Get the reviews for the current spot
+  const reviews = useSelector((state) => state.reviews.Reviews);
+  console.log("SHOW DEM REVIEWS", reviews);
 
-  const spot = allSpots[spotId]; // Access the specific spot from allSpots
-  const currSpot = currentSpot[0];
-  console.log("THIS IS THE SPOT!", spot);
-  console.log("CURRRRRRRRRRRRRRRRRRRRRRRENT SPOT???", currentSpot);
-  console.log("THE SPOT I AM LOOKING AT RIGHT NOW, IT IS", currSpot);
 
-  // const review = useSelector(state => state.reviews.reviews[spotId])
-  // console.log('Da Reviewwwwwws', review)
+
 
   useEffect(() => {
-    dispatch(getSpotById(spotId)).then(() => setIsLoaded(true));
-    dispatch(getReviews(spotId)).then(() => setIsLoaded(true));
+    const fetchData = async () => {
+      await Promise.all([
+        dispatch(getSpotById(spotId)),
+        dispatch(getReviews(spotId)),
+      ]);
+      setIsLoaded(true);
+    };
+
+    fetchData();
   }, [dispatch, spotId]);
 
   const reserveButtonClick = () => {
     alert("Feature Coming Soon...");
   };
 
-  if (!isLoaded || !spot) return <div>Loading right meow...</div>;
+  // If data is not loaded yet, show a loading message
+  if (!isLoaded || !currentSpot) return <div>Loading right meow...
+  </div>;
 
   return (
     <>
-      <h1>ʕ*•ﻌ•ʔฅ</h1>
+      {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
       <div id="spot-detail-container">
         <section className="listing-name-container">
-          <h1>{spot.name}</h1>
+          <h1>{currentSpot.name}</h1>
           <span className="location">
-            {spot.city}, {spot.state}, {spot.country}
+            {currentSpot.city}, {currentSpot.state}, {currentSpot.country}
           </span>
         </section>
+
         <div className="images-container">
           <div className="main-image-left">
             <img
               className="main-image"
-              src={spot.previewImage}
-              alt="Main Spot"
+              src={currentSpot.SpotImages[0].url}
+              alt="Main spots"
             />
           </div>
           <div className="images-container-right">
             <img
               className="side-image"
-              src={spot.previewImage}
-              alt="Spot pic"
+              src={currentSpot.SpotImages[0].url}
+              alt="spots pic"
             />
             <img
               className="side-image"
-              src={spot.previewImage}
-              alt="Spot pic"
+              src={currentSpot.SpotImages[0].url}
+              alt="spots pic"
+              style={{borderTopRightRadius: "10px"}}
+
             />
             <img
               className="side-image"
-              src={spot.previewImage}
-              alt="Spot pic"
+              src={currentSpot.SpotImages[0].url}
+              alt="spots pic"
+
             />
             <img
               className="side-image"
-              src={spot.previewImage}
+              src={currentSpot.SpotImages[0].url}
               alt="Spot pic"
+              style={{ borderBottomRightRadius: "10px"}}
             />
           </div>
         </div>
+
         <section className="location-info-container-mid">
           <div className="owner-description-container">
             <h2 className="owner-info">
-              Hosted by {currSpot?.Owner?.firstName} {currSpot?.Owner?.lastName}
+              Hosted by {currentSpot?.Owner?.firstName}{" "}
+              {currentSpot?.Owner?.lastName}
             </h2>
-            <p className="description">{spot.description}</p>
+            <p className="description">{currentSpot.description}</p>
           </div>
           <div className="reserve-container">
             <div className="reserve-top">
               <div className="price-details">
-                ${spot.price} <span className="price-span-details">night</span>
+                ${currentSpot.price}{" "}
+                <span className="price-span-details">night</span>
               </div>
               <div className="reviews-details">
                 <TiStarFullOutline />
-                {isNaN(spot.avgRating) || spot.avgRating === undefined
+                {isNaN(currentSpot.avgRating) ||
+                currentSpot.avgRating === undefined
                   ? "New"
-                  : spot.avgRating}{" "}
-                {isNaN(spot.avgRating) || spot.avgRating === undefined
+                  : currentSpot.avgRating}{" "}
+                {isNaN(currentSpot.avgRating) ||
+                currentSpot.avgRating === undefined
                   ? ""
                   : "·"}{" "}
-                {currSpot.numReviews === 1
+                {currentSpot.numReviews === 1
                   ? "1 review"
-                  : currSpot.numReviews > 1
-                  ? `${currSpot.numReviews} reviews`
+                  : currentSpot.numReviews > 1
+                  ? `${currentSpot.numReviews} reviews`
                   : ""}
               </div>
             </div>
             <button className="reserve-button" onClick={reserveButtonClick}>
               Reserve
             </button>
+          </div>
+        </section>
+
+        <section id="reviews-container">
+          <div className="star-and-reviews-container">
+            <TiStarFullOutline className="star-reviews-num" />
+            {isNaN(currentSpot.avgRating) ||
+                currentSpot.avgRating === undefined
+                  ? "New"
+                  : currentSpot.avgRating}{" "}
+                {isNaN(currentSpot.avgRating) ||
+                currentSpot.avgRating === undefined
+                  ? ""
+                  : "·"}{" "}
+                {currentSpot.numReviews === 1
+                  ? "1 review"
+                  : currentSpot.numReviews > 1
+                  ? `${currentSpot.numReviews} reviews`
+                  : ""}
+          </div>
+          <div className="reviews-from-the-people">
+            {reviews &&
+              reviews.length > 0 &&
+              reviews.map((review, index) => {
+                const createdAtDate = new Date(review.createdAt);
+                const month = createdAtDate.toLocaleString("default", {
+                  month: "long",
+                });
+                const year = createdAtDate.getFullYear();
+
+                return (
+                  <div key={index} className='actual-reviews'>
+                    <span style={{fontSize: '18px'}}>{review.User.firstName}</span>
+                    <span style={{fontSize: "14px"}}>{`${month} ${year}`}</span>
+                    <span style={{fontSize: "12px"}}>{review.review}</span>
+                  </div>
+                );
+              })}
           </div>
         </section>
       </div>

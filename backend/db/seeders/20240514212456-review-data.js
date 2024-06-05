@@ -28,8 +28,8 @@ module.exports = {
         {
           spotId: 1,
           userId: 3,
-          review: "Had a great time!",
-          stars: 3,
+          review: "Had an ok time.",
+          stars: 2,
         },
         {
           spotId: 2,
@@ -56,13 +56,13 @@ module.exports = {
           stars: 5,
         },
         {
-          spotId: 3,
+          spotId: 4,
           userId: 2,
           review: "Meow meow meow!",
           stars: 5,
         },
         {
-          spotId: 3,
+          spotId: 10,
           userId: 3,
           review: "It was really nice and meow-nificent!",
           stars: 4,
@@ -80,7 +80,7 @@ module.exports = {
           stars: 4,
         },
         {
-          spotId: 4,
+          spotId: 7,
           userId: 1,
           review: "Huge spot for paw-rties! :3",
           stars: 4,
@@ -98,7 +98,7 @@ module.exports = {
           stars: 4,
         },
         {
-          spotId: 5,
+          spotId: 6,
           userId: 4,
           review: "Not bad",
           stars: 4,
@@ -110,13 +110,13 @@ module.exports = {
           stars: 4
         },
         {
-          spotId: 6,
+          spotId: 8,
           userId: 2,
           review: "Meow!",
           stars: 3
         },
         {
-          spotId: 7,
+          spotId: 5,
           userId: 3,
           review: "Such a cozy hideout!",
           stars: 5

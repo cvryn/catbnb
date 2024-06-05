@@ -17,6 +17,7 @@ function Navigation({ isLoaded }) {
     </li>
   ) : (
     <>
+
       <li>
         <OpenModalButton
           className="sign-up-button"

@@ -1,3 +1,6 @@
+
+
+
 #spots-container {
   /* border: solid 2px #ffc0cb; */
   flex: 1;
@@ -26,8 +29,8 @@
 
 .spots-image {
   /* border: dotted 2px green; */
-  width: 300px;
-  height: 300px;
+  width: 375px;
+  height: 375px;
   border-radius: 5px;
 }
 
@@ -44,18 +47,22 @@
 }
 .location-text {
   /* border: dashed 2px blue; */
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 18px;
   padding: 5px 0;
 }
 
 .rating {
+  font-size: 18px;
 
 }
 
 .price {
     font-weight: bold;
+    font-size: 18px;
 }
 
 .price-span {
     font-weight:300;
+    font-size: 18px;
 }

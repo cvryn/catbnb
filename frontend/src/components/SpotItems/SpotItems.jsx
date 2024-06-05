@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { TiStarFullOutline } from "react-icons/ti";
 
-import { Tooltip } from "react-tooltip";
-
 import "./SpotItems.css";
 
 const SpotItems = ({ spot }) => {
@@ -11,11 +9,11 @@ const SpotItems = ({ spot }) => {
   return (
     <>
       <div
-        data-tooltip-id="my-tooltip"
-        data-tooltip-content={spot.name}
-        data-tooltip-place="bottom"
+        // data-tooltip-id="my-tooltip"
+        // data-tooltip-content={spot.name}
+        // data-tooltip-place="bottom"
       >
-        <div id="spots-container">
+        <div id="spots-container" title={spot.name}>
           <Link to={`/spots/${spot.id}`} style={{ textDecoration: "none" }}>
             {/* <div className="spot-container"> */}
             <div className="spot-image-container">
@@ -34,14 +32,24 @@ const SpotItems = ({ spot }) => {
                 </div>
               </div>
               <div className="rating">
-              <TiStarFullOutline /> {spot.avgRating}
+                <TiStarFullOutline />{" "}
+                {isNaN(spot.avgRating) || spot.avgRating === undefined
+                  ? "New"
+                  : spot.avgRating}{" "}
+                {isNaN(spot.avgRating) || spot.avgRating === undefined
+                  ? ""
+                  : ""}{" "}
+                {spot.numReviews === 1
+                  ? "1 review"
+                  : spot.numReviews > 1
+                  ? `${spot.numReviews} reviews`
+                  : ""}
               </div>
               {/* </div> */}
             </div>
           </Link>
         </div>
       </div>
-      <Tooltip id="my-tooltip" />
     </>
   );
 };

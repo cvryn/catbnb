@@ -21,7 +21,7 @@ module.exports = {
           lat: 37.75263939630619,
           lng: -122.42089576219055,
           name: "Cat Box",
-          description: "A place to nap",
+          description: "It's a box. It's a cool place to nap. It's a nice box. It's a cool box. Sometimes it has a flap to protect you from the sunshine, sometimes it doesn't. Sometimes when it rains, the humans move it away so be sure to book while you can!",
           price: 4.99,
         },
         {

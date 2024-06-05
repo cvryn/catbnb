@@ -17,7 +17,7 @@ module.exports = {
       [
         {
           spotId: 1,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717385330/catbnb/cat-box_q8k1et.jpg',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/c_crop,ar_1:1/v1717385330/catbnb/cat-box_q8k1et.jpg',
           preview: true,
         },
         {
