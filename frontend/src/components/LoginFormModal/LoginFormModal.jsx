@@ -57,9 +57,10 @@ function LoginFormModal() {
 
   return (
     <>
-      <h1>Log In</h1>
+      <h1 style={{textAlign: 'center'}}>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label>
+        <div className='credentials-textbox'>
+        <label className='credential-input'>
           Username or Email
           <input
             type="text"
@@ -68,7 +69,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        <label>
+        <label className='credential-input'>
           Password
           <input
             type="password"
@@ -77,16 +78,23 @@ function LoginFormModal() {
             required
           />
         </label>
+        </div>
         {Object.values(errors).map((key, index) => (
           <p key={index}>{errors[key]}</p>
         ))}
         {/* Shows the error messages */}
         {errors.credential && <p>{errors.credential}</p>}
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit" disabled={Object.values(errors).length > 0}>
+        <div className='login-modal-buttons'>
+        <button
+        className='login-modal-button'
+        type="submit"
+        disabled={Object.values(errors).length > 0}>
           Log In
         </button>
+
         <button
+        className='demo-user-modal-button'
           type="submit"
           onClick={() => {
             setCredential("Mama");
@@ -96,6 +104,7 @@ function LoginFormModal() {
           {" "}
           Demo User
         </button>
+        </div>
       </form>
     </>
   );

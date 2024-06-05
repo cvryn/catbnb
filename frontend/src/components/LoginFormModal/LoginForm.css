@@ -1,0 +1,40 @@
+
+
+.credentials-textbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.credential-input{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.login-modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    min-width: 320px; /* Set a minimum width */
+}
+
+.login-modal-button {
+    height: 35px;
+    width: 300px;
+    background-color: red;
+    color: white;
+    box-shadow: 3px 3px 1px black;
+}
+
+.login-modal-button:disabled {
+    background-color: grey;
+}
+
+
+.demo-user-modal-button{
+    background-color: white;
+    border: none;
+    text-decoration: underline;
+
+}

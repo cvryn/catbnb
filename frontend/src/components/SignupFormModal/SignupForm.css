@@ -1,0 +1,20 @@
+
+.error-messages {
+    color:red;
+}
+
+.signup-input-separation {
+    padding: 10px 0;
+}
+
+
+.signup-modal-button {
+    height: 35px;
+    width: 300px;
+    background-color: red;
+    color: white;
+    box-shadow: 3px 3px 1px black;
+}
+
+.signup-modal-button:disabled {
+    background-color: grey; 

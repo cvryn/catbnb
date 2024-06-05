@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpotById } from "../../store/spotsReducer";
 import { TiStarFullOutline } from "react-icons/ti";
-import "./SpotDetails.css";
 import { getReviews } from "../../store/reviewReducer";
+
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import DeleteReviewModal from "../Reviews/DeleteReviewModal";
+
+import "./SpotDetails.css";
 
 const SpotDetails = () => {
   const dispatch = useDispatch();
@@ -15,14 +19,14 @@ const SpotDetails = () => {
   const spots = useSelector((state) => state.spots.allSpots[spotId]);
   // console.log("ALLLLLLLL SPOTS", spots);
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
-  // console.log("currrrrrrrrrrrrrrrrrrrrrrrrrrrrr", currentSpot);
+  console.log("currrrrrrrrrrrrrrrrrrrrrrrrrrrrr", currentSpot);
 
   // Get the reviews for the current spot
   const reviews = useSelector((state) => state.reviews.Reviews);
   console.log("SHOW DEM REVIEWS", reviews);
 
-
-
+  const user = useSelector((state) => state.session.user);
+  console.log("WHOOOOOOOOOOOOOOO DIS", user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,8 +45,22 @@ const SpotDetails = () => {
   };
 
   // If data is not loaded yet, show a loading message
-  if (!isLoaded || !currentSpot) return <div>Loading right meow...
-  </div>;
+  if (!isLoaded || !currentSpot)
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h1>Loading right meow...</h1>
+        <img
+          src="https://res.cloudinary.com/dfj8lsesn/image/upload/v1717520571/catbnb/loading-cat_egosvf.gif"
+          alt="Loading Cat"
+        />
+      </div>
+    );
 
   return (
     <>
@@ -73,20 +91,18 @@ const SpotDetails = () => {
               className="side-image"
               src={currentSpot.SpotImages[0].url}
               alt="spots pic"
-              style={{borderTopRightRadius: "10px"}}
-
+              style={{ borderTopRightRadius: "10px" }}
             />
             <img
               className="side-image"
               src={currentSpot.SpotImages[0].url}
               alt="spots pic"
-
             />
             <img
               className="side-image"
               src={currentSpot.SpotImages[0].url}
               alt="Spot pic"
-              style={{ borderBottomRightRadius: "10px"}}
+              style={{ borderBottomRightRadius: "10px" }}
             />
           </div>
         </div>
@@ -131,19 +147,17 @@ const SpotDetails = () => {
         <section id="reviews-container">
           <div className="star-and-reviews-container">
             <TiStarFullOutline className="star-reviews-num" />
-            {isNaN(currentSpot.avgRating) ||
-                currentSpot.avgRating === undefined
-                  ? "New"
-                  : currentSpot.avgRating}{" "}
-                {isNaN(currentSpot.avgRating) ||
-                currentSpot.avgRating === undefined
-                  ? ""
-                  : "·"}{" "}
-                {currentSpot.numReviews === 1
-                  ? "1 review"
-                  : currentSpot.numReviews > 1
-                  ? `${currentSpot.numReviews} reviews`
-                  : ""}
+            {isNaN(currentSpot.avgRating) || currentSpot.avgRating === undefined
+              ? "New"
+              : currentSpot.avgRating}{" "}
+            {isNaN(currentSpot.avgRating) || currentSpot.avgRating === undefined
+              ? ""
+              : "·"}{" "}
+            {currentSpot.numReviews === 1
+              ? "1 review"
+              : currentSpot.numReviews > 1
+              ? `${currentSpot.numReviews} reviews`
+              : ""}
           </div>
           <div className="reviews-from-the-people">
             {reviews &&
@@ -156,10 +170,27 @@ const SpotDetails = () => {
                 const year = createdAtDate.getFullYear();
 
                 return (
-                  <div key={index} className='actual-reviews'>
-                    <span style={{fontSize: '18px'}}>{review.User.firstName}</span>
-                    <span style={{fontSize: "14px"}}>{`${month} ${year}`}</span>
-                    <span style={{fontSize: "12px"}}>{review.review}</span>
+                  <div key={index} className="actual-reviews">
+                    <span style={{ fontSize: "18px" }}>
+                      {review.User.firstName}
+                    </span>
+                    <span
+                      style={{ fontSize: "14px" }}
+                    >{`${month} ${year}`}</span>
+                    <span style={{ fontSize: "12px" }}>{review.review}</span>
+                    {user && user.id === review.userId && (
+                      <div id="delete-review-button">
+                        <OpenModalButton
+                          modalComponent={
+                            <DeleteReviewModal
+                              reviewId={review.id}
+                              spotId={spotId}
+                            />
+                          }
+                          buttonText={"Delete"}
+                        />
+                      </div>
+                    )}
                   </div>
                 );
               })}

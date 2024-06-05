@@ -1,6 +1,25 @@
 #nav-right-side {
   list-style-type: none;
+  /* border: solid 2px pink; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
 }
+
+.create-a-new-spot {
+  /* border: dotted 2px orange; */
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 25px;
+  font-size: 16px;
+}
+
+.create-a-new-spot:hover {
+  background-color: #EBEBEB;
+
+}
+
 
 .hidden {
   display: none;
@@ -28,4 +47,3 @@
   padding: 10px;
   gap: 5px;
 }
-
