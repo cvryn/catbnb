@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-
-import {
-  getAllSpots,
-  getSpotById,
-  createNewSpot,
-} from "../../store/spotsReducer";
+import { useNavigate } from "react-router-dom";
+import { createNewSpot } from "../../store/spotsReducer";
 
 import "./CreateNewSpotForm.css";
 
 function CreateSpotForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -25,147 +18,120 @@ function CreateSpotForm() {
   const [price, setPrice] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-
   const [previewImage, setPreviewImage] = useState("");
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
   const [image4, setImage4] = useState("");
-
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-
   const [errors, setErrors] = useState({});
-  const[visualErrors, setVisualErrors] = useState ({})
+  const [visualErrors, setVisualErrors] = useState({});
 
-  let spots = useSelector(state => state.spots.allSpots)
-
-  console.log('All the spots,', spots)
-
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setIsLoaded(true);
-    setHasSubmitted(true);
+    const errors = {};
 
-    let errors = {};
-    let visualErrors = {};
-
-    if (!address || address.trim().length === 0) {
-        errors.address = "Address is required";
-    }
-
-    if (!city || city.trim().length === 0) {
-      errors.city = "City is required";
-    }
-
-    if (!state || state.trim().length === 0) {
-      errors.state = "State is required";
-    }
-
-    if (!country || country.trim().length === 0) {
-      errors.country = "Country is required";
-    }
-
-    if (!name || name.trim().length === 0) {
-      errors.name = "Name is required";
-    }
-
-    if (!description || description.length < 30) {
+    // Validations
+    if (!address.trim()) errors.address = "Address is required";
+    if (!city.trim()) errors.city = "City is required";
+    if (!state.trim()) errors.state = "State is required";
+    if (!country.trim()) errors.country = "Country is required";
+    if (!name.trim()) errors.name = "Name is required";
+    if (description.length < 30)
       errors.description = "Description needs a minimum of 30 characters";
-    }
+    if (price < 1) errors.price = "Price is required";
+    if (lat < -90 || lat > 90)
+      errors.lat = "Latitude must be between -90 and 90";
+    if (lng < -180 || lng > 180)
+      errors.lng = "Longitude must be between -180 and 180";
 
-    if (!price || price < 1) {
-      errors.price = "Price is required";
-    }
-
-    if (!lat) {
-        errors.lat = "Latitude is required";
-    } else if (lat < -90 || lat > 90) {
-        errors.lat = "Latitude must be between -90 and 90";
-    }
-    if (!lng) {
-        errors.lng = "Longitude is required";
-    } else if (lng < -180 || lng > 180) {
-        errors.lng = "Longitude must be between -90 and 90";
-    }
-    const checkImageUrl = (url) => {
-      return url && (url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg"));
-    };
-
-    if (!previewImage || !checkImageUrl(previewImage)) {
-        errors.previewImage = "Preview image is required and must end in .png, .jpg, or .jpeg.";
-      }
-
-
-    if (image1 && !checkImageUrl(image1)) {
-     visualErrors.image1 = "Image URL must end in .png, .jpg, or .jpeg";
-    }
-    if (image2 && !checkImageUrl(image2)) {
-       visualErrors.image2 = "Image URL must end in .png, .jpg, or .jpeg";
-    }
-
-    if (image3 && !checkImageUrl(image3)) {
-       visualErrors.image3 = "Image URL must end in .png, .jpg, or .jpeg";
-    }
-
-    if (image4 && !checkImageUrl(image4)) {
-       visualErrors.image4 = "Image URL must end in .png, .jpg, or .jpeg";
-    }
+    // Helper to make sure the images are the proper file type
+    const checkImageUrl = (url) =>
+      url &&
+      (url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg"));
+    if (!checkImageUrl(previewImage))
+      errors.previewImage =
+        "Preview image is required and must end in .png, .jpg, or .jpeg";
+    if (image1 && !checkImageUrl(image1))
+      visualErrors.image1 = "Image URL must end in .png, .jpg, or .jpeg";
+    if (image2 && !checkImageUrl(image2))
+      visualErrors.image2 = "Image URL must end in .png, .jpg, or .jpeg";
+    if (image3 && !checkImageUrl(image3))
+      visualErrors.image3 = "Image URL must end in .png, .jpg, or .jpeg";
+    if (image4 && !checkImageUrl(image4))
+      visualErrors.image4 = "Image URL must end in .png, .jpg, or .jpeg";
 
     setErrors(errors);
-    setVisualErrors(visualErrors)
-
+    setVisualErrors(visualErrors);
 
     if (Object.keys(errors).length === 0) {
-        const newSpot = {
-            address,
-            city,
-            state,
-            country,
-            name,
-            price,
-            description,
-            lat,
-            lng,
-            previewImage,
-            images: [image1, image2, image3, image4].filter(img => img),
-        };
+      const newSpot = {
+        address,
+        city,
+        state,
+        country,
+        name,
+        price,
+        description,
+        lat,
+        lng,
+      };
 
-      console.log("Submitting new spot:", newSpot);
-
-      const response = await dispatch(createNewSpot(newSpot));
-    //   await dispatch(getAllSpots(spots))
-
-      console.log("DID WE createNewSpot:", response);
-
-      if (response && response.id) {
-        navigate(`/spots/${response.id}`);
-
-      } else {
-        console.error("Failed to create new spot:", response);
-      }
+      const response = await dispatch(
+        createNewSpot(newSpot, previewImage, [image1, image2, image3, image4])
+      );
+      if (response && response.id) navigate(`/spots/${response.id}`);
     }
   };
 
   return (
     <>
       {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
-      <form onSubmit={handleSubmit} id='create-spot-form-container'>
+      <button
+        className="demo-user-modal-button"
+        type="submit"
+        onClick={() => {
+          setAddress("1");
+          setCity("1");
+          setState("1");
+          setCountry("1");
+          setName("1");
+          setDescription(
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          );
+          setPrice(1);
+          setLat(1);
+          setLng(1);
+          setPreviewImage(
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717482655/catbnb/8-ATANKZhXomcJ7Tc_rqhse8.png"
+          );
+          setImage1(
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481451/catbnb/8-VHGdSOckSozju5k_q3y8ax.png"
+          );
+          setImage2(
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481395/catbnb/8-PxeIe9RIpGvMIqY_m3gyf8.png"
+          );
+        }}
+      >
+        {" "}
+        Demo Spots
+      </button>
+      <form onSubmit={handleSubmit} id="create-spot-form-container">
         <div id="spot-form-container">
           <header>
             <h2>Create a new Spot</h2>
-            <h3>Where&apos;s your place located?</h3>
-
+            <h3>Where's your place located?</h3>
             <p>
               Guests will only get your exact address once they booked a
               reservation.
             </p>
           </header>
 
+          {/* // Section 1 */}
           <section id="form-country-street-city-state">
             <label className="country-address-input">
               <div className="create-spot-key-input">
-                Country
+                Country{" "}
                 <div className="errors-object">
                   {errors.country && <p>{errors.country}</p>}
                 </div>
@@ -181,7 +147,7 @@ const handleSubmit = async (e) => {
             </label>
             <label className="country-address-input">
               <div className="create-spot-key-input">
-                Street Address
+                Street Address{" "}
                 <div className="errors-object">
                   {errors.address && <p>{errors.address}</p>}
                 </div>
@@ -195,11 +161,10 @@ const handleSubmit = async (e) => {
                 required
               />
             </label>
-
             <label className="city-state-input">
               <div className="city-input" style={{ width: "60%" }}>
                 <div className="create-spot-key-input">
-                  City
+                  City{" "}
                   <div className="errors-object">
                     {errors.city && <p>{errors.city}</p>}
                   </div>
@@ -214,10 +179,9 @@ const handleSubmit = async (e) => {
                 />
                 <span>, &nbsp; </span>
               </div>
-
               <div className="state-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                  State
+                  State{" "}
                   <div className="errors-object">
                     {errors.state && <p>{errors.state}</p>}
                   </div>
@@ -232,12 +196,10 @@ const handleSubmit = async (e) => {
                 />
               </div>
             </label>
-
-
             <label className="lat-lng-input">
               <div className="lat-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                  Latitude
+                  Latitude{" "}
                   <div className="errors-object">
                     {errors.lat && <p>{errors.lat}</p>}
                   </div>
@@ -252,10 +214,9 @@ const handleSubmit = async (e) => {
                 />
                 <span>, &nbsp; </span>
               </div>
-
-              <div className="lng-input" style={{ width: "60%" }}>
+              <div className="lng-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                 Longitude
+                  Longitude{" "}
                   <div className="errors-object">
                     {errors.lng && <p>{errors.lng}</p>}
                   </div>
@@ -270,42 +231,44 @@ const handleSubmit = async (e) => {
                 />
               </div>
             </label>
-
-
           </section>
 
           <hr></hr>
 
-          <section id="description-container">
-            <h3>Describe your place to guests</h3>
-            <label className="description-input">
-              <span className="description-suggestion">
-                Mention the best features of your spot, any special amenities
-                like fast wifi or parking, and what you love about the
-                neighborhood.
-              </span>
-              <textarea
-                style={{ width: "100%", height: "150px" }}
-                type="text"
-                value={description}
-                placeholder="Description. Please write at least 30 characters"
-                onChange={(e) => setDescription(e.target.value)}
-                required
-              />
-              <div className="errors-object">
-                {errors.description && <p>{errors.description}</p>}
-              </div>
-            </label>
-          </section>
+          <header>
+            <h2>Describe your place to guests</h2>
+            <p>
+              Mention the best features of your space, any special amentities
+              like fast wifi or parking, and what you love about the
+              neighborhood.
+            </p>
+          </header>
+
+          <label id="description-label" className="description-input">
+            <textarea
+              style={{ width: "100%" }}
+              type="text"
+              value={description}
+              placeholder="Please write at least 30 characters"
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+            <div className="errors-object">
+              {errors.description && <p>{errors.description}</p>}
+            </div>
+          </label>
 
           <hr></hr>
 
-          <section id="create-title-container">
-            <h3>Create a title for your spot</h3>
-            <span className="spot-name-input">
-              Catch guests&apos; attention with a spot title that highlights
-              what makes your place special.
-            </span>
+          <header>
+            <h2>Create a title for your spot</h2>
+            <p>
+              Catch guests' attention with a spot title that highlights what
+              makes your place special.
+            </p>
+          </header>
+
+          <label className="name-input">
             <input
               style={{ width: "100%" }}
               type="text"
@@ -314,26 +277,27 @@ const handleSubmit = async (e) => {
               onChange={(e) => setName(e.target.value)}
               required
             />
-
             <div className="errors-object">
               {errors.name && <p>{errors.name}</p>}
             </div>
-          </section>
+          </label>
 
           <hr></hr>
 
-          <section id="set-price-container">
-            <h3>Set a base price for your spot</h3>
-            <span>
+          <header>
+            <h2>Set a base price for your spot</h2>
+            <p>
               Competitive pricing can help your listing stand out and rank
               higher in search results.
-            </span>
-            <div className="price-input-container">
-              <span> $ </span>
+            </p>
+          </header>
 
+          <label className="price-input">
+            <div className="input-field">
+              <span>$</span>
               <input
                 style={{ width: "100%" }}
-                type="text"
+                type="number"
                 value={price}
                 placeholder="Price per night (USD)"
                 onChange={(e) => setPrice(e.target.value)}
@@ -343,16 +307,16 @@ const handleSubmit = async (e) => {
             <div className="errors-object">
               {errors.price && <p>{errors.price}</p>}
             </div>
-          </section>
+          </label>
 
           <hr></hr>
 
-          <section id="publish-image-new-spot-container">
-            <h3>Liven up your spot with photos</h3>
-            <span>
-              Submit a link to at least one photo to publish your spot.
-            </span>
-
+          <header>
+            <h2>Liven up your spot with photos</h2>
+            <p>Submit a link to at least one photo to publish your spot.</p>
+          </header>
+          {/* // previewImage */}
+          <label className="photos-input">
             <input
               style={{ width: "100%" }}
               type="text"
@@ -362,76 +326,67 @@ const handleSubmit = async (e) => {
               required
             />
             <div className="errors-object">
-            {errors.previewImage && <p>{errors.previewImage}</p>}
+              {errors.previewImage && <p>{errors.previewImage}</p>}
             </div>
-            {/* //image1  */}
+          </label>
+
+          {/* //image1 */}
+          <label className="photos-input">
             <input
               style={{ width: "100%" }}
-              type="Image URL"
+              type="text"
               value={image1}
               placeholder="Image URL"
               onChange={(e) => setImage1(e.target.value)}
             />
-
             <div className="errors-object">
-              {errors.image1 && <p>{errors.image1}</p>}
-              {/* {visualErrors.image1 && <p>{visualErrors.image1}</p>} */}
-
+              {visualErrors.image1 && <p>{visualErrors.image1}</p>}
             </div>
-
-            {/* //image2  */}
+          </label>
+          {/* //image2 */}
+          <label className="photos-input">
             <input
               style={{ width: "100%" }}
-              type="Image URL"
+              type="text"
               value={image2}
               placeholder="Image URL"
               onChange={(e) => setImage2(e.target.value)}
             />
-
             <div className="errors-object">
-              {errors.image2 && <p>{errors.image2}</p>}
-
-              {/* {visualErrors.image2 && <p>{visualErrors.image2}</p>} */}
+              {visualErrors.image2 && <p>{visualErrors.image2}</p>}
             </div>
+          </label>
 
-            {/* //image3  */}
+          {/* //image3 */}
+          <label className="photos-input">
             <input
               style={{ width: "100%" }}
-              type="Image URL"
+              type="text"
               value={image3}
               placeholder="Image URL"
               onChange={(e) => setImage3(e.target.value)}
             />
-
             <div className="errors-object">
-              {errors.image3 && <p>{errors.image3}</p>}
-
-              {/* {visualErrors.image3 && <p>{visualErrors.image3}</p>} */}
+              {visualErrors.image3 && <p>{visualErrors.image3}</p>}
             </div>
-
-            {/* //image4  */}
+          </label>
+          {/* //image4 */}
+          <label className="photos-input">
             <input
               style={{ width: "100%" }}
-              type="Image URL"
+              type="text"
               value={image4}
               placeholder="Image URL"
               onChange={(e) => setImage4(e.target.value)}
             />
-
             <div className="errors-object">
-              {errors.image4 && <p>{errors.image4}</p>}
-
-              {/* {visualErrors.image4 && <p>{visualErrors.image4}</p>} */}
+              {visualErrors.image4 && <p>{visualErrors.image4}</p>}
             </div>
-          </section>
+          </label>
 
           <hr></hr>
 
-          <button
-          className='create-spot-button'
-          type='submit'>
-            Create Spot
-          </button>
+          <button type="submit">Create Spot</button>
         </div>
       </form>
     </>

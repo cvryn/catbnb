@@ -6,7 +6,7 @@ import { deleteSpot, getAllSpots } from "../../store/spotsReducer";
 import './DeleteSpotModal.css'
 
 
-const DeleteSpotModal = ({ spot, spotId }) => {
+const DeleteSpotModal = ({ spotId }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 

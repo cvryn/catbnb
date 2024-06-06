@@ -33,7 +33,7 @@ const ManageSpots = () => {
     };
 
     fetchData();
-  }, [dispatch, spotId]);
+  }, [dispatch, spotId, spots]);
 
   const userOwnedSpots = Object.values(spots).filter(
     (spot) => spot.ownerId === currentUser.id

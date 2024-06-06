@@ -5,7 +5,7 @@ import noimage from "../../../src/assets/no-image-available.jpg";
 import "./SpotItems.css";
 
 const SpotItems = ({ spot }) => {
-  console.log(spot);
+  // console.log(spot);
 
   return (
     <>

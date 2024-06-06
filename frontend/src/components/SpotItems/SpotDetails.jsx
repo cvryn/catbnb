@@ -21,7 +21,11 @@ const SpotDetails = () => {
   const spots = useSelector((state) => state.spots.allSpots[spotId]);
   console.log("ALLLLLLLL SPOTS", spots);
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
-  console.log("%c currrrrrrrrrrrrrrrrrrrrrrrrrrrrr", "color: orange", currentSpot);
+  console.log(
+    "%c currrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+    "color: orange",
+    currentSpot
+  );
 
   // Get the reviews for the current spot
   const reviews = useSelector((state) => state.reviews.Reviews);
@@ -55,12 +59,12 @@ const SpotDetails = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: 'center'
+          alignItems: "center",
         }}
       >
         <h1>Loading right meow...</h1>
         <img
-          style={{ width: "1000px"}}
+          style={{ width: "1000px" }}
           src="https://res.cloudinary.com/dfj8lsesn/image/upload/v1717520571/catbnb/loading-cat_egosvf.gif"
           alt="Loading Cat"
         />
@@ -82,30 +86,44 @@ const SpotDetails = () => {
           <div className="main-image-left">
             <img
               className="main-image"
-              src={currentSpot?.SpotImages[0]?.url || noimage}
+              src={
+                currentSpot?.SpotImages[0]?.url || noimage
+              }
               alt="Main spots"
             />
           </div>
           <div className="images-container-right">
             <img
               className="side-image"
-              src={currentSpot?.SpotImages[1]?.url || currentSpot?.SpotImages[0]?.url || noimage}
+              src={
+                currentSpot?.SpotImages[1]?.url ||
+                noimage
+              }
               alt="spots pic"
             />
             <img
               className="side-image"
-              src={currentSpot?.SpotImages[2]?.url || currentSpot?.SpotImages[0]?.url || noimage}
+              src={
+                currentSpot?.SpotImages[2]?.url ||
+                noimage
+              }
               alt="spots pic"
               style={{ borderTopRightRadius: "10px" }}
             />
             <img
               className="side-image"
-              src={currentSpot?.SpotImages[3]?.url || currentSpot?.SpotImages[0]?.url || noimage}
+              src={
+                currentSpot?.SpotImages[3]?.url ||
+                noimage
+              }
               alt="spots pic"
             />
             <img
               className="side-image"
-              src={currentSpot?.SpotImages[4]?.url || currentSpot?.SpotImages[0]?.url || noimage}
+              src={
+                currentSpot?.SpotImages[4]?.url ||
+                noimage
+              }
               alt="Spot pic"
               style={{ borderBottomRightRadius: "10px" }}
             />
@@ -118,7 +136,9 @@ const SpotDetails = () => {
               Hosted by {currentSpot?.Owner?.firstName}{" "}
               {currentSpot?.Owner?.lastName}
             </h2>
-            <p className="description" style= {{ width: '90%'}}>{currentSpot.description}</p>
+            <p className="description" style={{ width: "90%" }}>
+              {currentSpot.description}
+            </p>
           </div>
           <div className="reserve-container">
             <div className="reserve-top">
@@ -143,10 +163,10 @@ const SpotDetails = () => {
                   : ""}
               </div>
             </div>
-            <div style={{paddingTop: '20px'}} >
-            <button className="reserve-button" onClick={reserveButtonClick}>
-              Reserve
-            </button>
+            <div style={{ paddingTop: "20px" }}>
+              <button className="reserve-button" onClick={reserveButtonClick}>
+                Reserve
+              </button>
             </div>
           </div>
         </section>
@@ -188,11 +208,13 @@ const SpotDetails = () => {
                     {user && user.id === review.userId && (
                       <div id="delete-review-button">
                         <OpenModalButton
-                            buttonText={"Delete"}
+                          buttonText={"Delete"}
                           modalComponent={
                             <DeleteReviewModal
                               reviewId={review.id}
-                              spotId={spotId}/>}
+                              spotId={spotId}
+                            />
+                          }
                         />
                       </div>
                     )}

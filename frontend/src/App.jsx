@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import LoginFormPage from './components/LoginFormPage';
+// import LoginFormPage from './components/LoginFormPage';
 // import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation/Navigation';
 import * as sessionActions from './store/session';
 import { Modal } from './context/Modal';
-import Landing from './components/LandingPage/Landing'
+// import Landing from './components/LandingPage/Landing'
 import Spots from './components/Spots/Spots'
 import SpotDetails from './components/SpotItems/SpotDetails'
 import CreateSpotForm from './components/SpotItems/CreateNewSpotForm';
