@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { TiStarFullOutline } from "react-icons/ti";
 
+import noimage from "../../../src/assets/no-image-available.jpg";
 import "./SpotItems.css";
 
 const SpotItems = ({ spot }) => {
-  // console.log(spot);
+  console.log(spot);
 
   return (
     <>
@@ -17,7 +18,7 @@ const SpotItems = ({ spot }) => {
           <Link to={`/spots/${spot.id}`} style={{ textDecoration: "none" }}>
             {/* <div className="spot-container"> */}
             <div className="spot-image-container">
-              <img className="spots-image" src={spot.previewImage} />
+              <img className="spots-image" src={spot?.previewImage || noimage} />
             </div>
 
             <div className="spot-text-container">

@@ -66,9 +66,14 @@
 .reserve-container {
   border: solid 2px rgb(25, 25, 25);
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
+  display: block;
+  width: 300px;
+  height: 100px;
+  margin-top: 20px;
   padding: 20px;
+  /* Additional styles to override flex behavior */
+  flex: 0 0 auto;
+  max-width: 100%;
 }
 
 .reserve-top {
@@ -98,10 +103,11 @@
 .reserve-button {
   box-shadow: 2px 2px 3px black;
   border-radius: 10px;
+  width: 280px;
   color: white;
   font-size: 12px;
-  background-color: #ff609d;
-  padding: 8px;
+  background-color: #FC807D;
+  padding: 10px;
 }
 
 #reviews-container {

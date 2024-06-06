@@ -35,6 +35,7 @@ function CreateSpotForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const [errors, setErrors] = useState({});
+  const[visualErrors, setVisualErrors] = useState ({})
 
   let spots = useSelector(state => state.spots.allSpots)
 
@@ -47,24 +48,25 @@ const handleSubmit = async (e) => {
     setHasSubmitted(true);
 
     let errors = {};
+    let visualErrors = {};
 
-    if (!address) {
-      errors.address = "Address is required";
+    if (!address || address.trim().length === 0) {
+        errors.address = "Address is required";
     }
 
-    if (!city) {
+    if (!city || city.trim().length === 0) {
       errors.city = "City is required";
     }
 
-    if (!state) {
+    if (!state || state.trim().length === 0) {
       errors.state = "State is required";
     }
 
-    if (!country) {
+    if (!country || country.trim().length === 0) {
       errors.country = "Country is required";
     }
 
-    if (!name) {
+    if (!name || name.trim().length === 0) {
       errors.name = "Name is required";
     }
 
@@ -76,51 +78,57 @@ const handleSubmit = async (e) => {
       errors.price = "Price is required";
     }
 
-    if (!lat || lat < -90 || lat > 90) errors.lat = "Latitude is required";
-    if (!lng || lng < -180 || lng > 180) errors.lng = "Longitude is required";
-
-    if (!previewImage) {
-      errors.previewImage = "Preview image is required.";
+    if (!lat) {
+        errors.lat = "Latitude is required";
+    } else if (lat < -90 || lat > 90) {
+        errors.lat = "Latitude must be between -90 and 90";
     }
-
+    if (!lng) {
+        errors.lng = "Longitude is required";
+    } else if (lng < -180 || lng > 180) {
+        errors.lng = "Longitude must be between -90 and 90";
+    }
     const checkImageUrl = (url) => {
       return url && (url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg"));
     };
 
-    if (!image1 || !checkImageUrl(image1)) {
-      errors.image1 = "Image URL must end in .png, .jpg, or .jpeg";
+    if (!previewImage || !checkImageUrl(previewImage)) {
+        errors.previewImage = "Preview image is required and must end in .png, .jpg, or .jpeg.";
+      }
+
+
+    if (image1 && !checkImageUrl(image1)) {
+     visualErrors.image1 = "Image URL must end in .png, .jpg, or .jpeg";
     }
-    if (!image2 || !checkImageUrl(image2)) {
-      errors.image2 = "Image URL must end in .png, .jpg, or .jpeg";
+    if (image2 && !checkImageUrl(image2)) {
+       visualErrors.image2 = "Image URL must end in .png, .jpg, or .jpeg";
     }
-    if (!image3 || !checkImageUrl(image3)) {
-      errors.image3 = "Image URL must end in .png, .jpg, or .jpeg";
+
+    if (image3 && !checkImageUrl(image3)) {
+       visualErrors.image3 = "Image URL must end in .png, .jpg, or .jpeg";
     }
-    if (!image4 || !checkImageUrl(image4)) {
-      errors.image4 = "Image URL must end in .png, .jpg, or .jpeg";
+
+    if (image4 && !checkImageUrl(image4)) {
+       visualErrors.image4 = "Image URL must end in .png, .jpg, or .jpeg";
     }
 
     setErrors(errors);
+    setVisualErrors(visualErrors)
+
+
     if (Object.keys(errors).length === 0) {
-        const userInput = {
-          address,
-          city,
-          state,
-          country,
-          name,
-          price,
-          description,
-          lat,
-          lng,
-        };
-
-        const prevImage = { previewImage };
-        const images = { image1, image2, image3, image4 };
-
         const newSpot = {
-          ...userInput,
-          prevImage,
-          images,
+            address,
+            city,
+            state,
+            country,
+            name,
+            price,
+            description,
+            lat,
+            lng,
+            previewImage,
+            images: [image1, image2, image3, image4].filter(img => img),
         };
 
       console.log("Submitting new spot:", newSpot);
@@ -131,7 +139,7 @@ const handleSubmit = async (e) => {
       console.log("DID WE createNewSpot:", response);
 
       if (response && response.id) {
-        // navigate(`/spots/${response.id}`);
+        navigate(`/spots/${response.id}`);
 
       } else {
         console.error("Failed to create new spot:", response);
@@ -272,7 +280,7 @@ const handleSubmit = async (e) => {
             <h3>Describe your place to guests</h3>
             <label className="description-input">
               <span className="description-suggestion">
-                Mention the best features of your spot, any special amentities
+                Mention the best features of your spot, any special amenities
                 like fast wifi or parking, and what you love about the
                 neighborhood.
               </span>
@@ -353,9 +361,8 @@ const handleSubmit = async (e) => {
               onChange={(e) => setPreviewImage(e.target.value)}
               required
             />
-
             <div className="errors-object">
-              {errors.previewImage && <p>{errors.previewImage}</p>}
+            {errors.previewImage && <p>{errors.previewImage}</p>}
             </div>
             {/* //image1  */}
             <input
@@ -364,11 +371,12 @@ const handleSubmit = async (e) => {
               value={image1}
               placeholder="Image URL"
               onChange={(e) => setImage1(e.target.value)}
-              required
             />
 
             <div className="errors-object">
               {errors.image1 && <p>{errors.image1}</p>}
+              {/* {visualErrors.image1 && <p>{visualErrors.image1}</p>} */}
+
             </div>
 
             {/* //image2  */}
@@ -378,11 +386,12 @@ const handleSubmit = async (e) => {
               value={image2}
               placeholder="Image URL"
               onChange={(e) => setImage2(e.target.value)}
-              required
             />
 
             <div className="errors-object">
               {errors.image2 && <p>{errors.image2}</p>}
+
+              {/* {visualErrors.image2 && <p>{visualErrors.image2}</p>} */}
             </div>
 
             {/* //image3  */}
@@ -392,11 +401,12 @@ const handleSubmit = async (e) => {
               value={image3}
               placeholder="Image URL"
               onChange={(e) => setImage3(e.target.value)}
-              required
             />
 
             <div className="errors-object">
               {errors.image3 && <p>{errors.image3}</p>}
+
+              {/* {visualErrors.image3 && <p>{visualErrors.image3}</p>} */}
             </div>
 
             {/* //image4  */}
@@ -406,11 +416,12 @@ const handleSubmit = async (e) => {
               value={image4}
               placeholder="Image URL"
               onChange={(e) => setImage4(e.target.value)}
-              required
             />
 
             <div className="errors-object">
               {errors.image4 && <p>{errors.image4}</p>}
+
+              {/* {visualErrors.image4 && <p>{visualErrors.image4}</p>} */}
             </div>
           </section>
 
