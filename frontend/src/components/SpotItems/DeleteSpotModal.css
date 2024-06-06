@@ -1,24 +1,24 @@
 
-#delete-spot-modal {
+#delete-review-modal {
     border-radius: 10px;
     background-color: white;
 }
 
-.delete-spot-confirmation {
+.delete-review-confirmation {
     /* border: solid 2px blue; */
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.delete-spot-modal-button-yes {
+.delete-review-modal-button-yes {
     height: 35px;
     background-color: red;
     color: white;
     box-shadow: 3px 3px 1px black
 }
 
-.delete-spot-modal-button-no {
+.delete-review-modal-button-no {
     height: 35px;
     background-color: grey;
     color: white;

@@ -1,0 +1,40 @@
+#manage-spots-container {
+  /* border: solid 2px red; */
+}
+
+.manage-spots-header {
+  /* border: solid 2px blue; */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+}
+.user-owned-spot {
+  /* border: solid 2px green; */
+  display: inline-flex;
+  flex-direction: column;
+
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 2400px) {
+    #manage-spots-container {
+      max-width: 2400px;
+      margin: 0 auto;
+    }
+  }
