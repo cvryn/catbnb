@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { newReview, getReviews } from '../../store/reviewReducer';
 import ReviewModalInput from './CreateReviewInput';
 
-const ReviewForm = ({ spotId, onSubmit, onClose }) => {
+const ReviewForm = ({ spotId, onClose }) => {
   const dispatch = useDispatch();
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);

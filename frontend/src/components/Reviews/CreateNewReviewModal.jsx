@@ -2,7 +2,7 @@ import { newReview } from "../../store/reviewReducer";
 import ReviewForm from "./CreateReviewForm";
 
 
-const CreateReviewModal = ({ rating, spotId, disabled, onClose }) => {
+const CreateReviewModal = ({ spotId, onClose }) => {
   return (
     <ReviewForm spotId={spotId} onSubmit={newReview} onClose={onClose} />
   );

@@ -1,12 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./Landing.css";
 
 import { PiPawPrintFill } from "react-icons/pi";
 
 export default function Landing() {
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -26,7 +25,7 @@ export default function Landing() {
 
       <div onClick={handleSubmit}>
       <button className="enter-website-button"
-       ><PiPawPrintFill /> let's look at some spots! <PiPawPrintFill /></button>
+       ><PiPawPrintFill /> Look at some spots! <PiPawPrintFill /></button>
        </div>
 
     </div>
