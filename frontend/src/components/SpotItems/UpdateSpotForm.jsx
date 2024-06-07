@@ -6,8 +6,7 @@ import { getSpotById, updateSpot } from "../../store/spotsReducer";
 import "./UpdateSpotForm.css";
 
 const UpdateSpotForm = () => {
-
-    const { spotId} = useParams();
+  const { spotId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,34 +30,32 @@ const UpdateSpotForm = () => {
 
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
 
-  console.log("Current spot being updated", currentSpot)
-  console.log(':eyes:', spotId)
+  console.log("Current spot being updated", currentSpot);
+  console.log(":eyes:", spotId);
 
+  // useEffect to fetch the spot data by spotId
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(getSpotById(spotId));
+    };
 
-    // useEffect to fetch the spot data by spotId
-    useEffect(() => {
-        const fetchData = async () => {
-          await dispatch(getSpotById(spotId));
-        };
+    fetchData();
+  }, [dispatch, spotId]);
 
-        fetchData();
-      }, [dispatch, spotId]);
-
-
-    // useEffect for pre-filled form with values from the db
-    useEffect(() => {
-        if(currentSpot){
-            setAddress(currentSpot.address)
-            setCity(currentSpot.city)
-            setState(currentSpot.state)
-            setCountry(currentSpot.country)
-            setDescription(currentSpot.description)
-            setName(currentSpot.name)
-            setPrice(currentSpot.price)
-            setLat(currentSpot.lat);
-            setLng(currentSpot.lng);
-        }
-    }, [currentSpot])
+  // useEffect for pre-filled form with values from the db
+  useEffect(() => {
+    if (currentSpot) {
+      setAddress(currentSpot.address);
+      setCity(currentSpot.city);
+      setState(currentSpot.state);
+      setCountry(currentSpot.country);
+      setDescription(currentSpot.description);
+      setName(currentSpot.name);
+      setPrice(currentSpot.price);
+      setLat(currentSpot.lat);
+      setLng(currentSpot.lng);
+    }
+  }, [currentSpot]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,27 +76,27 @@ const UpdateSpotForm = () => {
     if (lng < -180 || lng > 180)
       errors.lng = "Longitude must be between -180 and 180";
 
-
     setErrors(errors);
     setVisualErrors(visualErrors);
 
     if (Object.keys(errors).length === 0) {
-        const updatedSpot = {
-          address,
-          city,
-          state,
-          country,
-          name,
-          price,
-          description,
-          lat,
-          lng,
-        };
+      const updatedSpot = {
+        address,
+        city,
+        state,
+        country,
+        name,
+        price,
+        description,
+        lat,
+        lng,
+      };
 
-        const response = await dispatch(updateSpot(spotId, updatedSpot));
-        if (response && response.id) {
-          navigate(`/spots/${response.id}`); // Redirect to the spot's details page
-        }
+      const response = await dispatch(updateSpot(spotId, updatedSpot));
+      if (response && response.id) {
+        // Redirects to the spot's details page at that spotId
+        navigate(`/spots/${response.id}`);
+      }
     }
   };
 
@@ -322,7 +319,18 @@ const UpdateSpotForm = () => {
 
           <hr></hr>
 
-          <button type="submit">Create Spot</button>
+          <button
+            type="submit"
+            style={{
+              color: "white",
+              backgroundColor: "red",
+              width: " 100px",
+              boxShadow: "2px 2px 2px black",
+              margin: "0 auto",
+            }}
+          >
+            Create Spot
+          </button>
         </div>
       </form>
     </>

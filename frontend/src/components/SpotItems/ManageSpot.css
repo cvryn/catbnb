@@ -21,9 +21,15 @@
 
 
 
+.user-spots-delete-button{
+  /* border: solid 2px pink; */
+}
 
-
-
+.user-owned-update-delete-buttons{
+  border: solid 2px blue;
+  display: flex;
+  gap: 20px;
+}
 
 
 

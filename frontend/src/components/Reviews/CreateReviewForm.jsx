@@ -13,6 +13,7 @@ const ReviewForm = ({ spotId, onSubmit, onClose }) => {
     e.preventDefault();
     let newErrors = {};
 
+
     if (!review || review.length < 10) {
       newErrors.review = 'Review must be 10 characters or more';
     }
@@ -27,8 +28,11 @@ const ReviewForm = ({ spotId, onSubmit, onClose }) => {
         review,
         stars: rating,
       };
+      console.log('What is this review data looking like', reviewData)
+      console.log(typeof review)
 
       const response = await dispatch(newReview(spotId, reviewData));
+      console.log('Did we get here? new review response', response)
       if (response && response.id) {
         await dispatch(getReviews(spotId));
         onClose();

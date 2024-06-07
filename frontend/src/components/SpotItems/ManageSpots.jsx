@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate} from "react-router-dom";
+import { NavLink, useNavigate} from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteSpotModal from "./DeleteSpotModal";
 import {
@@ -8,7 +8,6 @@ import {
   getCurrentUserSpots,
 } from "../../store/spotsReducer";
 import SpotItems from "./SpotItems";
-
 import "./ManageSpot.css";
 
 
@@ -50,9 +49,10 @@ const ManageSpots = () => {
       <section className="manage-spots-header">
         <h1>Manage Your Spots</h1>
         <div>
-          <button className="create-a-new-spot-button" type="submit">
-            Create a New Spot
-          </button>
+          {currentUser && userOwnedSpots.length === 0 && (
+            <NavLink to='/spots/new' style={{textDecoration: 'none', boxShadow: '2px 2px 2px black', color:'white', backgroundColor: 'grey', fontSize: '12px', padding: '3px'}}>Create a New Spot</NavLink>
+
+          )}
         </div>
       </section>
 
@@ -63,7 +63,7 @@ const ManageSpots = () => {
             <div className="user-owned-spot" key={spot.id}>
               <SpotItems spot={spot} />
               <div className="user-owned-update-delete-buttons">
-                <button onClick={() => handleUpdateSpot(spot.id)}>Update</button>
+                <button style={{textDecoration: 'none', boxShadow: '2px 2px 2px black', color:'white', backgroundColor: 'grey', fontSize: '12px'}} onClick={() => handleUpdateSpot(spot.id) }>Update</button>
                 <div className="user-spots-delete-button">
                 <OpenModalButton
                     buttonText={"Delete"}

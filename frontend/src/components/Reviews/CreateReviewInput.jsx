@@ -1,4 +1,3 @@
-import React from 'react';
 import { GoStar } from "react-icons/go";
 import { GoStarFill } from "react-icons/go";
 

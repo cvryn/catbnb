@@ -83,8 +83,8 @@ function ProfileButton({ user }) {
             {/* <li>ManageSpots</li> */}
 
             <li>
-              <div className="logout-button">
-                <button onClick={logout} style={{ cursor: "pointer" }}>
+              <div className="logout-button-container">
+                <button className='logout-button' onClick={logout} style={{ cursor: "pointer" }}>
                   Log Out
                 </button>
               </div>

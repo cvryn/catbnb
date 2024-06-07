@@ -386,7 +386,7 @@ function CreateSpotForm() {
 
           <hr></hr>
 
-          <button type="submit">Create Spot</button>
+          <button type="submit" style={{color:'white', backgroundColor: 'red', width:' 100px', boxShadow: '2px 2px 2px black', margin: '0 auto'}}>Create Spot</button>
         </div>
       </form>
     </>

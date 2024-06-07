@@ -1,5 +1,5 @@
-import ReviewForm from "./CreateReviewForm";
 import { newReview } from "../../store/reviewReducer";
+import ReviewForm from "./CreateReviewForm";
 
 
 const CreateReviewModal = ({ rating, spotId, disabled, onClose }) => {
