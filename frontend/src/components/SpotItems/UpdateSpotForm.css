@@ -1,0 +1,14 @@
+.update-spot-button {
+    color: white;
+    box-shadow: 2px 2px 2px black;
+    margin: 0 auto;
+    width: 100px;
+    cursor: pointer;
+    background-color:red;
+}
+
+.update-spot-button:disabled {
+    background-color: grey;
+
+
+  }

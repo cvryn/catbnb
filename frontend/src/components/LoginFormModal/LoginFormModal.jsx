@@ -96,6 +96,7 @@ function LoginFormModal() {
 {/* // ! Demo user should not flash on the input, onClick login(user password) */}
         <button
         className='demo-user-modal-button'
+        style={{cursor:'pointer'}}
           type="submit"
           onClick={() => {
             setCredential("Mama");

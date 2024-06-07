@@ -320,13 +320,18 @@ const UpdateSpotForm = () => {
 
           <button
             type="submit"
-            style={{
-              color: "white",
-              backgroundColor: "red",
-              width: " 100px",
-              boxShadow: "2px 2px 2px black",
-              margin: "0 auto",
-            }}
+            className='update-spot-button'
+            disabled={
+              Object.keys(errors).length > 0 ||
+              !address ||
+              !city ||
+              !state ||
+              !country ||
+              !name ||
+              description.length < 30 ||
+              price < 1 ||
+              lat < -90 || lat > 90 ||
+              lng < -180 || lng > 180}
           >
             Create Spot
           </button>
