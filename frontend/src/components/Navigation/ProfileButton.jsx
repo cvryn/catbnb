@@ -56,20 +56,24 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {!user && (
           <>
+          <div id='profile-modal-login-signup-container'>
+
             <li>
               <OpenModalButton
-                className="sign-up-button"
+              modalStyling='sign-up-button'
                 buttonText="Sign Up"
                 modalComponent={<SignupFormModal />}
               />
             </li>
             <li>
               <OpenModalButton
-                className="log-in-button"
+                 modalStyling="log-in-button"
                 buttonText="Log In"
                 modalComponent={<LoginFormModal />}
               />
             </li>
+
+          </div>
           </>
         )}
         {user && (

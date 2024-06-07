@@ -63,9 +63,10 @@ const ManageSpots = () => {
             <div className="user-owned-spot" key={spot.id}>
               <SpotItems spot={spot} />
               <div className="user-owned-update-delete-buttons">
-                <button style={{textDecoration: 'none', boxShadow: '2px 2px 2px black', color:'white', backgroundColor: 'grey', fontSize: '12px', cursor:'pointer'}} onClick={() => handleUpdateSpot(spot.id) }>Update</button>
+                <button className='user-owned-update-button' onClick={() => handleUpdateSpot(spot.id) }>Update</button>
                 <div className="user-spots-delete-button">
                 <OpenModalButton
+                modalStyling='user-owned-delete-button'
                     buttonText={"Delete"}
                     modalComponent={<DeleteSpotModal spotId={spot.id} />}
                   />

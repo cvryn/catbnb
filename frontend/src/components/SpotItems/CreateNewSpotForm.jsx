@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createNewSpot } from "../../store/spotsReducer";
-
 import "./CreateNewSpotForm.css";
 
 function CreateSpotForm() {
@@ -26,45 +25,56 @@ function CreateSpotForm() {
   const [errors, setErrors] = useState({});
   const [visualErrors, setVisualErrors] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const errors = {};
+  const validateInputs = () => {
+    const newErrors = {};
+    const newVisualErrors = {};
 
     // Validations
-    if (!address.trim()) errors.address = "Address is required";
-    if (!city.trim()) errors.city = "City is required";
-    if (!state.trim()) errors.state = "State is required";
-    if (!country.trim()) errors.country = "Country is required";
-    if (!name.trim()) errors.name = "Name is required";
+    if (!address.trim()) newErrors.address = "Address is required";
+    if (!city.trim()) newErrors.city = "City is required";
+    if (!state.trim()) newErrors.state = "State is required";
+    if (!country.trim()) newErrors.country = "Country is required";
+    if (!name.trim()) newErrors.name = "Name is required";
     if (description.length < 30)
-      errors.description = "Description needs a minimum of 30 characters";
-    if (price < 1) errors.price = "Price is required";
+      newErrors.description = "Description needs a minimum of 30 characters";
+    if (price < 1) newErrors.price = "Price is required";
     if (lat < -90 || lat > 90)
-      errors.lat = "Latitude must be between -90 and 90";
+      newErrors.lat = "Latitude must be between -90 and 90";
     if (lng < -180 || lng > 180)
-      errors.lng = "Longitude must be between -180 and 180";
+      newErrors.lng = "Longitude must be between -180 and 180";
 
-    // Helper to make sure the images are the proper file type
     const checkImageUrl = (url) =>
       url &&
       (url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg"));
+
     if (!checkImageUrl(previewImage))
-      errors.previewImage =
+      newErrors.previewImage =
         "Preview image is required and must end in .png, .jpg, or .jpeg";
+
     if (image1 && !checkImageUrl(image1))
-      visualErrors.image1 = "Image URL must end in .png, .jpg, or .jpeg";
+      newVisualErrors.image1 = "Image URL must end in .png, .jpg, or .jpeg";
     if (image2 && !checkImageUrl(image2))
-      visualErrors.image2 = "Image URL must end in .png, .jpg, or .jpeg";
+      newVisualErrors.image2 = "Image URL must end in .png, .jpg, or .jpeg";
     if (image3 && !checkImageUrl(image3))
-      visualErrors.image3 = "Image URL must end in .png, .jpg, or .jpeg";
+      newVisualErrors.image3 = "Image URL must end in .png, .jpg, or .jpeg";
     if (image4 && !checkImageUrl(image4))
-      visualErrors.image4 = "Image URL must end in .png, .jpg, or .jpeg";
+      newVisualErrors.image4 = "Image URL must end in .png, .jpg, or .jpeg";
 
-    setErrors(errors);
-    setVisualErrors(visualErrors);
+    setErrors(newErrors);
+    setVisualErrors(newVisualErrors);
 
-    if (Object.keys(errors).length === 0) {
+    return (
+      Object.keys(newErrors).length === 0 &&
+      Object.keys(newVisualErrors).length === 0
+    );
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const isValid = validateInputs();
+
+    if (isValid) {
       const newSpot = {
         address,
         city,
@@ -86,8 +96,9 @@ function CreateSpotForm() {
 
   return (
     <>
-      {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
-      {/* <button
+   {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
+
+<button
         className="demo-user-modal-button"
         type="submit"
         onClick={() => {
@@ -115,7 +126,40 @@ function CreateSpotForm() {
       >
         {" "}
         Demo Spots
-      </button> */}
+      </button>
+
+
+      <button
+        className="demo-user-modal-button"
+        type="submit"
+        onClick={() => {
+          setAddress(" ");
+          setCity(" ");
+          setState(" ");
+          setCountry(" ");
+          setName(" ");
+          setDescription(
+            "Lore"
+          );
+          setPrice(1);
+          setLat(1);
+          setLng(1);
+          setPreviewImage(
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717482655/catbnb/8-ATANKZhXomcJ7Tc_rqhse8.png"
+          );
+          setImage1(
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481451/catbnb/8-VHGdSOckSozju5k_q3y8ax.png"
+          );
+          setImage2(
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481395/catbnb/8-PxeIe9RIpGvMIqY_m3gyf8.png"
+          );
+        }}
+      >
+        {" "}
+        Demo Blank Spot Tester
+      </button>
+
+
       <form onSubmit={handleSubmit} id="create-spot-form-container">
         <div id="spot-form-container">
           <header>
@@ -131,7 +175,7 @@ function CreateSpotForm() {
           <section id="form-country-street-city-state">
             <label className="country-address-input">
               <div className="create-spot-key-input">
-                Country{" "}
+                Country
                 <div className="errors-object">
                   {errors.country && <p>{errors.country}</p>}
                 </div>
@@ -147,7 +191,7 @@ function CreateSpotForm() {
             </label>
             <label className="country-address-input">
               <div className="create-spot-key-input">
-                Street Address{" "}
+                Street Address
                 <div className="errors-object">
                   {errors.address && <p>{errors.address}</p>}
                 </div>
@@ -164,7 +208,7 @@ function CreateSpotForm() {
             <label className="city-state-input">
               <div className="city-input" style={{ width: "60%" }}>
                 <div className="create-spot-key-input">
-                  City{" "}
+                  City
                   <div className="errors-object">
                     {errors.city && <p>{errors.city}</p>}
                   </div>
@@ -181,7 +225,7 @@ function CreateSpotForm() {
               </div>
               <div className="state-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                  State{" "}
+                  State
                   <div className="errors-object">
                     {errors.state && <p>{errors.state}</p>}
                   </div>
@@ -199,7 +243,7 @@ function CreateSpotForm() {
             <label className="lat-lng-input">
               <div className="lat-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                  Latitude{" "}
+                  Latitude
                   <div className="errors-object">
                     {errors.lat && <p>{errors.lat}</p>}
                   </div>
@@ -216,7 +260,7 @@ function CreateSpotForm() {
               </div>
               <div className="lng-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                  Longitude{" "}
+                  Longitude
                   <div className="errors-object">
                     {errors.lng && <p>{errors.lng}</p>}
                   </div>
@@ -233,12 +277,12 @@ function CreateSpotForm() {
             </label>
           </section>
 
-          <hr></hr>
+          <hr />
 
           <header>
             <h2>Describe your place to guests</h2>
             <p>
-              Mention the best features of your space, any special amentities
+              Mention the best features of your space, any special amenities
               like fast wifi or parking, and what you love about the
               neighborhood.
             </p>
@@ -258,7 +302,7 @@ function CreateSpotForm() {
             </div>
           </label>
 
-          <hr></hr>
+          <hr />
 
           <header>
             <h2>Create a title for your spot</h2>
@@ -282,7 +326,7 @@ function CreateSpotForm() {
             </div>
           </label>
 
-          <hr></hr>
+          <hr />
 
           <header>
             <h2>Set a base price for your spot</h2>
@@ -293,10 +337,10 @@ function CreateSpotForm() {
           </header>
 
           <label className="price-input">
-            <div className="input-field">
-              <span>$</span>
+            <div className="price-icon-input">
+              $
               <input
-                style={{ width: "100%" }}
+                style={{ width: "95%" }}
                 type="number"
                 value={price}
                 placeholder="Price per night (USD)"
@@ -309,96 +353,95 @@ function CreateSpotForm() {
             </div>
           </label>
 
-          <hr></hr>
+          <hr />
 
           <header>
             <h2>Liven up your spot with photos</h2>
             <p>Submit a link to at least one photo to publish your spot.</p>
           </header>
-          {/* // previewImage */}
-          <label className="photos-input">
+
+          <label className="image-input">
+            <div className="create-spot-key-input">
+              Preview Image URL
+              <div className="errors-object">
+                {errors.previewImage && <p>{errors.previewImage}</p>}
+              </div>
+            </div>
             <input
               style={{ width: "100%" }}
-              type="text"
+              type="url"
               value={previewImage}
               placeholder="Preview Image URL"
               onChange={(e) => setPreviewImage(e.target.value)}
               required
             />
-            <div className="errors-object">
-              {errors.previewImage && <p>{errors.previewImage}</p>}
-            </div>
           </label>
-
-          {/* //image1 */}
-          <label className="photos-input">
+          <label className="image-input">
+            <div className="create-spot-key-input">
+              Image URL
+              <div className="errors-object">
+                {visualErrors.image1 && <p>{visualErrors.image1}</p>}
+              </div>
+            </div>
             <input
               style={{ width: "100%" }}
-              type="text"
+              type="url"
               value={image1}
               placeholder="Image URL"
               onChange={(e) => setImage1(e.target.value)}
             />
-            <div className="errors-object">
-              {visualErrors.image1 && <p>{visualErrors.image1}</p>}
-            </div>
           </label>
-          {/* //image2 */}
-          <label className="photos-input">
+          <label className="image-input">
+            <div className="create-spot-key-input">
+              Image URL
+              <div className="errors-object">
+                {visualErrors.image2 && <p>{visualErrors.image2}</p>}
+              </div>
+            </div>
             <input
               style={{ width: "100%" }}
-              type="text"
+              type="url"
               value={image2}
               placeholder="Image URL"
               onChange={(e) => setImage2(e.target.value)}
             />
-            <div className="errors-object">
-              {visualErrors.image2 && <p>{visualErrors.image2}</p>}
-            </div>
           </label>
-
-          {/* //image3 */}
-          <label className="photos-input">
+          <label className="image-input">
+            <div className="create-spot-key-input">
+              Image URL
+              <div className="errors-object">
+                {visualErrors.image3 && <p>{visualErrors.image3}</p>}
+              </div>
+            </div>
             <input
               style={{ width: "100%" }}
-              type="text"
+              type="url"
               value={image3}
               placeholder="Image URL"
               onChange={(e) => setImage3(e.target.value)}
             />
-            <div className="errors-object">
-              {visualErrors.image3 && <p>{visualErrors.image3}</p>}
-            </div>
           </label>
-          {/* //image4 */}
-          <label className="photos-input">
+          <label className="image-input">
+            <div className="create-spot-key-input">
+              Image URL
+              <div className="errors-object">
+                {visualErrors.image4 && <p>{visualErrors.image4}</p>}
+              </div>
+            </div>
             <input
               style={{ width: "100%" }}
-              type="text"
+              type="url"
               value={image4}
               placeholder="Image URL"
               onChange={(e) => setImage4(e.target.value)}
             />
-            <div className="errors-object">
-              {visualErrors.image4 && <p>{visualErrors.image4}</p>}
-            </div>
           </label>
 
           <hr></hr>
 
-          <button type="submit" className='submit-create-page-button' disabled={
-    Object.keys(errors).length > 0 ||
-    !address ||
-    !city ||
-    !state ||
-    !country ||
-    !name ||
-    description.length < 30 ||
-    price < 1 ||
-    lat < -90 || lat > 90 ||
-    lng < -180 || lng > 180 ||
-    (!previewImage)
-  } >Create Spot</button>
+          <button id="create-spot-button" type="submit">
+            Create Spot
+          </button>
         </div>
       </form>
     </>

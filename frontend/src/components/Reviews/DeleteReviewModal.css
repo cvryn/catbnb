@@ -11,16 +11,21 @@
     gap: 10px;
 }
 
-.delete-spot-modal-button-yes {
+.modal-button-confirm-yes {
+    border: none;
     height: 35px;
     background-color: red;
     color: white;
-    box-shadow: 3px 3px 1px black
+    box-shadow: 3px 3px 2px black;
+    cursor: pointer;
+
 }
 
-.delete-spot-modal-button-no {
+.modal-button-confirm-no {
+    border: none;
     height: 35px;
     background-color: grey;
     color: white;
-    box-shadow: 3px 3px 1px black
+    box-shadow: 3px 3px 2px black;
+    cursor: pointer;
 }

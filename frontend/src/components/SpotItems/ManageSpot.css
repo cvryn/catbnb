@@ -21,16 +21,32 @@
 
 
 
-.user-spots-delete-button{
-  /* border: solid 2px pink; */
-}
 
 .user-owned-update-delete-buttons{
   /* border: solid 2px blue; */
   display: flex;
   gap: 20px;
-}
+  }
 
+  .user-owned-update-button {
+    text-decoration: none;
+    border:none;
+    background-color: grey;
+    box-shadow: 2px 2px 2px black;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    }
+
+.user-owned-delete-button {
+  border: none;
+  background-color: grey;
+  box-shadow: 2px 2px 2px black;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+
+}
 
 
 
