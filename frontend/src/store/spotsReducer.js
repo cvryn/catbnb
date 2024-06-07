@@ -141,13 +141,13 @@ export const createNewSpot = (spot, previewImage, images) => async (dispatch) =>
           if (imageResponse.ok) {
             const imageResult = await imageResponse.json();
             spotImages.push(imageResult);
-            console.log('The other images?', imageResult)
+            // console.log('The other images?', imageResult)
           }
         }
       }
 
       newSpot.images = spotImages;
-      console.log('See that new spot', newSpot)
+      // console.log('See that new spot', newSpot)
 
       dispatch(createSpot(newSpot));
       return newSpot;
@@ -182,7 +182,7 @@ export const getCurrentUserSpots = () => async (dispatch) => {
 //UPDATE update spot by id /api/spots/spotId
 
 export const updateSpot = (spotId, spot) => async(dispatch) => {
-  console.log('!!!!!!!!!!!!!!', spotId)
+  // console.log('!!!!!!!!!!!!!!', spotId)
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'PUT',
     headers: {

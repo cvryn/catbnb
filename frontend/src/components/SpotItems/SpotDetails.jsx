@@ -22,19 +22,15 @@ const SpotDetails = () => {
   const { closeModal } = useModal();
 
   // Get all spots and current spot from the Redux store
-  const spots = useSelector((state) => state.spots.allSpots[spotId]);
-  console.log("ALLLLLLLL SPOTS", spots);
+  // const spots = useSelector((state) => state.spots.allSpots[spotId]);
+  // console.log("ALLLLLLLL SPOTS", spots);
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
-  console.log(
-    "%c currrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-    "color: orange",
-    currentSpot
-  );
+  // console.log("%c Spot Details: currrrrrrrrrrrrrrrrrrrrrrrrrrrrrent spot","color: orange",currentSpot)
+
 
   // Get the reviews for the current spot
   const reviews = useSelector((state) => state.reviews.Reviews || []);
   console.log("SHOW DEM REVIEWS", reviews);
-
 
   const user = useSelector((state) => state.session.user);
   // console.log(`WHOOOOOOOOOOOOOOO DIS`, user);
@@ -57,7 +53,6 @@ const SpotDetails = () => {
 
   // Check if this user has already left a review on the spot
   const userHasReview = reviews.find((review) => review.userId === user?.id);
-
 
   // LOADING CAT If data is not loaded yet and show a loading message
   if (!isLoaded || !currentSpot)
@@ -183,10 +178,12 @@ const SpotDetails = () => {
           </div>
           <div>
             {user && user.id !== currentSpot.ownerId && !userHasReview && (
-              <div id="delete-review-button">
+              <div style={{ padding: "10px 0" }}>
                 <OpenModalButton
                   buttonText={"Post Your Review"}
-                  modalComponent={<CreateReviewModal spotId={spotId} onClose={closeModal}/>}
+                  modalComponent={
+                    <CreateReviewModal spotId={spotId} onClose={closeModal} />
+                  }
                 />
                 {/* {reviews.length === 0 && (
                   <span>Be the first to post a review!</span>
@@ -201,38 +198,43 @@ const SpotDetails = () => {
           <div className="reviews-from-the-cats">
             {reviews &&
               reviews.length > 0 &&
-              reviews.map((review, index) => {
-                const createdAtDate = new Date(review.createdAt);
-                const month = createdAtDate.toLocaleString("default", {
-                  month: "long",
-                });
-                const year = createdAtDate.getFullYear();
+              (() => {
+                const reversedReviews = [];
+                for (let i = reviews.length - 1; i >= 0; i--) {
+                  const review = reviews[i];
+                  const createdAtDate = new Date(review.createdAt);
+                  const month = createdAtDate.toLocaleString("default", {
+                    month: "long",
+                  });
+                  const year = createdAtDate.getFullYear();
 
-                return (
-                  <div key={index} className="actual-reviews">
-                    <span style={{ fontSize: "18px" }}>
-                      {review.User.firstName}
-                    </span>
-                    <span
-                      style={{ fontSize: "14px" }}
-                    >{`${month} ${year}`}</span>
-                    <span style={{ fontSize: "12px" }}>{review.review}</span>
-                    {user && user.id === review.userId && (
-                      <div id="delete-review-button">
-                        <OpenModalButton
-                          buttonText={"Delete"}
-                          modalComponent={
-                            <DeleteReviewModal
-                              reviewId={review.id}
-                              spotId={spotId}
-                            />
-                          }
-                        />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                  reversedReviews.push(
+                    <div key={i} className="actual-reviews">
+                      <span style={{ fontSize: "18px" }}>
+                        {review.User.firstName}
+                      </span>
+                      <span
+                        style={{ fontSize: "14px", color: "grey" }}
+                      >{`${month} ${year}`}</span>
+                      <span style={{ fontSize: "12px" }}>{review.review}</span>
+                      {user && user.id === review.userId && (
+                        <div id="delete-review-button">
+                          <OpenModalButton
+                            buttonText={"Delete"}
+                            modalComponent={
+                              <DeleteReviewModal
+                                reviewId={review.id}
+                                spotId={spotId}
+                              />
+                            }
+                          />
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return reversedReviews;
+              })()}
           </div>
         </section>
       </div>

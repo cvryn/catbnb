@@ -30,8 +30,8 @@ const UpdateSpotForm = () => {
 
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
 
-  console.log("Current spot being updated", currentSpot);
-  console.log(":eyes:", spotId);
+  // console.log("Current spot being updated", currentSpot);
+  // console.log(":eyes:", spotId);
 
   // useEffect to fetch the spot data by spotId
   useEffect(() => {
@@ -102,8 +102,7 @@ const UpdateSpotForm = () => {
 
   return (
     <>
-      <h1>ʕ*•ﻌ•ʔฅ</h1>
-      {/* // Awesome demo spot update button */}
+      {/* <h1>ʕ*•ﻌ•ʔฅ</h1>
       <button
         className="demo-user-modal-button"
         type="submit"
@@ -123,7 +122,7 @@ const UpdateSpotForm = () => {
       >
         {" "}
         Demo Spots
-      </button>
+      </button> */}
       <form onSubmit={handleSubmit} id="create-spot-form-container">
         <div id="spot-form-container">
           <header>

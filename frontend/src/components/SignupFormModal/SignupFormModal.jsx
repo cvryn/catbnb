@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
@@ -15,13 +15,11 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const [submitClicked, setSubmitClicked] = useState(false);
-
-  // UseEffect to catch any blank inputs or those that don't pass validations
+  // const [submitClicked, setSubmitClicked] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitClicked(true);
+    // setSubmitClicked(true);
 
     const errors = {};
 

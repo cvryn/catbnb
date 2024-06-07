@@ -19,7 +19,7 @@ const ManageSpots = () => {
   const spots = useSelector((state) => state.spots.allSpots);
 
   const currentUser = useSelector((state) => state.session.user);
-  console.log("The current session user is: ", currentUser);
+  // console.log("The current session user is: ", currentUser);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +33,7 @@ const ManageSpots = () => {
     (spot) => spot.ownerId === currentUser.id
   );
 
-  console.log("Spots owned by this user", userOwnedSpots);
+  // console.log("Spots owned by this user", userOwnedSpots);
 
 
   const handleUpdateSpot = (spotId) => {

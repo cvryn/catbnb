@@ -87,7 +87,7 @@ function CreateSpotForm() {
   return (
     <>
       {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
-      <button
+      {/* <button
         className="demo-user-modal-button"
         type="submit"
         onClick={() => {
@@ -115,7 +115,7 @@ function CreateSpotForm() {
       >
         {" "}
         Demo Spots
-      </button>
+      </button> */}
       <form onSubmit={handleSubmit} id="create-spot-form-container">
         <div id="spot-form-container">
           <header>

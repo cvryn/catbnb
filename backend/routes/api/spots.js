@@ -445,10 +445,10 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
 
     // Validate review and stars
     const errors = {};
-    if (!review || review.trim() === "") {
+    if (!review) {
       errors.review = "Review text is required";
     }
-    if (!stars || stars > 5 || stars < 1 || stars.toString().trim() === "") {
+    if (!stars || stars > 5 || stars < 1 || isNaN(stars)) {
       errors.stars = "Stars must be an integer from 1 to 5";
     }
 
@@ -659,7 +659,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     startDate,
     endDate,
   });
-  
+
   res.status(200).json(newBooking);
 });
 
