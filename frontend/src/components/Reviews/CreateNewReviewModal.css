@@ -9,7 +9,7 @@ textarea {
 }
 
 .star-rating {
-  border: solid 2px yellow;
+  /* border: solid 2px yellow; */
   display: flex;
   justify-content: center;
   align-items: center;
