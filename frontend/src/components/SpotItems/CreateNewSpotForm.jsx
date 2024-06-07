@@ -397,11 +397,7 @@ function CreateSpotForm() {
     price < 1 ||
     lat < -90 || lat > 90 ||
     lng < -180 || lng > 180 ||
-    !checkImageUrl(previewImage) ||
-    (image1 && !checkImageUrl(image1)) ||
-    (image2 && !checkImageUrl(image2)) ||
-    (image3 && !checkImageUrl(image3)) ||
-    (image4 && !checkImageUrl(image4))
+    (!previewImage)
   } >Create Spot</button>
         </div>
       </form>
