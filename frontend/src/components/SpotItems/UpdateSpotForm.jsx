@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { createNewSpot } from "../../store/spotsReducer";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { getSpotById, updateSpot } from "../../store/spotsReducer";
 
-import "./CreateNewSpotForm.css";
+import "./UpdateSpotForm.css";
 
-function CreateSpotForm() {
+const UpdateSpotForm = () => {
+
+    const { spotId} = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,13 +20,45 @@ function CreateSpotForm() {
   const [price, setPrice] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  const [previewImage, setPreviewImage] = useState("");
-  const [image1, setImage1] = useState("");
-  const [image2, setImage2] = useState("");
-  const [image3, setImage3] = useState("");
-  const [image4, setImage4] = useState("");
+  //   const [previewImage, setPreviewImage] = useState("");
+  //   const [image1, setImage1] = useState("");
+
+  //   const [image2, setImage2] = useState("");
+  //   const [image3, setImage3] = useState("");
+  //   const [image4, setImage4] = useState("");
   const [errors, setErrors] = useState({});
   const [visualErrors, setVisualErrors] = useState({});
+
+  const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
+
+  console.log("Current spot being updated", currentSpot)
+  console.log(':eyes:', spotId)
+
+
+    // useEffect to fetch the spot data by spotId
+    useEffect(() => {
+        const fetchData = async () => {
+          await dispatch(getSpotById(spotId));
+        };
+
+        fetchData();
+      }, [dispatch, spotId]);
+
+
+    // useEffect for pre-filled form with values from the db
+    useEffect(() => {
+        if(currentSpot){
+            setAddress(currentSpot.address)
+            setCity(currentSpot.city)
+            setState(currentSpot.state)
+            setCountry(currentSpot.country)
+            setDescription(currentSpot.description)
+            setName(currentSpot.name)
+            setPrice(currentSpot.price)
+            setLat(currentSpot.lat);
+            setLng(currentSpot.lng);
+        }
+    }, [currentSpot])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,48 +79,34 @@ function CreateSpotForm() {
     if (lng < -180 || lng > 180)
       errors.lng = "Longitude must be between -180 and 180";
 
-    // Helper to make sure the images are the proper file type
-    const checkImageUrl = (url) =>
-      url &&
-      (url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg"));
-    if (!checkImageUrl(previewImage))
-      errors.previewImage =
-        "Preview image is required and must end in .png, .jpg, or .jpeg";
-    if (image1 && !checkImageUrl(image1))
-      visualErrors.image1 = "Image URL must end in .png, .jpg, or .jpeg";
-    if (image2 && !checkImageUrl(image2))
-      visualErrors.image2 = "Image URL must end in .png, .jpg, or .jpeg";
-    if (image3 && !checkImageUrl(image3))
-      visualErrors.image3 = "Image URL must end in .png, .jpg, or .jpeg";
-    if (image4 && !checkImageUrl(image4))
-      visualErrors.image4 = "Image URL must end in .png, .jpg, or .jpeg";
 
     setErrors(errors);
     setVisualErrors(visualErrors);
 
     if (Object.keys(errors).length === 0) {
-      const newSpot = {
-        address,
-        city,
-        state,
-        country,
-        name,
-        price,
-        description,
-        lat,
-        lng,
-      };
+        const updatedSpot = {
+          address,
+          city,
+          state,
+          country,
+          name,
+          price,
+          description,
+          lat,
+          lng,
+        };
 
-      const response = await dispatch(
-        createNewSpot(newSpot, previewImage, [image1, image2, image3, image4])
-      );
-      if (response && response.id) navigate(`/spots/${response.id}`);
+        const response = await dispatch(updateSpot(spotId, updatedSpot));
+        if (response && response.id) {
+          navigate(`/spots/${response.id}`); // Redirect to the spot's details page
+        }
     }
   };
 
   return (
     <>
-      {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
+      <h1>ʕ*•ﻌ•ʔฅ</h1>
+      {/* // Awesome demo spot update button */}
       <button
         className="demo-user-modal-button"
         type="submit"
@@ -102,15 +122,6 @@ function CreateSpotForm() {
           setPrice(1);
           setLat(1);
           setLng(1);
-          setPreviewImage(
-            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717482655/catbnb/8-ATANKZhXomcJ7Tc_rqhse8.png"
-          );
-          setImage1(
-            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481451/catbnb/8-VHGdSOckSozju5k_q3y8ax.png"
-          );
-          setImage2(
-            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481395/catbnb/8-PxeIe9RIpGvMIqY_m3gyf8.png"
-          );
         }}
       >
         {" "}
@@ -119,7 +130,7 @@ function CreateSpotForm() {
       <form onSubmit={handleSubmit} id="create-spot-form-container">
         <div id="spot-form-container">
           <header>
-            <h2>Create a new Spot</h2>
+            <h2>Update your Spot</h2>
             <h3>Where&apos;s your place located?</h3>
             <p>
               Guests will only get your exact address once they booked a
@@ -263,8 +274,8 @@ function CreateSpotForm() {
           <header>
             <h2>Create a title for your spot</h2>
             <p>
-              Catch guests&apos; attention with a spot title that highlights what
-              makes your place special.
+              Catch guests&apos; attention with a spot title that highlights
+              what makes your place special.
             </p>
           </header>
 
@@ -311,86 +322,11 @@ function CreateSpotForm() {
 
           <hr></hr>
 
-          <header>
-            <h2>Liven up your spot with photos</h2>
-            <p>Submit a link to at least one photo to publish your spot.</p>
-          </header>
-          {/* // previewImage */}
-          <label className="photos-input">
-            <input
-              style={{ width: "100%" }}
-              type="text"
-              value={previewImage}
-              placeholder="Preview Image URL"
-              onChange={(e) => setPreviewImage(e.target.value)}
-              required
-            />
-            <div className="errors-object">
-              {errors.previewImage && <p>{errors.previewImage}</p>}
-            </div>
-          </label>
-
-          {/* //image1 */}
-          <label className="photos-input">
-            <input
-              style={{ width: "100%" }}
-              type="text"
-              value={image1}
-              placeholder="Image URL"
-              onChange={(e) => setImage1(e.target.value)}
-            />
-            <div className="errors-object">
-              {visualErrors.image1 && <p>{visualErrors.image1}</p>}
-            </div>
-          </label>
-          {/* //image2 */}
-          <label className="photos-input">
-            <input
-              style={{ width: "100%" }}
-              type="text"
-              value={image2}
-              placeholder="Image URL"
-              onChange={(e) => setImage2(e.target.value)}
-            />
-            <div className="errors-object">
-              {visualErrors.image2 && <p>{visualErrors.image2}</p>}
-            </div>
-          </label>
-
-          {/* //image3 */}
-          <label className="photos-input">
-            <input
-              style={{ width: "100%" }}
-              type="text"
-              value={image3}
-              placeholder="Image URL"
-              onChange={(e) => setImage3(e.target.value)}
-            />
-            <div className="errors-object">
-              {visualErrors.image3 && <p>{visualErrors.image3}</p>}
-            </div>
-          </label>
-          {/* //image4 */}
-          <label className="photos-input">
-            <input
-              style={{ width: "100%" }}
-              type="text"
-              value={image4}
-              placeholder="Image URL"
-              onChange={(e) => setImage4(e.target.value)}
-            />
-            <div className="errors-object">
-              {visualErrors.image4 && <p>{visualErrors.image4}</p>}
-            </div>
-          </label>
-
-          <hr></hr>
-
           <button type="submit">Create Spot</button>
         </div>
       </form>
     </>
   );
-}
+};
 
-export default CreateSpotForm;
+export default UpdateSpotForm;

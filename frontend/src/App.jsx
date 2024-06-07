@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom";
 // import LoginFormPage from './components/LoginFormPage';
 // import SignupFormPage from './components/SignupFormPage';
-import Navigation from './components/Navigation/Navigation';
-import * as sessionActions from './store/session';
-import { Modal } from './context/Modal';
+import Navigation from "./components/Navigation/Navigation";
+import * as sessionActions from "./store/session";
+import { Modal } from "./context/Modal";
 // import Landing from './components/LandingPage/Landing'
-import Spots from './components/Spots/Spots'
-import SpotDetails from './components/SpotItems/SpotDetails'
-import CreateSpotForm from './components/SpotItems/CreateNewSpotForm';
-import ManageSpots from './components/SpotItems/ManageSpots';
+import Spots from "./components/Spots/Spots";
+import SpotDetails from "./components/SpotItems/SpotDetails";
+import CreateSpotForm from "./components/SpotItems/CreateNewSpotForm";
+import ManageSpots from "./components/SpotItems/ManageSpots";
+import UpdateSpotForm from "./components/SpotItems/UpdateSpotForm";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -18,13 +19,13 @@ function Layout() {
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => {
-      setIsLoaded(true)
+      setIsLoaded(true);
     });
   }, [dispatch]);
 
   return (
     <>
-      <Modal/>
+      <Modal />
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Outlet />}
     </>
@@ -40,20 +41,24 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/',
-        element: <Spots />
+        path: "/spots/current/",
+        element: <ManageSpots />,
       },
       {
-        path: "spots/:spotId",
-        element: <SpotDetails />
+        path: "/spots/new",
+        element: <CreateSpotForm />,
       },
       {
-        path: "spots/new",
-        element: <CreateSpotForm />
+        path: "/spots/:spotId/edit",
+        element: <UpdateSpotForm />,
       },
       {
-        path: "spots/current",
-        element: <ManageSpots />
+        path: "/spots/:spotId",
+        element: <SpotDetails />,
+      },
+      {
+        path: "/",
+        element: <Spots />,
       },
       // {
       //   path: 'login',
@@ -63,11 +68,11 @@ const router = createBrowserRouter([
       //   path: 'signup',
       //   element: <SignupFormPage />
       // }
-    ]
+    ],
   },
   {
-    path: '*',
-    element: <h1>Page Not Found!</h1>
+    path: "*",
+    element: <h1>Page Not Found!</h1>,
   },
 ]);
 

@@ -186,7 +186,7 @@ const SpotDetails = () => {
               ? `${currentSpot.numReviews} reviews`
               : ""}
           </div>
-          <div className="reviews-from-the-people">
+          <div className="reviews-from-the-cats">
             {reviews &&
               reviews.length > 0 &&
               reviews.map((review, index) => {

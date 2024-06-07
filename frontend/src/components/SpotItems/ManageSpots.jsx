@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteSpotModal from "./DeleteSpotModal";
 import {
   getAllSpots,
-  getSpotById,
   getCurrentUserSpots,
 } from "../../store/spotsReducer";
 import SpotItems from "./SpotItems";
 
 import "./ManageSpot.css";
 
+
 const ManageSpots = () => {
-  const { spotId } = useParams();
-  const [isLoaded, setIsLoaded] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,21 +22,26 @@ const ManageSpots = () => {
   const currentUser = useSelector((state) => state.session.user);
   console.log("The current session user is: ", currentUser);
 
-  console.log("Managing my spots", spots);
-
   useEffect(() => {
     const fetchData = async () => {
-      await Promise.all([dispatch(getSpotById(spotId))]);
-      dispatch(getAllSpots(spots));
-      setIsLoaded(true);
+      await Promise.all([dispatch(getAllSpots()), dispatch(getCurrentUserSpots())]);
     };
 
     fetchData();
-  }, [dispatch, spotId, spots]);
+  }, [dispatch]);
 
   const userOwnedSpots = Object.values(spots).filter(
     (spot) => spot.ownerId === currentUser.id
   );
+
+  console.log("Spots owned by this user", userOwnedSpots);
+
+
+  const handleUpdateSpot = (spotId) => {
+    navigate(`/spots/${spotId}/edit`);
+  // console.log('What is this rn??', spotId)
+  };
+
 
   console.log("Spots owned by this user", userOwnedSpots);
 
@@ -53,15 +57,15 @@ const ManageSpots = () => {
       </section>
 
       <section className="owned-spots-container">
-        {isLoaded &&
+        {
           currentUser &&
           userOwnedSpots.map((spot) => (
             <div className="user-owned-spot" key={spot.id}>
               <SpotItems spot={spot} />
               <div className="user-owned-update-delete-buttons">
-                <button>Update</button>
+                <button onClick={() => handleUpdateSpot(spot.id)}>Update</button>
                 <div className="user-spots-delete-button">
-                  <OpenModalButton
+                <OpenModalButton
                     buttonText={"Delete"}
                     modalComponent={<DeleteSpotModal spotId={spot.id} />}
                   />

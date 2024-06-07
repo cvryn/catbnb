@@ -78,7 +78,7 @@ function ProfileButton({ user }) {
             {/* <li>{user.lastName}</li> */}
             <li style={{borderBottom: 'solid 1px #e1e1e1', padding: '5px 0'}}>{user.email}</li>
             <li>
-              <NavLink to="/spots/current" style={{textDecoration: 'none', color:'black'}}>Manage Spots</NavLink>
+              <NavLink to="/spots/current/" style={{textDecoration: 'none', color:'black'}}>Manage Spots</NavLink>
             </li>
             {/* <li>ManageSpots</li> */}
 
