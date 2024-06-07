@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+
 import SpotItems from '../SpotItems/SpotItems';
 
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSpot, getAllSpots } from "../../store/spotsReducer";
-import { useEffect, useState } from "react";
+import {  getAllSpots } from "../../store/spotsReducer";
+import { useEffect } from "react";
 
 import "./Spots.css";
 

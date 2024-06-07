@@ -304,24 +304,13 @@ const spotsReducer = (state = initialState, action) => {
       };
     }
     // case EDIT_SPOT: {
-    //   const updatedSpot = action.spot;
-    //   return {
+    //   const newState = {
     //     ...state,
-    //     allSpots: {
-    //       ...state.allSpots,
-    //       [updatedSpot.id]: updatedSpot,
-    //     },
-    //     currentSpot: updatedSpot,
+    //     allSpots: { ...state.allSpots, [action.spot.id]: action.spot },
+    //     currentSpot: action.spot,
     //   };
+    //   return newState;
     // }
-    case EDIT_SPOT: {
-      const newState = {
-        ...state,
-        allSpots: { ...state.allSpots, [action.spot.id]: action.spot },
-        currentSpot: action.spot,
-      };
-      return newState;
-    }
     case REMOVE_SPOT: {
       const newState = { ...state };
       delete newState.allSpots[action.spotId];

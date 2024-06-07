@@ -6,7 +6,10 @@ import { TiStarFullOutline } from "react-icons/ti";
 import { getReviews } from "../../store/reviewReducer";
 
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import { useModal } from "../../context/Modal";
+
 import DeleteReviewModal from "../Reviews/DeleteReviewModal";
+import CreateReviewModal from "../Reviews/CreateNewReviewModal";
 
 import noimage from "../../../src/assets/no-image-available.jpg";
 
@@ -16,6 +19,7 @@ const SpotDetails = () => {
   const dispatch = useDispatch();
   const { spotId } = useParams();
   const [isLoaded, setIsLoaded] = useState(false);
+  const { closeModal } = useModal();
 
   // Get all spots and current spot from the Redux store
   const spots = useSelector((state) => state.spots.allSpots[spotId]);
@@ -28,8 +32,9 @@ const SpotDetails = () => {
   );
 
   // Get the reviews for the current spot
-  const reviews = useSelector((state) => state.reviews.Reviews);
-  // console.log("SHOW DEM REVIEWS", reviews);
+  const reviews = useSelector((state) => state.reviews.Reviews || []);
+  console.log("SHOW DEM REVIEWS", reviews);
+
 
   const user = useSelector((state) => state.session.user);
   // console.log(`WHOOOOOOOOOOOOOOO DIS`, user);
@@ -50,7 +55,11 @@ const SpotDetails = () => {
     alert("Feature Coming Soon...");
   };
 
-  // If data is not loaded yet, show a loading message
+  // Check if this user has already left a review on the spot
+  const userHasReview = reviews.find((review) => review.userId === user?.id);
+
+
+  // LOADING CAT If data is not loaded yet and show a loading message
   if (!isLoaded || !currentSpot)
     return (
       <div
@@ -86,44 +95,30 @@ const SpotDetails = () => {
           <div className="main-image-left">
             <img
               className="main-image"
-              src={
-                currentSpot?.SpotImages[0]?.url || noimage
-              }
+              src={currentSpot?.SpotImages[0]?.url || noimage}
               alt="Main spots"
             />
           </div>
           <div className="images-container-right">
             <img
               className="side-image"
-              src={
-                currentSpot?.SpotImages[1]?.url ||
-                noimage
-              }
+              src={currentSpot?.SpotImages[1]?.url || noimage}
               alt="spots pic"
             />
             <img
               className="side-image"
-              src={
-                currentSpot?.SpotImages[2]?.url ||
-                noimage
-              }
+              src={currentSpot?.SpotImages[2]?.url || noimage}
               alt="spots pic"
               style={{ borderTopRightRadius: "10px" }}
             />
             <img
               className="side-image"
-              src={
-                currentSpot?.SpotImages[3]?.url ||
-                noimage
-              }
+              src={currentSpot?.SpotImages[3]?.url || noimage}
               alt="spots pic"
             />
             <img
               className="side-image"
-              src={
-                currentSpot?.SpotImages[4]?.url ||
-                noimage
-              }
+              src={currentSpot?.SpotImages[4]?.url || noimage}
               alt="Spot pic"
               style={{ borderBottomRightRadius: "10px" }}
             />
@@ -185,6 +180,23 @@ const SpotDetails = () => {
               : currentSpot.numReviews > 1
               ? `${currentSpot.numReviews} reviews`
               : ""}
+          </div>
+          <div>
+            {user && user.id !== currentSpot.ownerId && !userHasReview && (
+              <div id="delete-review-button">
+                <OpenModalButton
+                  buttonText={"Post Your Review"}
+                  modalComponent={<CreateReviewModal spotId={spotId} onClose={closeModal}/>}
+                />
+                {/* {reviews.length === 0 && (
+                  <span>Be the first to post a review!</span>
+                )} */}
+              </div>
+            )}
+            {/* <span>ʕ*•ﻌ•ʔฅ </span> */}
+            {reviews.length === 0 && (
+              <span>Be the first to post a review!</span>
+            )}
           </div>
           <div className="reviews-from-the-cats">
             {reviews &&
