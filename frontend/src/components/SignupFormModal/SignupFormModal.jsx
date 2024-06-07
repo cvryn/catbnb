@@ -6,6 +6,8 @@ import "./SignupForm.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -13,48 +15,41 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const [submitClicked, setSubmitClicked] = useState(false);
 
   // UseEffect to catch any blank inputs or those that don't pass validations
 
-  useEffect(() => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitClicked(true);
+
     const errors = {};
 
     if (!email) {
-      errors.email = "";
+      errors.email = "The provided email is invalid";
     }
 
     if (username.length < 4) {
-      errors.username = "";
+      errors.username = "Username must be at least 4 characters long";
     }
 
     if (!firstName) {
-      errors.firstName = "";
+      errors.firstName = "First name is required";
     }
 
     if (!lastName) {
-      errors.lastName = "";
+      errors.lastName = "Last name is required";
     }
 
     if (password.length < 6) {
-      errors.password = "";
-    }
-
-    if (!confirmPassword) {
-      errors.confirmPassword = "";
+      errors.password = "Password must be at least 6 characters long";
     }
 
     if (password !== confirmPassword) {
-      errors.confirmPassword = "";
+      errors.confirmPassword = "Confirm Password field must be the same as the Password field";
     }
 
-    setErrors(errors);
-  }, [email, username, firstName, lastName, password, confirmPassword]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors({});
+    if (Object.keys(errors).length === 0) {
       return dispatch(
         sessionActions.signup({
           email,
@@ -72,10 +67,8 @@ function SignupFormModal() {
           }
         });
     }
-    return setErrors({
-      confirmPassword:
-        "Confirm Password field must be the same as the Password field",
-    });
+
+    setErrors(errors);
   };
 
   return (
@@ -170,7 +163,13 @@ function SignupFormModal() {
         <button
           className="signup-modal-button"
           type="submit"
-          disabled={Object.values(errors).length > 0}
+          disabled={Object.values(errors).length > 0 ||
+            !email ||
+            !username ||
+            !firstName ||
+            !lastName ||
+            !password ||
+            !confirmPassword}
         >
           Sign Up
         </button>
