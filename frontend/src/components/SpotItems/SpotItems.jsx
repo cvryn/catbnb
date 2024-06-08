@@ -16,7 +16,6 @@ const SpotItems = ({ spot }) => {
       >
         <div id="spots-container" title={spot.name}>
           <Link to={`/spots/${spot.id}`} style={{ textDecoration: "none" }}>
-            {/* <div className="spot-container"> */}
             <div className="spot-image-container">
               <img className="spots-image" src={spot?.previewImage || noimage} />
             </div>

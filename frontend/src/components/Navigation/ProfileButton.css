@@ -71,6 +71,10 @@
   padding: 10px 15px;
 }
 
+.logout-button:hover {
+background-color: rgb(110, 110, 110);
+  }
+
 #profile-modal-login-signup-container {
   /* border: solid 2px red; */
   display: flex;

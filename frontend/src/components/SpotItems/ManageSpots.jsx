@@ -50,7 +50,7 @@ const ManageSpots = () => {
         <h1>Manage Your Spots</h1>
         <div>
           {currentUser && userOwnedSpots.length === 0 && (
-            <NavLink to='/spots/new' style={{textDecoration: 'none', boxShadow: '2px 2px 2px black', color:'white', backgroundColor: 'grey', fontSize: '12px', padding: '3px'}}>Create a New Spot</NavLink>
+            <NavLink to='/spots/new' className='create-a-new-spot-button-manage'>Create a New Spot</NavLink>
 
           )}
         </div>

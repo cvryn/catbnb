@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSpotById, updateSpot } from "../../store/spotsReducer";
 
-import "./UpdateSpotForm.css";
-
 const UpdateSpotForm = () => {
   const { spotId } = useParams();
   const dispatch = useDispatch();
@@ -19,21 +17,11 @@ const UpdateSpotForm = () => {
   const [price, setPrice] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  //   const [previewImage, setPreviewImage] = useState("");
-  //   const [image1, setImage1] = useState("");
 
-  //   const [image2, setImage2] = useState("");
-  //   const [image3, setImage3] = useState("");
-  //   const [image4, setImage4] = useState("");
   const [errors, setErrors] = useState({});
-  const [visualErrors, setVisualErrors] = useState({});
 
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
 
-  // console.log("Current spot being updated", currentSpot);
-  // console.log(":eyes:", spotId);
-
-  // useEffect to fetch the spot data by spotId
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getSpotById(spotId));
@@ -42,7 +30,6 @@ const UpdateSpotForm = () => {
     fetchData();
   }, [dispatch, spotId]);
 
-  // useEffect for pre-filled form with values from the db
   useEffect(() => {
     if (currentSpot) {
       setAddress(currentSpot.address);
@@ -57,29 +44,33 @@ const UpdateSpotForm = () => {
     }
   }, [currentSpot]);
 
+  const validateInputs = () => {
+    const newErrors = {};
+
+    if (!address.trim()) newErrors.address = "Address is required";
+    if (!city.trim()) newErrors.city = "City is required";
+    if (!state.trim()) newErrors.state = "State is required";
+    if (!country.trim()) newErrors.country = "Country is required";
+    if (!name.trim()) newErrors.name = "Name is required";
+    if (description.length < 30)
+      newErrors.description = "Description needs a minimum of 30 characters";
+    if (price < 1) newErrors.price = "Price is required";
+    if (lat < -90 || lat > 90)
+      newErrors.lat = "Latitude must be between -90 and 90";
+    if (lng < -180 || lng > 180)
+      newErrors.lng = "Longitude must be between -180 and 180";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const errors = {};
+    const isValid = validateInputs();
 
-    // Validations
-    if (!address.trim()) errors.address = "Address is required";
-    if (!city.trim()) errors.city = "City is required";
-    if (!state.trim()) errors.state = "State is required";
-    if (!country.trim()) errors.country = "Country is required";
-    if (!name.trim()) errors.name = "Name is required";
-    if (description.length < 30)
-      errors.description = "Description needs a minimum of 30 characters";
-    if (price < 1) errors.price = "Price is required";
-    if (lat < -90 || lat > 90)
-      errors.lat = "Latitude must be between -90 and 90";
-    if (lng < -180 || lng > 180)
-      errors.lng = "Longitude must be between -180 and 180";
-
-    setErrors(errors);
-    setVisualErrors(visualErrors);
-
-    if (Object.keys(errors).length === 0) {
+    if (isValid) {
       const updatedSpot = {
         address,
         city,
@@ -94,7 +85,6 @@ const UpdateSpotForm = () => {
 
       const response = await dispatch(updateSpot(spotId, updatedSpot));
       if (response && response.id) {
-        // Redirects to the spot's details page at that spotId
         navigate(`/spots/${response.id}`);
       }
     }
@@ -102,8 +92,7 @@ const UpdateSpotForm = () => {
 
   return (
     <>
-      {/* <h1>ʕ*•ﻌ•ʔฅ</h1>
-      <button
+<button
         className="demo-user-modal-button"
         type="submit"
         onClick={() => {
@@ -122,36 +111,60 @@ const UpdateSpotForm = () => {
       >
         {" "}
         Demo Spots
-      </button> */}
-      <form onSubmit={handleSubmit} id="create-spot-form-container">
-        <div id="spot-form-container">
-          <header>
-            <h2>Update your Spot</h2>
-            <h3>Where&apos;s your place located?</h3>
-            <p>
-              Guests will only get your exact address once they booked a
-              reservation.
-            </p>
-          </header>
+      </button>
 
-          {/* // Section 1 */}
-          <section id="form-country-street-city-state">
-            <label className="country-address-input">
-              <div className="create-spot-key-input">
-                Country{" "}
-                <div className="errors-object">
-                  {errors.country && <p>{errors.country}</p>}
-                </div>
+      <button
+        className="demo-user-modal-button"
+        type="submit"
+        onClick={() => {
+          setAddress(" ");
+          setCity(" ");
+          setState(" ");
+          setCountry(" ");
+          setName(" ");
+          setDescription("Lore");
+          setPrice(1);
+          setLat(1);
+          setLng(1);
+        }}
+      >
+        {" "}
+        Demo Blank Spot Tester
+      </button>
+
+
+
+
+
+    <form onSubmit={handleSubmit} id="update-spot-form-container">
+      <div id="spot-form-container">
+        <header>
+          <h2>Update your Spot</h2>
+          <h3>Where&apos;s your place located?</h3>
+          <p>
+            Guests will only get your exact address once they booked a
+            reservation.
+          </p>
+        </header>
+
+        {/* // Section 1 */}
+        <section id="form-country-street-city-state">
+          <label className="country-address-input">
+            <div className="create-spot-key-input">
+              Country{" "}
+              <div className="errors-object">
+                {errors.country && <p>{errors.country}</p>}
               </div>
-              <input
-                style={{ width: "100%" }}
-                type="text"
-                value={country}
-                placeholder="Country"
-                onChange={(e) => setCountry(e.target.value)}
-                required
-              />
-            </label>
+            </div>
+            <input
+              style={{ width: "100%" }}
+              type="text"
+              value={country}
+              placeholder="Country"
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+          </label>
             <label className="country-address-input">
               <div className="create-spot-key-input">
                 Street Address{" "}
@@ -318,23 +331,9 @@ const UpdateSpotForm = () => {
 
           <hr></hr>
 
-          <button
-            type="submit"
-            className='update-spot-button'
-            disabled={
-              Object.keys(errors).length > 0 ||
-              !address ||
-              !city ||
-              !state ||
-              !country ||
-              !name ||
-              description.length < 30 ||
-              price < 1 ||
-              lat < -90 || lat > 90 ||
-              lng < -180 || lng > 180}
-          >
-            Create Spot
-          </button>
+          <button id="create-update-spot-button" type="submit">
+          Update Spot
+        </button>
         </div>
       </form>
     </>

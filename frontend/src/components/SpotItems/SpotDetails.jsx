@@ -220,6 +220,7 @@ const SpotDetails = () => {
                       {user && user.id === review.userId && (
                         <div id="delete-review-button">
                           <OpenModalButton
+                          modalStyling='spots-review-delete-button'
                             buttonText={"Delete"}
                             modalComponent={
                               <DeleteReviewModal

@@ -106,18 +106,19 @@ hr {
 
 
 
-.submit-create-page-button{
+#create-update-spot-button{
+    border: none;
   color: white;
   box-shadow: 2px 2px 2px black;
   margin: 0 auto;
   width: 100px;
   cursor: pointer;
   background-color: red;
+
 }
 
-.submit-create-page-button:disabled {
+#create-update-spot-button:disabled {
   background-color: grey;
-
 
 }
 

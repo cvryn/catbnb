@@ -9,15 +9,18 @@
   /* flex-wrap: wrap; */
   /* flex-direction: row; */
   /* display: inline-flex; */
+  padding: 10px;
+  border-radius: 5px;
 
 }
 
-.spot-container {
-  /* border: solid 3px green; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* flex: 1; */
+#spots-container:hover {
+  box-shadow: 2px 2px 5px rgb(230, 230, 230);
+  background-color: rgb(245, 245, 245);
+
 }
+
+
 
 .spot-image-container {
   /* border: solid 2px red; */

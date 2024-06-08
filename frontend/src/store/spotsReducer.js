@@ -5,7 +5,7 @@ export const LOAD_SPOTS = "spots/LOAD_SPOTS";
 export const GET_SPOT = "spots/GET_SPOT";
 export const CREATE_SPOT = "spots/CREATE_SPOT";
 
-export const CREATE_SPOT_IMAGE = "spots/CREATE_SPOT_IMAGE";
+// export const CREATE_SPOT_IMAGE = "spots/CREATE_SPOT_IMAGE";
 
 export const GET_OWNER_SPOT = "spots/GET_OWNER_SPOT";
 export const EDIT_SPOT = 'spots/EDIT_SPOT';
@@ -33,10 +33,10 @@ export const createSpot = (spot) => ({
 });
 
 //Create a spot image
-export const createSpotImage = (image) => ({
-  type: CREATE_SPOT_IMAGE,
-  image,
-});
+// export const createSpotImage = (image) => ({
+//   type: CREATE_SPOT_IMAGE,
+//   image,
+// });
 
 // Get Spots by Owner
 export const getOwnerSpot = (spots) => ({
@@ -207,6 +207,9 @@ export const deleteSpot = (spotId) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     if (response.ok) {
       dispatch(removeSpot(spotId));
@@ -246,45 +249,23 @@ const spotsReducer = (state = initialState, action) => {
         currentSpot: newSpot,
       };
     }
-    // case CREATE_SPOT: {
-    //   const newSpot = action.spot;
+
+    // case CREATE_SPOT_IMAGE: {
+    //   const { spotId, image } = action;
+    //   const spot = state.allSpots[spotId] || state.currentSpot;
+    //   if (spot) {
+    //     spot.images = [...(spot.images || []), image];
+    //   }
     //   return {
     //     ...state,
     //     allSpots: {
     //       ...state.allSpots,
-    //       [newSpot.id]: newSpot,
+    //       [spotId]: spot,
     //     },
+    //     currentSpot: spot,
     //   };
     // }
-    case CREATE_SPOT_IMAGE: {
-      const { spotId, image } = action;
-      const spot = state.allSpots[spotId] || state.currentSpot;
-      if (spot) {
-        spot.images = [...(spot.images || []), image];
-      }
-      return {
-        ...state,
-        allSpots: {
-          ...state.allSpots,
-          [spotId]: spot,
-        },
-        currentSpot: spot,
-      };
-    }
-    // case GET_OWNER_SPOT: {
-    //   const ownerSpots = {};
-    //   action.spots.forEach((spot) => {
-    //     ownerSpots[spot.id] = spot;
-    //   });
-    //   return {
-    //     ...state,
-    //     allSpots: {
-    //       ...state.allSpots,
-    //       ...ownerSpots,
-    //     },
-    //     currentSpot: { ...ownerSpots },
-    //   };
-    // }
+
     case GET_OWNER_SPOT: {
       const ownerSpots = {};
       action.spots.Spots.forEach(spot => {

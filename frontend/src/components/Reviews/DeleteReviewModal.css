@@ -17,8 +17,15 @@
     background-color: red;
     color: white;
     box-shadow: 3px 3px 2px black;
+    transition: box-shadow 0.5s ease;
     cursor: pointer;
 
+
+}
+
+.modal-button-confirm-yes:hover {
+    background-color: rgb(218, 0, 0);
+    box-shadow: 3px 3px 2px black;
 }
 
 .modal-button-confirm-no {
@@ -27,5 +34,11 @@
     background-color: grey;
     color: white;
     box-shadow: 3px 3px 2px black;
+      transition: box-shadow 0.5s ease;
     cursor: pointer;
+}
+
+.modal-button-confirm-no:hover {
+    background-color: rgb(110, 110, 110);
+
 }

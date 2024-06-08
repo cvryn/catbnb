@@ -47,7 +47,7 @@ function CreateSpotForm() {
       url &&
       (url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg"));
 
-    if (!checkImageUrl(previewImage))
+    if (previewImage && !checkImageUrl(previewImage))
       newErrors.previewImage =
         "Preview image is required and must end in .png, .jpg, or .jpeg";
 
@@ -90,7 +90,11 @@ function CreateSpotForm() {
       const response = await dispatch(
         createNewSpot(newSpot, previewImage, [image1, image2, image3, image4])
       );
-      if (response && response.id) navigate(`/spots/${response.id}`);
+      if (response && response.id)
+        console.log('Reponse: ', response)
+      console.log('ReponseID: ', response.id)
+      
+        navigate(`/spots/${response.id}`);
     }
   };
 
@@ -439,7 +443,7 @@ function CreateSpotForm() {
 
           <hr></hr>
 
-          <button id="create-spot-button" type="submit">
+          <button id="create-update-spot-button" type="submit">
             Create Spot
           </button>
         </div>
