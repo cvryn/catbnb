@@ -131,9 +131,9 @@ const SpotDetails = () => {
               Hosted by {currentSpot?.Owner?.firstName}{" "}
               {currentSpot?.Owner?.lastName}
             </h2>
-            <p className="description" style={{ width: "90%" }}>
+            <div className="description" style={{ width: "90%" }}>
               {currentSpot.description}
-            </p>
+            </div>
           </div>
           <div className="reserve-container">
             <div className="reserve-top">
@@ -219,7 +219,7 @@ const SpotDetails = () => {
               </div>
             )}
             {/* <span>ʕ*•ﻌ•ʔฅ </span> */}
-            {reviews.length === 0 && user.id !== currentSpot.ownerId && (
+            {reviews.length === 0 && user?.id !== currentSpot.ownerId && currentSpot.Owner && (
               <span>Be the first to post a review!</span>
             )}
           </div>

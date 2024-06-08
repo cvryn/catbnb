@@ -33,7 +33,7 @@ module.exports = {
           lat: 37.8175167579453,
           lng: -122.12236669999999,
           name: "Cat Tree",
-          description: "A place to lounge, to relax, and to bat at things",
+          description: "Unleash your feline's inner explorer at the Cat Tree! This kitty paradise boasts comfy napping nooks, scratching posts of all textures, window perches for birdwatching, and a network of tunnels for pouncing on hidden toys. It's the purrfect place for your cat to lounge, play, and reign supreme.",
           price: 9.99,
         },
 
@@ -46,7 +46,7 @@ module.exports = {
           lat: 37.76653764454153,
           lng: -122.44107715767119,
           name: "Cat House",
-          description: "We got plenty of free food and snacks and toys",
+          description: "Perches by the window offer the ultimate napping spot. You can sprawl out, soak up the warmth, and watch the fascinating world of birds flit by outside. This peaceful haven is the perfect place to relax, recharge, and keep yourself entertained for hours on end.",
           price: 29.99,
         },
         {
@@ -58,7 +58,7 @@ module.exports = {
           lat: 37.7742295,
           lng: -122.3004154,
           name: "Purr Palace",
-          description: "A luxurious retreat for pampered pets",
+          description: "A luxurious retreat for pampered pets. Imagine yourself lounging amidst feline royalty. Plush velvet cushions adorn window perches, offering the perfect vantage point to survey your sprawling domain. Crystal chandeliers cast a soft glow, illuminating a network of hand-woven sisal climbing structures that resemble miniature cathedrals. Delicate feather toys, adorned with tiny jewels, dangle from the rafters, begging for a regal swat with your paw. This isn't just a hangout, it's a five-star feline palace, designed to pamper your inner aristocrat.",
           price: 999.99,
         },
         {
@@ -70,7 +70,7 @@ module.exports = {
           lat: 37.773149296,
           lng: -122.50024155,
           name: "Meow Manor",
-          description: "A stylish space for the discerning feline",
+          description: "A stylish space for the discerning feline. Everywhere you turn, feathery prey dangles and fuzzy mice tempt your pounce. The air even tingles with the scent of catnip, making your whiskers twitch with excitement. This place is a hunter's dream come true!",
           price: 54.99,
         },
         {
@@ -82,7 +82,7 @@ module.exports = {
           lat: 37.8044,
           lng: -122.2711,
           name: "Paws Play Place",
-          description: "A playful haven for feline friends",
+          description: "A playful haven for feline friends. Tunnels and tubes become your secret passageways, perfect for stalking unsuspecting toys or simply enjoying a good zoomie. Cubbyholes offer cozy hideaways for a quick nap after a thrilling chase. This is a playground that fuels your inner panther and keeps you entertained for hours on end.",
           price: 79.99
         },
         {
@@ -94,7 +94,7 @@ module.exports = {
           lat: 37.8716,
           lng: -122.2727,
           name: "Whisker Wonderland",
-          description: "A cozy retreat for whiskered companions",
+          description: "A cozy retreat for whiskered companions. Feeling a bit peckish after all that playtime? Some havens might even have a designated feeding area to keep your energy levels up. Just remember to check for availability before getting your hopes up for a mid-play snack. ",
           price: 69.99
         },
         {
@@ -106,7 +106,7 @@ module.exports = {
           lat: 37.5629,
           lng: -122.3255,
           name: "Cat's Corner",
-          description: "An enchanting hideaway for pampered cats",
+          description: "The floor is practically a wonderland of crinkly delights. Balls filled with irresistible crinkle paper become your personal soccer trophies, while feathery toys with a hint of crinkle entice the most playful pounces. This place understands your love for the sound of crinkle, offering endless opportunities to unleash your inner hunter and keep boredom at bay.",
           price: 89.99
         },
         {
@@ -118,7 +118,7 @@ module.exports = {
           lat: 37.8591,
           lng: -122.4853,
           name: "Furry Feline Retreat",
-          description: "A serene escape for purring pals",
+          description: "Looking for some social butterflies?  Some havens offer supervised playtime with other feline companions, fostering purrfect friendships. Just check for availability before bringing your social side to the party.",
           price: 99.99
         },
         {
@@ -130,8 +130,8 @@ module.exports = {
           lat: 37.4419,
           lng: -122.1430,
           name: "Purrfect Paradise",
-          description: "A paradise for playful kitties",
-          price: 109.99
+          description: "Imagine yourself basking in the gilded glory of a feline opera house. Plush velvet drapes frame arched windows, offering a glimpse of the world outside your personal stage. Gleaming brass sconces cast a warm, theatrical light on a network of woven sisal climbing structures that resemble miniature coliseums. Dangling from the rafters are handcrafted feather toys adorned with shimmering ribbons, each a delicate aria waiting to be conducted with a flick of your paw. This isn't merely a hangout, it's a purrformance venue fit for a feline maestro, designed to unleash your inner virtuoso.",
+          price: 299.99
         }
       ],
       { validate: true }

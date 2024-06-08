@@ -52,7 +52,7 @@ const UpdateSpotForm = () => {
     if (!state.trim()) newErrors.state = "State is required";
     if (!country.trim()) newErrors.country = "Country is required";
     if (!name.trim()) newErrors.name = "Name is required";
-    if (description.length < 30)
+    if (!description.trim() || description.length < 30)
       newErrors.description = "Description needs a minimum of 30 characters";
     if (price < 1) newErrors.price = "Price is required";
     if (lat < -90 || lat > 90)

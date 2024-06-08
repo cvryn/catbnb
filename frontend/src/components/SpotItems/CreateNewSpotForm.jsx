@@ -35,7 +35,7 @@ function CreateSpotForm() {
     if (!state.trim()) newErrors.state = "State is required";
     if (!country.trim()) newErrors.country = "Country is required";
     if (!name.trim()) newErrors.name = "Name is required";
-    if (description.length < 30)
+    if (!description.trim() || description.length < 30)
       newErrors.description = "Description needs a minimum of 30 characters";
     if (price < 1) newErrors.price = "Price is required";
     if (lat < -90 || lat > 90)
@@ -91,8 +91,8 @@ function CreateSpotForm() {
         createNewSpot(newSpot, previewImage, [image1, image2, image3, image4])
       );
       if (response && response.id)
-        console.log('Reponse: ', response)
-      console.log('ReponseID: ', response.id)
+        console.log('Response: ', response)
+      console.log('ResponseID: ', response.id)
 
         navigate(`/spots/${response.id}`);
     }
