@@ -7,7 +7,9 @@ import './DeleteSpotModal.css'
 
 
 const DeleteSpotModal = ({ spotId }) => {
+
   const dispatch = useDispatch();
+
   const { closeModal } = useModal();
 
 

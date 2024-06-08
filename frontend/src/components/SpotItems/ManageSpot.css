@@ -21,7 +21,7 @@
 }
 
 .create-a-new-spot-button-manage:hover {
-  background-color: rgb(78, 78, 78);
+  background-color: rgb(112, 112, 112);
 }
 
 .user-owned-spot {
@@ -50,7 +50,7 @@
 }
 
 .user-owned-update-button:hover {
-  background-color: rgb(78, 78, 78);
+  background-color: rgb(112, 112, 112);
 }
 
 .user-owned-delete-button {
@@ -63,7 +63,7 @@
 }
 
 .user-owned-delete-button:hover {
-  background-color: rgb(78, 78, 78);
+  background-color: rgb(112, 112, 112);
 }
 
 @media screen and (min-width: 2400px) {

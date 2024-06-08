@@ -93,7 +93,7 @@ function CreateSpotForm() {
       if (response && response.id)
         console.log('Reponse: ', response)
       console.log('ReponseID: ', response.id)
-      
+
         navigate(`/spots/${response.id}`);
     }
   };
@@ -118,13 +118,16 @@ function CreateSpotForm() {
           setLat(1);
           setLng(1);
           setPreviewImage(
-            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717482655/catbnb/8-ATANKZhXomcJ7Tc_rqhse8.png"
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481289/catbnb/Cat%27s%20Corner.png"
           );
           setImage1(
-            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481451/catbnb/8-VHGdSOckSozju5k_q3y8ax.png"
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481395/catbnb/8-PxeIe9RIpGvMIqY_m3gyf8.png"
           );
           setImage2(
-            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481395/catbnb/8-PxeIe9RIpGvMIqY_m3gyf8.png"
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481451/catbnb/8-VHGdSOckSozju5k_q3y8ax.png"
+          );
+          setImage3(
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386122/catbnb/r-cat-manor_uesoqf.png"
           );
         }}
       >

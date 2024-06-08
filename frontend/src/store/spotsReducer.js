@@ -8,7 +8,7 @@ export const CREATE_SPOT = "spots/CREATE_SPOT";
 // export const CREATE_SPOT_IMAGE = "spots/CREATE_SPOT_IMAGE";
 
 export const GET_OWNER_SPOT = "spots/GET_OWNER_SPOT";
-export const EDIT_SPOT = 'spots/EDIT_SPOT';
+export const EDIT_SPOT = "spots/EDIT_SPOT";
 
 export const REMOVE_SPOT = "spots/REMOVE_SPOT";
 
@@ -46,10 +46,10 @@ export const getOwnerSpot = (spots) => ({
 
 // Update Spot by spotId
 
-export const editSpot = (spot) =>  ({
+export const editSpot = (spot) => ({
   type: EDIT_SPOT,
   spot,
-})
+});
 
 // Delete spot by id
 export const removeSpot = (spotId) => ({
@@ -98,68 +98,75 @@ export const getSpotById = (spotId) => async (dispatch) => {
 
 // POST create new spot /api/spots/new
 
-export const createNewSpot = (spot, previewImage, images) => async (dispatch) => {
-  try {
-    const response = await csrfFetch("/api/spots", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(spot),
-    });
-
-    if (response.ok) {
-      const newSpot = await response.json();
-      const spotImages = []; // STORE IT IN THE SPOTIMAGES ARRAY!!!
-
-      // Create the preview image first
-      const previewImageResponse = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+export const createNewSpot =
+  (spot, previewImage, images) => async (dispatch) => {
+    try {
+      const response = await csrfFetch("/api/spots", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url: previewImage, preview: true }),
+        body: JSON.stringify(spot),
       });
 
-      if (previewImageResponse.ok) {
-        const previewImageResult = await previewImageResponse.json();
-        spotImages.push(previewImageResult);
-        // console.log('Preview Image Result!?!?!?!?!', previewImageResult)
-      }
+      if (response.ok) {
+        const newSpot = await response.json();
+        const spotImages = []; // STORE IT IN THE SPOTIMAGES ARRAY!!!
 
-      // Create the other images, iterate through a for loop
-      for (const image of images) {
-        if (image) {
-          const imageResponse = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+        // Create the preview image first
+        const previewImageResponse = await csrfFetch(
+          `/api/spots/${newSpot.id}/images`,
+          {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ url: image, preview: false }),
-          });
+            body: JSON.stringify({ url: previewImage, preview: true }),
+          }
+        );
 
-          if (imageResponse.ok) {
-            const imageResult = await imageResponse.json();
-            spotImages.push(imageResult);
-            // console.log('The other images?', imageResult)
+        if (previewImageResponse.ok) {
+          const previewImageResult = await previewImageResponse.json();
+          spotImages.push(previewImageResult);
+          // console.log('Preview Image Result!?!?!?!?!', previewImageResult)
+        }
+
+        // Create the other images, iterate through a for loop
+        for (const image of images) {
+          if (image) {
+            const imageResponse = await csrfFetch(
+              `/api/spots/${newSpot.id}/images`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ url: image, preview: false }),
+              }
+            );
+
+            if (imageResponse.ok) {
+              const imageResult = await imageResponse.json();
+              spotImages.push(imageResult);
+              // console.log('The other images?', imageResult)
+            }
           }
         }
+
+        newSpot.images = spotImages;
+        // console.log('See that new spot', newSpot)
+
+        dispatch(createSpot(newSpot));
+        return newSpot;
+      } else {
+        const errors = await response.json();
+        throw new Error(errors);
       }
-
-      newSpot.images = spotImages;
-      // console.log('See that new spot', newSpot)
-
-      dispatch(createSpot(newSpot));
-      return newSpot;
-    } else {
-      const errors = await response.json();
-      throw new Error(errors);
+    } catch (error) {
+      console.error("Error creating new spot with images:", error);
+      throw error;
     }
-  } catch (error) {
-    console.error("Error creating new spot with images:", error);
-    throw error;
-  }
-}
+  };
 
 // GET spot by owner /api/spots/current
 
@@ -181,25 +188,24 @@ export const getCurrentUserSpots = () => async (dispatch) => {
 
 //UPDATE update spot by id /api/spots/spotId
 
-export const updateSpot = (spotId, spot) => async(dispatch) => {
+export const updateSpot = (spotId, spot) => async (dispatch) => {
   // console.log('!!!!!!!!!!!!!!', spotId)
   const response = await csrfFetch(`/api/spots/${spotId}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(spot),
-    })
+  });
   if (response.ok) {
     const updatedSpot = await response.json();
-    dispatch(editSpot(updatedSpot))
+    dispatch(editSpot(updatedSpot));
     return updatedSpot;
   } else {
     const errors = await response.json();
     throw new Error(errors);
-}
-}
-
+  }
+};
 
 // DELETE delete spot by id /api/spots/:spotId
 
@@ -222,7 +228,6 @@ export const deleteSpot = (spotId) => async (dispatch) => {
     return err;
   }
 };
-
 
 const initialState = { allSpots: {}, currentSpot: {} };
 
@@ -268,11 +273,11 @@ const spotsReducer = (state = initialState, action) => {
 
     case GET_OWNER_SPOT: {
       const ownerSpots = {};
-      action.spots.Spots.forEach(spot => {
-          ownerSpots[spot.id] = spot
-      })
-      return {allSpots: {...ownerSpots}, currentSpot: {...ownerSpots}}
-  }
+      action.spots.Spots.forEach((spot) => {
+        ownerSpots[spot.id] = spot;
+      });
+      return { allSpots: { ...ownerSpots }, currentSpot: { ...ownerSpots } };
+    }
     case EDIT_SPOT: {
       const updatedSpot = action.spot;
       return {
@@ -292,6 +297,7 @@ const spotsReducer = (state = initialState, action) => {
     //   };
     //   return newState;
     // }
+
     case REMOVE_SPOT: {
       const newState = { ...state };
       delete newState.allSpots[action.spotId];

@@ -22,7 +22,7 @@ const DeleteReviewModal = ({ reviewId, spotId }) => {
     // Dispatch getReviews action to fetch the updated list of reviews for the spotId
     await dispatch(getReviews(spotId));
 
-    await closeModal();
+   await closeModal();
   };
 
   return (

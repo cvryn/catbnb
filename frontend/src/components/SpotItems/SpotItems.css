@@ -72,6 +72,17 @@
     font-size: 18px;
 }
 
+.spots-post-your-review-button {  border: none;
+  background-color: grey;
+  box-shadow: 2px 2px 2px black;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;}
+
+  .spots-post-your-review-button:hover {
+    background-color: rgb(112, 112, 112);
+  }
+
 #delete-review-button {
   /* border: solid 2px red; */
 }

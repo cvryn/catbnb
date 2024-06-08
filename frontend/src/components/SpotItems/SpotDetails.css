@@ -68,9 +68,9 @@
   border-radius: 10px;
   display: block;
   width: 300px;
-  height: 100px;
+  height: 100%;
   margin-top: 20px;
-  padding: 20px;
+  padding: 30px;
   /* Additional styles to override flex behavior */
   flex: 0 0 auto;
   max-width: 100%;

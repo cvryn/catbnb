@@ -77,6 +77,7 @@ const reviewsReducer = (state = initialState, action) => {
         ...action.reviews,
       };
     }
+
     case CREATE_REVIEW: {
       return {
         ...state,

@@ -27,13 +27,18 @@ const SpotDetails = () => {
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
   // console.log("%c Spot Details: currrrrrrrrrrrrrrrrrrrrrrrrrrrrrent spot","color: orange",currentSpot)
 
-
   // Get the reviews for the current spot
   const reviews = useSelector((state) => state.reviews.Reviews || []);
   console.log("SHOW DEM REVIEWS", reviews);
 
   const user = useSelector((state) => state.session.user);
   // console.log(`WHOOOOOOOOOOOOOOO DIS`, user);
+
+  const totalRating = reviews.reduce((acc, review) => acc + review.stars, 0);
+  const avgRating = reviews.length > 0 ? totalRating / reviews.length : "New";
+  const numReviews = reviews.length;
+
+  console.log("The total", totalRating);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,7 +96,7 @@ const SpotDetails = () => {
             <img
               className="main-image"
               src={currentSpot?.SpotImages[0]?.url || noimage}
-              alt="Main spots"
+              alt="Main spot"
             />
           </div>
           <div className="images-container-right">
@@ -136,7 +141,7 @@ const SpotDetails = () => {
                 ${currentSpot.price}{" "}
                 <span className="price-span-details">night</span>
               </div>
-              <div className="reviews-details">
+              {/* <div className="reviews-details">
                 <TiStarFullOutline />
                 {isNaN(currentSpot.avgRating) ||
                 currentSpot.avgRating === undefined
@@ -151,7 +156,26 @@ const SpotDetails = () => {
                   : currentSpot.numReviews > 1
                   ? `${currentSpot.numReviews} reviews`
                   : ""}
+              </div> */}
+
+
+              <div className="reviews-details">
+                <TiStarFullOutline />
+                {isNaN(avgRating) ||
+                avgRating === undefined
+                  ? "New"
+                  :(avgRating).toFixed(2)}{" "}
+                {isNaN(avgRating) ||
+                avgRating === undefined
+                  ? ""
+                  : "·"}{" "}
+                {numReviews === 1
+                  ? "1 review"
+                  : numReviews > 1
+                  ? `${numReviews} reviews`
+                  : ""}
               </div>
+
             </div>
             <div style={{ paddingTop: "20px" }}>
               <button className="reserve-button" onClick={reserveButtonClick}>
@@ -163,23 +187,27 @@ const SpotDetails = () => {
 
         <section id="reviews-container">
           <div className="star-and-reviews-container">
-            <TiStarFullOutline className="star-reviews-num" />
-            {isNaN(currentSpot.avgRating) || currentSpot.avgRating === undefined
-              ? "New"
-              : currentSpot.avgRating}{" "}
-            {isNaN(currentSpot.avgRating) || currentSpot.avgRating === undefined
-              ? ""
-              : "·"}{" "}
-            {currentSpot.numReviews === 1
-              ? "1 review"
-              : currentSpot.numReviews > 1
-              ? `${currentSpot.numReviews} reviews`
-              : ""}
-          </div>
+          <TiStarFullOutline />
+                {isNaN(avgRating) ||
+                avgRating === undefined
+                  ? "New"
+                  :(avgRating).toFixed(2)}{" "}
+                {isNaN(avgRating) ||
+                avgRating === undefined
+                  ? ""
+                  : "·"}{" "}
+                {numReviews === 1
+                  ? "1 review"
+                  : numReviews > 1
+                  ? `${numReviews} reviews`
+                  : ""}
+              </div>
+
           <div>
             {user && user.id !== currentSpot.ownerId && !userHasReview && (
               <div style={{ padding: "10px 0" }}>
                 <OpenModalButton
+                  modalStyling="spots-post-your-review-button"
                   buttonText={"Post Your Review"}
                   modalComponent={
                     <CreateReviewModal spotId={spotId} onClose={closeModal} />
@@ -191,7 +219,7 @@ const SpotDetails = () => {
               </div>
             )}
             {/* <span>ʕ*•ﻌ•ʔฅ </span> */}
-            {reviews.length === 0 && (
+            {reviews.length === 0 && user.id !== currentSpot.ownerId && (
               <span>Be the first to post a review!</span>
             )}
           </div>
@@ -220,8 +248,8 @@ const SpotDetails = () => {
                       {user && user.id === review.userId && (
                         <div id="delete-review-button">
                           <OpenModalButton
-                          modalStyling='spots-review-delete-button'
-                            buttonText={"Delete"}
+                            modalStyling="spots-review-delete-button"
+                            buttonText="Delete"
                             modalComponent={
                               <DeleteReviewModal
                                 reviewId={review.id}
