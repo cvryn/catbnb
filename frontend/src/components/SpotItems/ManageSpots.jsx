@@ -42,7 +42,7 @@ const ManageSpots = () => {
   };
 
 
-  console.log("Spots owned by this user", userOwnedSpots);
+  // console.log("Spots owned by this user", userOwnedSpots);
 
   return (
     <div id="manage-spots-container">

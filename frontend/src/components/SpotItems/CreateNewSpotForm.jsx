@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createNewSpot } from "../../store/spotsReducer";
@@ -91,8 +91,8 @@ function CreateSpotForm() {
         createNewSpot(newSpot, previewImage, [image1, image2, image3, image4])
       );
       if (response && response.id)
-        console.log('Response: ', response)
-      console.log('ResponseID: ', response.id)
+      //   console.log('Response: ', response)
+      // console.log('ResponseID: ', response.id)
 
         navigate(`/spots/${response.id}`);
     }
@@ -102,7 +102,7 @@ function CreateSpotForm() {
     <>
    {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
 
-<button
+{/* <button
         className="demo-user-modal-button"
         type="submit"
         onClick={() => {
@@ -164,7 +164,7 @@ function CreateSpotForm() {
       >
         {" "}
         Demo Blank Spot Tester
-      </button>
+      </button> */}
 
 
       <form onSubmit={handleSubmit} id="create-spot-form-container">

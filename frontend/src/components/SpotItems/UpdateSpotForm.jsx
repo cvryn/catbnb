@@ -92,7 +92,9 @@ const UpdateSpotForm = () => {
 
   return (
     <>
-<button
+
+    {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
+{/* <button
         className="demo-user-modal-button"
         type="submit"
         onClick={() => {
@@ -130,7 +132,7 @@ const UpdateSpotForm = () => {
       >
         {" "}
         Demo Blank Spot Tester
-      </button>
+      </button> */}
 
 
 

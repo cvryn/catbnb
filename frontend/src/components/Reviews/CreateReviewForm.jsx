@@ -31,11 +31,11 @@
 //         review,
 //         stars: rating,
 //       };
-      console.log('What is this review data looking like', reviewData)
-      console.log('Review looking like? ', review)
-      console.log(typeof review)
-      console.log("All of the stars", rating)
-      console.log(typeof rating)
+      // console.log('What is this review data looking like', reviewData)
+      // console.log('Review looking like? ', review)
+      // console.log(typeof review)
+      // console.log("All of the stars", rating)
+      // console.log(typeof rating)
 
 //       const response = await dispatch(newReview(spotId, reviewData));
 //       // console.log('Did we get here? new review response', response)

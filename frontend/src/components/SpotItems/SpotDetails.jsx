@@ -29,7 +29,7 @@ const SpotDetails = () => {
 
   // Get the reviews for the current spot
   const reviews = useSelector((state) => state.reviews.Reviews || []);
-  console.log("SHOW DEM REVIEWS", reviews);
+  // console.log("SHOW DEM REVIEWS", reviews);
 
   const user = useSelector((state) => state.session.user);
   // console.log(`WHOOOOOOOOOOOOOOO DIS`, user);
@@ -38,7 +38,7 @@ const SpotDetails = () => {
   const avgRating = reviews.length > 0 ? totalRating / reviews.length : "New";
   const numReviews = reviews.length;
 
-  console.log("The total", totalRating);
+  // console.log("The total", totalRating);
 
   useEffect(() => {
     const fetchData = async () => {
