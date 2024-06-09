@@ -182,7 +182,7 @@ function CreateSpotForm() {
           <section id="form-country-street-city-state">
             <label className="country-address-input">
               <div className="create-spot-key-input">
-                <label for='country'>Country</label>
+                <label htmlFor='country'>Country</label>
                 {/* Country */}
                 <div className="errors-object">
                   {errors.country && <p>{errors.country}</p>}
@@ -199,7 +199,7 @@ function CreateSpotForm() {
             </label>
             <label className="country-address-input">
               <div className="create-spot-key-input">
-              <label for='streetaddress'>Street Address</label>
+              <label htmlFor='streetaddress'>Street Address</label>
                 <div className="errors-object">
                   {errors.address && <p>{errors.address}</p>}
                 </div>
@@ -216,7 +216,7 @@ function CreateSpotForm() {
             <label className="city-state-input">
               <div className="city-input" style={{ width: "60%" }}>
                 <div className="create-spot-key-input">
-                <label for='city'>City</label>
+                <label htmlFor='city'>City</label>
                   {/* City */}
                   <div className="errors-object">
                     {errors.city && <p>{errors.city}</p>}
@@ -234,7 +234,7 @@ function CreateSpotForm() {
               </div>
               <div className="state-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                <label for='state'>State</label>
+                <label htmlFor='state'>State</label>
                   {/* State */}
                   <div className="errors-object">
                     {errors.state && <p>{errors.state}</p>}
@@ -253,7 +253,7 @@ function CreateSpotForm() {
             <label className="lat-lng-input">
               <div className="lat-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                <label for='Latitude'>Latitude</label>
+                <label htmlFor='Latitude'>Latitude</label>
                   {/* Latitude */}
                   <div className="errors-object">
                     {errors.lat && <p>{errors.lat}</p>}
@@ -271,7 +271,7 @@ function CreateSpotForm() {
               </div>
               <div className="lng-input" style={{ width: "40%" }}>
                 <div className="create-spot-key-input">
-                <label for='Longitude'>Longitude</label>
+                <label htmlFor='Longitude'>Longitude</label>
                   {/* Longitude */}
                   <div className="errors-object">
                     {errors.lng && <p>{errors.lng}</p>}
