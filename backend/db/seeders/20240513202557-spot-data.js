@@ -58,7 +58,7 @@ module.exports = {
           lat: 37.7742295,
           lng: -122.3004154,
           name: "Purr Palace",
-          description: "A luxurious retreat for pampered pets. Imagine yourself lounging amidst feline royalty. Plush velvet cushions adorn window perches, offering the perfect vantage point to survey your sprawling domain. Crystal chandeliers cast a soft glow, illuminating a network of hand-woven sisal climbing structures that resemble miniature cathedrals. Delicate feather toys, adorned with tiny jewels, dangle from the rafters, begging for a regal swat with your paw. This isn't just a hangout, it's a five-star feline palace, designed to pamper your inner aristocrat.",
+          description: "Imagine yourself lounging amidst feline royalty. Plush velvet cushions adorn window perches, offering the perfect vantage point to survey your sprawling domain. Crystal chandeliers cast a soft glow, illuminating a network of hand-woven sisal climbing structures. Delicate feather toys dangle from the rafters, begging for a regal swat with your paw. It's a five-star feline palace, designed to pamper your inner aristocrat.",
           price: 999.99,
         },
         {
@@ -130,7 +130,7 @@ module.exports = {
           lat: 37.4419,
           lng: -122.1430,
           name: "Purrfect Paradise",
-          description: "Imagine yourself basking in the gilded glory of a feline opera house. Plush velvet drapes frame arched windows, offering a glimpse of the world outside your personal stage. Gleaming brass sconces cast a warm, theatrical light on a network of woven sisal climbing structures that resemble miniature coliseums. Dangling from the rafters are handcrafted feather toys adorned with shimmering ribbons, each a delicate aria waiting to be conducted with a flick of your paw. This isn't merely a hangout, it's a purrformance venue fit for a feline maestro, designed to unleash your inner virtuoso.",
+          description: "Imagine yourself basking in the gilded glory of a feline opera house. Plush velvet drapes frame arched windows, gleaming brass sconces cast a warm, theatrical light. This isn't merely a hangout, it's a purrformance venue fit for a feline maestro, designed to unleash your inner virtuoso.",
           price: 299.99
         }
       ],
