@@ -21,7 +21,7 @@ module.exports = {
           lat: 37.75263939630619,
           lng: -122.42089576219055,
           name: "Cat Box",
-          description: "It's a box. It's a cool place to nap. It's a nice box. It's a cool box. Sometimes it has a flap to protect you from the sunshine, sometimes it doesn't. Sometimes when it rains, the humans move it away so be sure to book while you can!",
+          description: "It's a box. It's a cool place to nap. It's a nice box. Sometimes it has a flap to protect you from the sun, sometimes it doesn't. Sometimes when it rains, the humans move it away so be sure to book while you can!",
           price: 4.99,
         },
         {
@@ -33,7 +33,7 @@ module.exports = {
           lat: 37.8175167579453,
           lng: -122.12236669999999,
           name: "Cat Tree",
-          description: "Unleash your feline's inner explorer at the Cat Tree! This kitty paradise boasts comfy napping nooks, scratching posts of all textures, window perches for birdwatching, and a network of tunnels for pouncing on hidden toys.",
+          description: "This kitty paradise boasts comfy napping nooks, scratching posts of all textures, window perches for birdwatching, and a network of tunnels for pouncing on hidden toys.",
           price: 9.99,
         },
 
@@ -46,7 +46,7 @@ module.exports = {
           lat: 37.76653764454153,
           lng: -122.44107715767119,
           name: "Cat House",
-          description: "Perches by the window offer the ultimate napping spot. You can sprawl out, soak up the warmth, and watch the fascinating world of birds flit by outside. This peaceful haven is the perfect place to relax, recharge, and keep yourself entertained.",
+          description: "Perches by the window offer the ultimate napping spot. You can sprawl out, soak up the warmth, and watch birds flit by outside. This peaceful haven is the perfect place to relax, recharge, and keep yourself entertained.",
           price: 29.99,
         },
         {
@@ -70,7 +70,7 @@ module.exports = {
           lat: 37.773149296,
           lng: -122.50024155,
           name: "Meow Manor",
-          description: "Everywhere you turn, feathery prey dangles and fuzzy mice tempt your pounce. The air even tingles with the scent of catnip, making your whiskers twitch with excitement. This place is a hunter's dream come true!",
+          description: "The air even tingles with the scent of catnip, making your whiskers twitch with excitement. This place is a hunter's dream come true!",
           price: 54.99,
         },
         {
@@ -82,7 +82,7 @@ module.exports = {
           lat: 37.8044,
           lng: -122.2711,
           name: "Paws Play Place",
-          description: "A playful haven for feline friends. Tunnels and tubes perfect for stalking unsuspecting toys or simply enjoying a good zoomie. Cozy hideaways for a quick nap after a thrilling chase.",
+          description: "A playful haven for feline friends. Tunnels and tubes perfect for stalking unsuspecting toys or simply enjoying a good zoomie.",
           price: 79.99
         },
         {
@@ -106,7 +106,7 @@ module.exports = {
           lat: 37.5629,
           lng: -122.3255,
           name: "Cat's Corner",
-          description: "The floor is practically a wonderland of crinkly delights. Balls filled with irresistible crinkle paper. This place understands your love for the sound of crinkle, offering endless opportunities to unleash your inner hunter and keep boredom at bay.",
+          description: "The floor is practically a wonderland of crinkly delights. This place understands your love for the sound of crinkle, offering endless opportunities to unleash your inner hunter and keep boredom at bay.",
           price: 89.99
         },
         {
