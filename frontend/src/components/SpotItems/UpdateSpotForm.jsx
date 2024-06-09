@@ -334,7 +334,7 @@ const UpdateSpotForm = () => {
           <hr></hr>
 
           <button id="create-update-spot-button" type="submit">
-          Update Spot
+          Update Your Spot
         </button>
         </div>
       </form>

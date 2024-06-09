@@ -35,7 +35,7 @@ const DeleteSpotModal = ({ spotId }) => {
       <h1 style={{textAlign: 'center'}}> Confirm Delete</h1>
 
     <div className='delete-spot-confirmation'>
-      <span >Are you sure you want to delete this spot from the listings?</span>
+      <span >Are you sure you want to remove this spot?</span>
       <button onClick={handleDelete}
       className='modal-button-confirm-yes'>
         Yes (Delete Spot)

@@ -100,7 +100,7 @@ const CreateReviewModal = ({ spotId, onClose }) => {
           placeholder="Leave your review here..."
         />
         <div className="star-rating">{starIcons} stars</div>
-        <button type="submit" className="submit-review-button">
+        <button type="submit" className="submit-review-button" disabled={review.length < 10}>
           Submit Your Review
         </button>
       </form>
