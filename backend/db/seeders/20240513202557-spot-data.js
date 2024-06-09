@@ -46,7 +46,7 @@ module.exports = {
           lat: 37.76653764454153,
           lng: -122.44107715767119,
           name: "Cat House",
-          description: "Perches by the window offer the ultimate napping spot. You can sprawl out, soak up the warmth, and watch the fascinating world of birds flit by outside. This peaceful haven is the perfect place to relax, recharge, and keep yourself entertained for hours on end.",
+          description: "Perches by the window offer the ultimate napping spot. You can sprawl out, soak up the warmth, and watch the fascinating world of birds flit by outside. This peaceful haven is the perfect place to relax, recharge, and keep yourself entertained.",
           price: 29.99,
         },
         {
@@ -58,7 +58,7 @@ module.exports = {
           lat: 37.7742295,
           lng: -122.3004154,
           name: "Purr Palace",
-          description: "Plush velvet cushions adorn window perches, offering the perfect vantage point to survey your sprawling domain. Crystal chandeliers cast a soft glow. Delicate feather toys dangle from the rafters, begging for a regal swat with your paw. It's a five-star feline palace, designed to pamper your inner aristocrat.",
+          description: "Plush velvet cushions adorn window perches, offering the perfect vantage point to survey your sprawling domain. Delicate feather toys dangle from the rafters, begging for a regal swat with your paw. It's a five-star feline palace, designed to pamper your inner aristocrat.",
           price: 999.99,
         },
         {
@@ -70,7 +70,7 @@ module.exports = {
           lat: 37.773149296,
           lng: -122.50024155,
           name: "Meow Manor",
-          description: "A stylish space for the discerning feline. Everywhere you turn, feathery prey dangles and fuzzy mice tempt your pounce. The air even tingles with the scent of catnip, making your whiskers twitch with excitement. This place is a hunter's dream come true!",
+          description: "Everywhere you turn, feathery prey dangles and fuzzy mice tempt your pounce. The air even tingles with the scent of catnip, making your whiskers twitch with excitement. This place is a hunter's dream come true!",
           price: 54.99,
         },
         {
@@ -82,7 +82,7 @@ module.exports = {
           lat: 37.8044,
           lng: -122.2711,
           name: "Paws Play Place",
-          description: "A playful haven for feline friends. Tunnels and tubes become your secret passageways, perfect for stalking unsuspecting toys or simply enjoying a good zoomie. Cubbyholes offer cozy hideaways for a quick nap after a thrilling chase.",
+          description: "A playful haven for feline friends. Tunnels and tubes perfect for stalking unsuspecting toys or simply enjoying a good zoomie. Cozy hideaways for a quick nap after a thrilling chase.",
           price: 79.99
         },
         {
@@ -94,7 +94,7 @@ module.exports = {
           lat: 37.8716,
           lng: -122.2727,
           name: "Whisker Wonderland",
-          description: "A cozy retreat for whiskered companions. Feeling a bit peckish after all that playtime? Some havens might even have a designated feeding area to keep your energy levels up. Just remember to check for availability before getting your hopes up for a mid-play snack. ",
+          description: "A cozy retreat for whiskered companions. Feeling a bit peckish after all that playtime? Some havens might even have a designated feeding area to keep your energy levels up.",
           price: 69.99
         },
         {
@@ -106,7 +106,7 @@ module.exports = {
           lat: 37.5629,
           lng: -122.3255,
           name: "Cat's Corner",
-          description: "The floor is practically a wonderland of crinkly delights. Balls filled with irresistible crinkle paper become your personal soccer trophies. This place understands your love for the sound of crinkle, offering endless opportunities to unleash your inner hunter and keep boredom at bay.",
+          description: "The floor is practically a wonderland of crinkly delights. Balls filled with irresistible crinkle paper. This place understands your love for the sound of crinkle, offering endless opportunities to unleash your inner hunter and keep boredom at bay.",
           price: 89.99
         },
         {
@@ -118,7 +118,7 @@ module.exports = {
           lat: 37.8591,
           lng: -122.4853,
           name: "Furry Feline Retreat",
-          description: "Looking for some social butterflies?  Some havens offer supervised playtime with other feline companions, fostering purrfect friendships. Just check for availability before bringing your social side to the party.",
+          description: "This haven offer supervised playtime with other feline companions, fostering purrfect friendships.",
           price: 99.99
         },
         {
@@ -130,7 +130,7 @@ module.exports = {
           lat: 37.4419,
           lng: -122.1430,
           name: "Purrfect Paradise",
-          description: "Imagine yourself basking in the gilded glory of a feline opera house. Plush velvet drapes frame arched windows, gleaming brass sconces cast a warm, theatrical light. This isn't merely a hangout, it's a purrformance venue fit for a feline maestro, designed to unleash your inner virtuoso.",
+          description: "This isn't merely a hangout, it's a purrformance venue fit for a feline maestro, designed to unleash your inner virtuoso.",
           price: 299.99
         }
       ],
