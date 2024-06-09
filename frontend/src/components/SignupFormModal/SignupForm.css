@@ -14,8 +14,10 @@
     background-color: red;
     color: white;
     box-shadow: 3px 3px 1px black;
+    cursor: pointer;
 }
 
 .signup-modal-button:disabled {
     background-color: grey;
+    cursor: not-allowed;
 }

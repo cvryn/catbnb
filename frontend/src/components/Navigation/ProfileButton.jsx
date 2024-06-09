@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { IoMenu } from "react-icons/io5";
 
@@ -17,6 +17,8 @@ function ProfileButton({ user }) {
   const [isActive, setIsActive] = useState(false);
   const ulRef = useRef();
 
+  const currentUser = useSelector((state) => state.session.user);
+
   const toggleMenu = (e) => {
     e.stopPropagation();
     setShowMenu(!showMenu);
@@ -32,6 +34,10 @@ function ProfileButton({ user }) {
     };
 
     document.addEventListener("click", closeMenu);
+
+    if (currentUser) {
+      setShowMenu(true);
+    }
 
     return () => document.removeEventListener("click", closeMenu);
   }, []);
@@ -56,39 +62,48 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {!user && (
           <>
-          <div id='profile-modal-login-signup-container'>
-
-            <li>
-              <OpenModalButton
-              modalStyling='sign-up-button'
-                buttonText="Sign Up"
-                modalComponent={<SignupFormModal />}
-              />
-            </li>
-            <li>
-              <OpenModalButton
-                 modalStyling="log-in-button"
-                buttonText="Log In"
-                modalComponent={<LoginFormModal />}
-              />
-            </li>
-
-          </div>
+            <div id="profile-modal-login-signup-container">
+              <li>
+                <OpenModalButton
+                  modalStyling="sign-up-button"
+                  buttonText="Sign Up"
+                  modalComponent={<SignupFormModal />}
+                />
+              </li>
+              <li>
+                <OpenModalButton
+                  modalStyling="log-in-button"
+                  buttonText="Log In"
+                  modalComponent={<LoginFormModal />}
+                />
+              </li>
+            </div>
           </>
         )}
         {user && (
           <>
             <li>Hello, {user.firstName}</li>
             {/* <li>{user.lastName}</li> */}
-            <li style={{borderBottom: 'solid 1px #e1e1e1', padding: '5px 0'}}>{user.email}</li>
+            <li style={{ borderBottom: "solid 1px #e1e1e1", padding: "5px 0" }}>
+              {user.email}
+            </li>
             <li>
-              <NavLink to="/spots/current/" style={{textDecoration: 'none', color:'black'}}>Manage Spots</NavLink>
+              <NavLink
+                to="/spots/current/"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Manage Spots
+              </NavLink>
             </li>
             {/* <li>ManageSpots</li> */}
 
             <li>
               <div className="logout-button-container">
-                <button className='logout-button' onClick={logout} style={{ cursor: "pointer" }}>
+                <button
+                  className="logout-button"
+                  onClick={logout}
+                  style={{ cursor: "pointer" }}
+                >
                   Log Out
                 </button>
               </div>

@@ -131,9 +131,9 @@ const SpotDetails = () => {
               Hosted by {currentSpot?.Owner?.firstName}{" "}
               {currentSpot?.Owner?.lastName}
             </h2>
-            <div className="description" style={{ width: "90%" }}>
+            <p className="description" style={{ width: "90%" }}>
               {currentSpot.description}
-            </div>
+            </p>
           </div>
           <div className="reserve-container">
             <div className="reserve-top">
