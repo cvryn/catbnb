@@ -152,9 +152,9 @@ const SpotDetails = () => {
                   ? ""
                   : "·"}{" "}
                 {currentSpot.numReviews === 1
-                  ? "1 review"
+                  ? "1 Review"
                   : currentSpot.numReviews > 1
-                  ? `${currentSpot.numReviews} reviews`
+                  ? `${currentSpot.numReviews} Reviews`
                   : ""}
               </div> */}
 
@@ -170,9 +170,9 @@ const SpotDetails = () => {
                   ? ""
                   : "·"}{" "}
                 {numReviews === 1
-                  ? "1 review"
+                  ? "1 Review"
                   : numReviews > 1
-                  ? `${numReviews} reviews`
+                  ? `${numReviews} Reviews`
                   : ""}
               </div>
 
@@ -197,9 +197,9 @@ const SpotDetails = () => {
                   ? ""
                   : "·"}{" "}
                 {numReviews === 1
-                  ? "1 review"
+                  ? "1 Review"
                   : numReviews > 1
-                  ? `${numReviews} reviews`
+                  ? `${numReviews} Reviews`
                   : ""}
               </div>
 

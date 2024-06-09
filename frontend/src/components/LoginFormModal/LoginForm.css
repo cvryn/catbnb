@@ -25,6 +25,7 @@
     background-color: red;
     color: white;
     box-shadow: 3px 3px 1px black;
+    cursor: pointer;
 }
 
 .login-modal-button:disabled {

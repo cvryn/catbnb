@@ -170,7 +170,7 @@ function CreateSpotForm() {
       <form onSubmit={handleSubmit} id="create-spot-form-container">
         <div id="spot-form-container">
           <header>
-            <h2>Create a new Spot</h2>
+            <h2>Create a New Spot</h2>
             <h3>Where&apos;s your place located?</h3>
             <p>
               Guests will only get your exact address once they booked a
@@ -381,7 +381,7 @@ function CreateSpotForm() {
             </div>
             <input
               style={{ width: "100%" }}
-              type="url"
+              type="text"
               value={previewImage}
               placeholder="Preview Image URL"
               onChange={(e) => setPreviewImage(e.target.value)}

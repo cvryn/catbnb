@@ -40,7 +40,7 @@ function ProfileButton({ user }) {
     }
 
     return () => document.removeEventListener("click", closeMenu);
-  }, []);
+  }, [currentUser]);
 
   const logout = (e) => {
     e.preventDefault();
