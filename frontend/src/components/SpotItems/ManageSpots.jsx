@@ -47,7 +47,7 @@ const ManageSpots = () => {
   return (
     <div id="manage-spots-container">
       <section className="manage-spots-header">
-        <h1>Manage Your Spots</h1>
+        <h1>Manage Spots</h1>
         <div>
           {currentUser && userOwnedSpots.length === 0 && (
             <NavLink to='/spots/new' className='create-a-new-spot-button-manage'>Create a New Spot</NavLink>
