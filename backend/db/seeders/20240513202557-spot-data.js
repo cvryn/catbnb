@@ -33,7 +33,7 @@ module.exports = {
           lat: 37.8175167579453,
           lng: -122.12236669999999,
           name: "Cat Tree",
-          description: "Unleash your feline's inner explorer at the Cat Tree! This kitty paradise boasts comfy napping nooks, scratching posts of all textures, window perches for birdwatching, and a network of tunnels for pouncing on hidden toys. It's the purrfect place for your cat to lounge, play, and reign supreme.",
+          description: "Unleash your feline's inner explorer at the Cat Tree! This kitty paradise boasts comfy napping nooks, scratching posts of all textures, window perches for birdwatching, and a network of tunnels for pouncing on hidden toys.",
           price: 9.99,
         },
 
@@ -58,7 +58,7 @@ module.exports = {
           lat: 37.7742295,
           lng: -122.3004154,
           name: "Purr Palace",
-          description: "Imagine yourself lounging amidst feline royalty. Plush velvet cushions adorn window perches, offering the perfect vantage point to survey your sprawling domain. Crystal chandeliers cast a soft glow, illuminating a network of hand-woven sisal climbing structures. Delicate feather toys dangle from the rafters, begging for a regal swat with your paw. It's a five-star feline palace, designed to pamper your inner aristocrat.",
+          description: "Plush velvet cushions adorn window perches, offering the perfect vantage point to survey your sprawling domain. Crystal chandeliers cast a soft glow. Delicate feather toys dangle from the rafters, begging for a regal swat with your paw. It's a five-star feline palace, designed to pamper your inner aristocrat.",
           price: 999.99,
         },
         {
@@ -82,7 +82,7 @@ module.exports = {
           lat: 37.8044,
           lng: -122.2711,
           name: "Paws Play Place",
-          description: "A playful haven for feline friends. Tunnels and tubes become your secret passageways, perfect for stalking unsuspecting toys or simply enjoying a good zoomie. Cubbyholes offer cozy hideaways for a quick nap after a thrilling chase. This is a playground that fuels your inner panther and keeps you entertained for hours on end.",
+          description: "A playful haven for feline friends. Tunnels and tubes become your secret passageways, perfect for stalking unsuspecting toys or simply enjoying a good zoomie. Cubbyholes offer cozy hideaways for a quick nap after a thrilling chase.",
           price: 79.99
         },
         {
@@ -106,7 +106,7 @@ module.exports = {
           lat: 37.5629,
           lng: -122.3255,
           name: "Cat's Corner",
-          description: "The floor is practically a wonderland of crinkly delights. Balls filled with irresistible crinkle paper become your personal soccer trophies, while feathery toys with a hint of crinkle entice the most playful pounces. This place understands your love for the sound of crinkle, offering endless opportunities to unleash your inner hunter and keep boredom at bay.",
+          description: "The floor is practically a wonderland of crinkly delights. Balls filled with irresistible crinkle paper become your personal soccer trophies. This place understands your love for the sound of crinkle, offering endless opportunities to unleash your inner hunter and keep boredom at bay.",
           price: 89.99
         },
         {
