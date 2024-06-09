@@ -84,9 +84,10 @@ function LoginFormModal() {
         {Object.values(errors).map((key, index) => (
           <p key={index}>{errors[key]}</p>
         ))}
-        {/* Shows the error messages */}
+     <div className="errors-object">
         {errors.credential && <p>{errors.credential}</p>}
         {errors.password && <p>{errors.password}</p>}
+        </div>
         <div className='login-modal-buttons'>
         <button
         className='login-modal-button'
