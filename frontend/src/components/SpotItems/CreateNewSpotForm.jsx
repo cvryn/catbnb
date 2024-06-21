@@ -102,15 +102,15 @@ function CreateSpotForm() {
     <>
    {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
 
-{/* <button
+<button
         className="demo-user-modal-button"
         type="submit"
         onClick={() => {
-          setAddress("1");
-          setCity("1");
-          setState("1");
-          setCountry("1");
-          setName("1");
+          setAddress("1234 Cat St.");
+          setCity("San Francisco");
+          setState("California");
+          setCountry("United States of America");
+          setName("Cool Cats Club");
           setDescription(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
           );
@@ -128,6 +128,9 @@ function CreateSpotForm() {
           );
           setImage3(
             "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386122/catbnb/r-cat-manor_uesoqf.png"
+          );
+          setImage4(
+            "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386117/catbnb/r-cat-palace_rkbflt.png"
           );
         }}
       >
@@ -160,11 +163,12 @@ function CreateSpotForm() {
           setImage2(
             "https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481395/catbnb/8-PxeIe9RIpGvMIqY_m3gyf8.png"
           );
+
         }}
       >
         {" "}
         Demo Blank Spot Tester
-      </button> */}
+      </button>
 
 
       <form onSubmit={handleSubmit} id="create-spot-form-container">

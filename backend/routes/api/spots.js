@@ -69,7 +69,7 @@ async function numReviews(spots) {
   }
 }
 
-//Get all Spots -----------------------------------------------------------------------------
+// Get all Spots -----------------------------------------------------------------------------
 router.get("/", async (req, res, next) => {
 
   // It's query time ==================================================================
@@ -159,9 +159,6 @@ router.get("/:spotId", async (req, res) => {
   let id = req.params.spotId;
   // console.log(id)
 
-  let total = await Spot.findAll();
-  let totalLength = total.length;
-
   let spots = await Spot.findAll({
     where: {
       id: id,
@@ -179,10 +176,7 @@ router.get("/:spotId", async (req, res) => {
     ],
   });
 
-  // let numId = +id
-  // console.log(id > totalLength)
-  // console.log((typeof numId))
-  if (id > totalLength || id <= 0) {
+  if (!spots) {
     return res.status(404).json({
       message: "Spot couldn't be found",
     });
@@ -268,9 +262,9 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     //   }
     // }
     ();
-  let length = allSpots.length; // find how many spots are total
+  // let length = allSpots.length; // find how many spots are total
 
-  if (spotId > length || spotId <= 0) {
+  if (currentSpot === null || spotId <= 0) {
     return res.status(404).json({
       message: "Spot couldn't be found",
     });
@@ -297,6 +291,13 @@ router.put("/:spotId", requireAuth, async (req, res) => {
   const spotId = req.params.spotId; // current spot id
   const currentOwnerId = req.user.id; // current user id
   const updateSpot = await Spot.findByPk(spotId);
+
+  // if spot doesn't exist
+  if (!updateSpot) {
+    return res.status(404).json({
+      message: "Spot couldn't be found??",
+    });
+  }
 
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
@@ -334,15 +335,6 @@ router.put("/:spotId", requireAuth, async (req, res) => {
   }
   if (Object.keys(err.errors).length) throw err;
 
-  let allSpots = await Spot.findAll();
-  let length = allSpots.length;
-
-  // if spot doesn't exist
-  if (spotId > length || spotId <= 0) {
-    return res.status(404).json({
-      message: "Spot couldn't be found",
-    });
-  }
 
   let owner = updateSpot.ownerId;
   // spot belongs to the owner
@@ -398,9 +390,18 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
 // Get All Reviews by a Spot's Id -------------------------------------------------------------------
 
 router.get("/:spotId/reviews", async (req, res) => {
-  let spotId = req.params.spotId;
+  const spotId = req.params.spotId;
 
-  let spotReviews = await Review.findAll({
+  // Check if the spot exists
+  const spot = await Spot.findByPk(spotId);
+  if (!spot) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  }
+
+  // Fetch the reviews for the spotId
+  const spotReviews = await Review.findAll({
     where: {
       spotId: spotId,
     },
@@ -416,17 +417,9 @@ router.get("/:spotId/reviews", async (req, res) => {
     ],
   });
 
-  let total = await Spot.findAll();
-  let totalLength = total.length;
-
-  if (spotId > totalLength || spotId <= 0) {
-    return res.status(404).json({
-      message: "Spot couldn't be found",
-    });
-  }
-
   res.status(200).json({ Reviews: spotReviews });
 });
+
 
 // Create a Review for a Spot based on SpotId -------------------
 
