@@ -160,7 +160,10 @@ const SpotDetails = () => {
 
 
               <div className="reviews-details">
+                <div className="spot-details-star">
                 <TiStarFullOutline />
+                </div>
+                <div className='spot-details-reviews'>
                 {isNaN(avgRating) ||
                 avgRating === undefined
                   ? "New"
@@ -174,6 +177,8 @@ const SpotDetails = () => {
                   : numReviews > 1
                   ? `${numReviews} Reviews`
                   : ""}
+
+                </div>
               </div>
 
             </div>

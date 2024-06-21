@@ -58,8 +58,22 @@
 }
 
 .rating {
-  font-size: 18px;
+  /* border: solid 2px red; */
+  display: flex;
 
+  gap: 3px;
+  font-size: 18px;
+  border: 0;
+}
+
+
+.landing-page-star {
+  /* border: solid 1px blue; */
+  padding-top: 2px;
+  box-sizing: border-box;
+  /* padding: 0; */
+  padding-right: 1px;
+  margin: 0;
 }
 
 .price {
