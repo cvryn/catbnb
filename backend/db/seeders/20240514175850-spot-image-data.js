@@ -21,6 +21,16 @@ module.exports = {
           preview: true,
         },
         {
+          spotId: 1,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/c_crop,ar_1:1/v1717386107/catbnb/r-cat.box_g3hc5i.png',
+          preview: true,
+        },
+        {
+          spotId: 1,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386107/catbnb/r-cat-box2_aerpqz.png',
+          preview: true,
+        },
+        {
           spotId: 2,
           url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386381/catbnb/cat-tree2_k3ho9t.png',
           preview: true,

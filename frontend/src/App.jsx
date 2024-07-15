@@ -8,10 +8,10 @@ import * as sessionActions from "./store/session";
 import { Modal } from "./context/Modal";
 // import Landing from './components/LandingPage/Landing'
 import Spots from "./components/Spots/Spots";
-import SpotDetails from "./components/SpotItems/SpotDetails";
-import CreateSpotForm from "./components/SpotItems/CreateNewSpotForm";
-import ManageSpots from "./components/SpotItems/ManageSpots";
-import UpdateSpotForm from "./components/SpotItems/UpdateSpotForm";
+import SpotDetails from "./components/Spots/SpotDetails";
+import CreateSpotForm from "./components/Spots/CreateNewSpotForm";
+import ManageSpots from "./components/Spots/ManageSpots";
+import UpdateSpotForm from "./components/Spots/UpdateSpotForm";
 
 function Layout() {
   const dispatch = useDispatch();

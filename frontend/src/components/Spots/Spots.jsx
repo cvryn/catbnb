@@ -1,5 +1,5 @@
 
-import SpotItems from '../SpotItems/SpotItems';
+import SpotItems from './SpotItems';
 
 import { useDispatch, useSelector } from "react-redux";
 import {  getAllSpots } from "../../store/spotsReducer";
