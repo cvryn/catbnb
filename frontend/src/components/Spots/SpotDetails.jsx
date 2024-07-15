@@ -25,7 +25,7 @@ const SpotDetails = () => {
   // const spots = useSelector((state) => state.spots.allSpots[spotId]);
   // console.log("ALLLLLLLL SPOTS", spots);
   const currentSpot = useSelector((state) => state.spots.currentSpot[0]);
-  // console.log("%c Spot Details: currrrrrrrrrrrrrrrrrrrrrrrrrrrrrent spot","color: orange",currentSpot)
+  console.log("%c Spot Details: currrrrrrrrrrrrrrrrrrrrrrrrrrrrrent spot","color: orange", currentSpot)
 
   // Get the reviews for the current spot
   const reviews = useSelector((state) => state.reviews.Reviews || []);
