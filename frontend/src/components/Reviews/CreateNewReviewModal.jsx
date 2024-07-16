@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { newReview, getReviews } from '../../store/reviewReducer';
-import { GoStar } from "react-icons/go";
-import { GoStarFill } from "react-icons/go";
+import { newReview, getReviews, updateReview } from '../../store/reviewReducer';
+// import { GoStar } from "react-icons/go";
+// import { GoStarFill } from "react-icons/go";
+import { IoFish } from "react-icons/io5";
+import { IoFishOutline } from "react-icons/io5";
 
 import './CreateNewReviewModal.css'
 
@@ -76,7 +78,7 @@ const CreateReviewModal = ({ spotId, onClose }) => {
         onMouseLeave={handleMouseLeave}
         style={{paddingTop: '10px'}}
         >
-        {i < rating ? <GoStarFill /> : <GoStar />}
+        {i < rating ? <IoFish /> : <IoFishOutline />}
       </span>
     );
     }

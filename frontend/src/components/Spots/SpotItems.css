@@ -87,14 +87,17 @@
 }
 
 .spots-post-your-review-button {  border: none;
-  background-color: grey;
+  background-color: #FC807D;
   box-shadow: 2px 2px 2px black;
+  border-radius: 8px;
+  padding: 8px;
+  width: 200px;
   font-size: 14px;
   color: white;
   cursor: pointer;}
 
   .spots-post-your-review-button:hover {
-    background-color: rgb(112, 112, 112);
+    background-color: #fe7573;
   }
 
 #delete-review-button {
