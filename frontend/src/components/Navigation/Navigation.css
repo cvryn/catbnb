@@ -20,7 +20,7 @@
 
 .create-a-new-spot {
   /* border: dotted 2px orange; */
-  
+
   text-decoration: none;
   padding: 10px;
   border-radius: 25px;
@@ -45,7 +45,7 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border-bottom: solid 1px #e1e1e1;
+  /* border-bottom: solid 1px #e1e1e1; */
   padding: 10px 30px;
 
 

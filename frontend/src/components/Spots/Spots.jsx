@@ -1,8 +1,7 @@
-
-import SpotItems from './SpotItems';
+import SpotItems from "./SpotItems";
 
 import { useDispatch, useSelector } from "react-redux";
-import {  getAllSpots } from "../../store/spotsReducer";
+import { getAllSpots } from "../../store/spotsReducer";
 import { useEffect } from "react";
 
 import "./Spots.css";
@@ -26,15 +25,17 @@ const Spots = () => {
   // };
 
   return (
+    <>
     <section>
       <ul>
         <div className="spots-container">
           {spots.map((spot) => {
-            return <SpotItems spot={spot} key={spot.id} />
-})}
+            return <SpotItems spot={spot} key={spot.id} />;
+          })}
         </div>
       </ul>
     </section>
+    </>
   );
 };
 

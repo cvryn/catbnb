@@ -13,6 +13,7 @@ import CreateSpotForm from "./components/Spots/CreateNewSpotForm";
 import ManageSpots from "./components/Spots/ManageSpots";
 import UpdateSpotForm from "./components/Spots/UpdateSpotForm";
 import ManageReviews from "./components/Reviews/ManageReviews";
+import SearchBar from "./components/Search/SearchBar";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -28,7 +29,10 @@ function Layout() {
     <>
       <Modal />
       <Navigation isLoaded={isLoaded} />
+      <SearchBar />
+      <hr style={{fontWeight: 'lighter'}}/>
       {isLoaded && <Outlet />}
+      <hr />
     </>
   );
 }
