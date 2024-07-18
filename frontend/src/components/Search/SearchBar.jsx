@@ -34,6 +34,7 @@ const SearchBar = () => {
   return (
     <>
       {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
+
       <div id="search-bar-container">
         <form onSubmit={handleSubmit} className="search-bar-form">
           <div className="search-bar-field">
@@ -46,7 +47,7 @@ const SearchBar = () => {
             />
           </div>
           <div className='search-bar-separator'></div>
-          
+
           <div className="search-bar-field">
             <label htmlFor="check-in-date">Check In</label>
             <input

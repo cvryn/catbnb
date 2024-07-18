@@ -29,8 +29,8 @@ function Layout() {
     <>
       <Modal />
       <Navigation isLoaded={isLoaded} />
-      <SearchBar />
-      <hr style={{fontWeight: 'lighter'}}/>
+      {/* <SearchBar /> */}
+      {/* <hr style={{fontWeight: 'lighter'}}/> */}
       {isLoaded && <Outlet />}
       <hr />
     </>
