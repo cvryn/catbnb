@@ -36,34 +36,39 @@
 .user-owned-update-delete-buttons {
   /* border: solid 2px blue; */
   display: flex;
+  padding-left: 10px;
   gap: 20px;
 }
 
 .user-owned-update-button {
   text-decoration: none;
   border: none;
-  background-color: grey;
-  box-shadow: 2px 2px 2px black;
+  border-radius: 8px;
+  padding: 8px;
+  background-color:  #fc807d;
+  box-shadow: 2px 2px 2px rgb(222, 189, 189);
   color: white;
   font-size: 12px;
   cursor: pointer;
 }
 
 .user-owned-update-button:hover {
-  background-color: rgb(112, 112, 112);
+  background-color:  #fe7573;
 }
 
 .user-owned-delete-button {
   border: none;
-  background-color: grey;
-  box-shadow: 2px 2px 2px black;
+  border-radius: 8px;
+  padding: 8px;
+  background-color:  #fc807d;
+  box-shadow: 2px 2px 2px rgb(222, 189, 189);
   font-size: 14px;
   color: white;
   cursor: pointer;
 }
 
 .user-owned-delete-button:hover {
-  background-color: rgb(112, 112, 112);
+  background-color:  #fe7573;;
 }
 
 @media screen and (min-width: 2400px) {

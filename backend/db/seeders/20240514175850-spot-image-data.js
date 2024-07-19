@@ -31,24 +31,116 @@ module.exports = {
           preview: true,
         },
         {
+          spotId: 1,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721065909/catbnb/IMG_6144_ciaysb.jpg',
+          preview: true,
+        },
+        {
+          spotId: 1,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721065910/catbnb/IMG_6145_b0f0mp.jpg',
+          preview: true,
+        },
+        {
           spotId: 2,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386381/catbnb/cat-tree2_k3ho9t.png',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721078105/catbnb/8-2dY6rDmkIgt6eIx_yzgjy5.png',
           preview: true,
         },
 
         {
+          spotId: 2,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721078127/catbnb/8-ZBR7bH81pQS93in_hgm535.png',
+          preview: true,
+        },
+        {
+          spotId: 2,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721078189/catbnb/8-FIEJTsUsgbnC404_mczqwa.png',
+          preview: true,
+        },
+        {
+          spotId: 2,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721078217/catbnb/8-4vNCUM2EFkfFJIC_n9ygwt.png',
+          preview: true,
+        },
+        {
+          spotId: 2,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721078243/catbnb/8-wKItdmXAtw1sQrg_m8f0th.png',
+          preview: true,
+        },
+        {
           spotId: 3,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717385287/catbnb/cat-house_s0kuyk.png',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064565/8-0RhZUtwAMsdYmET_t2iko6.png',
+          preview: true,
+        },
+        {
+          spotId: 3,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721077665/catbnb/8-vmXLDyaZyS7Llb4_g45zgf.png',
+          preview: true,
+        },
+        {
+          spotId: 3,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721077729/catbnb/8-5J3aKlrK6lVOyvq_ixqisz.png',
+          preview: true,
+        },
+        {
+          spotId: 3,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721077754/catbnb/8-asgMXZGXbVKMqWs_yxoi0x.png',
+          preview: true,
+        },
+        {
+          spotId: 3,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721077784/catbnb/8-Rf8mm55wOSKOnkW_wu0zby.png',
+          preview: true,
+        },
+
+        {
+          spotId: 4,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721074400/catbnb/8-KiG2yqfWz0YXAC8_mr3ljz.png',
           preview: true,
         },
         {
           spotId: 4,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717386565/catbnb/cat-palace_cugto5.png',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721074490/catbnb/8-AVtuapCccYDgLYh_piwzrs.png',
+          preview: true,
+        },
+        {
+          spotId: 4,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721074998/catbnb/8-A5Rq0cyObxt8IKw_azmbrr.png',
+          preview: true,
+        },
+        {
+          spotId: 4,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721074593/catbnb/8-DQ4wjfYwjaHW3dD_j4hq8n.png',
+          preview: true,
+        },
+        {
+          spotId: 4,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721074742/catbnb/8-1WiSWwzF2exEhou_nwlifm.png',
           preview: true,
         },
         {
           spotId: 5,
           url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717385426/catbnb/cat-manor_ur2y73.png',
+          preview: true,
+        },
+        {
+          spotId: 5,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721074826/catbnb/8-uKE9E7uKGJhrzLj_u9ceyo.png',
+          preview: true,
+        },
+
+        {
+          spotId: 5,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721074524/catbnb/8-Zjtow5qpaH2IvWU_us7pk7.png',
+          preview: true,
+        },
+        {
+          spotId: 5,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075071/catbnb/8-yg8MHE29sZH0k2X_lzeazw.png',
+          preview: true,
+        },
+        {
+          spotId: 5,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721074490/catbnb/8-AVtuapCccYDgLYh_piwzrs.png',
           preview: true,
         },
         {
@@ -76,6 +168,78 @@ module.exports = {
           url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717482636/catbnb/8-gw2n7QwDHxtKg4O_jhqf7r.png',
           preview: true,
         },
+        {
+          spotId: 11,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064520/8-vVCNspoNcC5Jevs_ndmh0t.png',
+          preview: true,
+        },
+        {
+          spotId: 11,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064375/8-XiVdMvPw3eIf03j_mbbn82.png',
+          preview: true,
+        },
+        {
+          spotId: 11,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064369/8-6Q9pin276UeZirG_avrzd6.png',
+          preview: true,
+        },
+        {
+          spotId: 11,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064445/8-aeEpBzgtK11vf6X_dky0oc.png',
+          preview: true,
+        },
+        {
+          spotId: 11,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717482636/catbnb/8-gw2n7QwDHxtKg4O_jhqf7r.png',
+          preview: true,
+        },
+        {
+          spotId: 12,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717481500/catbnb/8-48P9ONEPd4ZO7DE_zrqm0c.png',
+          preview: true,
+        },
+
+        {
+          spotId: 13,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075250/catbnb/8-d2XU8On1wav9a7K_l0ifq7.png',
+          preview: true,
+        },
+        {
+          spotId: 14,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075267/catbnb/8-x5ls0CLFUg406m4_h3kq7s.png',
+          preview: true,
+        },
+        {
+          spotId: 15,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075276/catbnb/8-RcuZ8ApayWzqjrf_lqvyog.png',
+          preview: true,
+        },
+        {
+          spotId: 16,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075300/catbnb/8-rNfv0CqhU6Foqgd_d5rumd.png',
+          preview: true,
+        },
+        {
+          spotId: 17,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075444/catbnb/8-CQqVeeTfTWFirHo_x7s36z.png',
+          preview: true,
+        },
+        {
+          spotId: 18,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075466/catbnb/8-OA1QO4YqbI3IWNv_slp1ry.png',
+          preview: true,
+        },
+        {
+          spotId: 19,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075538/catbnb/8-H519OixpQdiceDX_qxact0.png',
+          preview: true,
+        },
+        {
+          spotId: 20,
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075490/catbnb/8-z7OCXx5TFvGhERM_f3eqqx.png',
+          preview: true,
+        },
+
       ]
     )
   },

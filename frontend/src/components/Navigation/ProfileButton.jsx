@@ -95,6 +95,14 @@ function ProfileButton({ user }) {
                 Manage Spots
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/reviews/current/"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Manage Reviews
+              </NavLink>
+            </li>
             {/* <li>ManageSpots</li> */}
 
             <li>

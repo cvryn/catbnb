@@ -2,14 +2,20 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpotById } from "../../store/spotsReducer";
-import { TiStarFullOutline } from "react-icons/ti";
 import { getReviews } from "../../store/reviewReducer";
 
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useModal } from "../../context/Modal";
 
+import StarDisplay from "./StarsDisplay";
+import BookingDetails from "../Booking/BookingDetails";
+
 import DeleteReviewModal from "../Reviews/DeleteReviewModal";
 import CreateReviewModal from "../Reviews/CreateNewReviewModal";
+
+// import { TiStarFullOutline } from "react-icons/ti";
+import { PiFishFill } from "react-icons/pi";
+import { LuCat } from "react-icons/lu";
 
 import noimage from "../../../src/assets/no-image-available.jpg";
 
@@ -130,6 +136,10 @@ const SpotDetails = () => {
             <h2 className="owner-info">
               Hosted by {currentSpot?.Owner?.firstName}{" "}
               {currentSpot?.Owner?.lastName}
+              <div className='cat-icon'>
+              <LuCat />
+
+              </div>
             </h2>
             <p className="description" style={{ width: "90%" }}>
               {currentSpot.description}
@@ -158,29 +168,23 @@ const SpotDetails = () => {
                   : ""}
               </div> */}
 
-
               <div className="reviews-details">
                 <div className="spot-details-star">
-                <TiStarFullOutline />
+                  {/* <TiStarFullOutline /> */}
+                  <PiFishFill />
                 </div>
-                <div className='spot-details-reviews'>
-                {isNaN(avgRating) ||
-                avgRating === undefined
-                  ? "New"
-                  :(avgRating).toFixed(2)}{" "}
-                {isNaN(avgRating) ||
-                avgRating === undefined
-                  ? ""
-                  : "·"}{" "}
-                {numReviews === 1
-                  ? "1 Review"
-                  : numReviews > 1
-                  ? `${numReviews} Reviews`
-                  : ""}
-
+                <div className="spot-details-reviews">
+                  {isNaN(avgRating) || avgRating === undefined
+                    ? "New"
+                    : avgRating.toFixed(2)}{" "}
+                  {isNaN(avgRating) || avgRating === undefined ? "" : "·"}{" "}
+                  {numReviews === 1
+                    ? "1 Review"
+                    : numReviews > 1
+                    ? `${numReviews} Reviews`
+                    : ""}
                 </div>
               </div>
-
             </div>
             <div style={{ paddingTop: "20px" }}>
               <button className="reserve-button" onClick={reserveButtonClick}>
@@ -189,24 +193,31 @@ const SpotDetails = () => {
             </div>
           </div>
         </section>
+        <hr />
+
+        <section id='booking-container'>
+          <div>
+            {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
+            <BookingDetails />
+          </div>
+
+        </section>
+        <hr />
 
         <section id="reviews-container">
           <div className="star-and-reviews-container">
-          <TiStarFullOutline />
-                {isNaN(avgRating) ||
-                avgRating === undefined
-                  ? "New"
-                  :(avgRating).toFixed(2)}{" "}
-                {isNaN(avgRating) ||
-                avgRating === undefined
-                  ? ""
-                  : "·"}{" "}
-                {numReviews === 1
-                  ? "1 Review"
-                  : numReviews > 1
-                  ? `${numReviews} Reviews`
-                  : ""}
-              </div>
+            {/* <TiStarFullOutline /> */}
+            <StarDisplay numStars={avgRating} style={{ padding: "5px", fontSize: "22px" }} />
+            {isNaN(avgRating) || avgRating === undefined
+              ? "New"
+              : avgRating.toFixed(2)}{" "}
+            {isNaN(avgRating) || avgRating === undefined ? "" : "·"}{" "}
+            {numReviews === 1
+              ? "1 Review"
+              : numReviews > 1
+              ? `${numReviews} Reviews`
+              : ""}
+          </div>
 
           <div>
             {user && user.id !== currentSpot.ownerId && !userHasReview && (
@@ -224,10 +235,12 @@ const SpotDetails = () => {
               </div>
             )}
             {/* <span>ʕ*•ﻌ•ʔฅ </span> */}
-            {reviews.length === 0 && user?.id !== currentSpot.ownerId && currentSpot.Owner && (
-              <span>Be the first to post a review!</span>
-            )}
+            {reviews.length === 0 &&
+              user?.id !== currentSpot.ownerId &&
+              currentSpot.Owner && <span>Be the first to post a review!</span>}
           </div>
+          <div className='review-from-cats-outer-container'>
+
           <div className="reviews-from-the-cats">
             {reviews &&
               reviews.length > 0 &&
@@ -244,11 +257,15 @@ const SpotDetails = () => {
                   reversedReviews.push(
                     <div key={i} className="actual-reviews">
                       <span style={{ fontSize: "18px" }}>
-                        {review.User.firstName}
+
+                      {review.User.firstName}
                       </span>
                       <span
                         style={{ fontSize: "14px", color: "grey" }}
                       >{`${month} ${year}`}</span>
+                      <span>
+                        <StarDisplay numStars={review.stars} />
+                      </span>
                       <span style={{ fontSize: "12px" }}>{review.review}</span>
                       {user && user.id === review.userId && (
                         <div id="delete-review-button">
@@ -269,6 +286,7 @@ const SpotDetails = () => {
                 }
                 return reversedReviews;
               })()}
+          </div>
           </div>
         </section>
       </div>

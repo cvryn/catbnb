@@ -1,20 +1,15 @@
 import { Link } from "react-router-dom";
-// import { TiStarFullOutline } from "react-icons/ti";
-import { PiFishFill } from "react-icons/pi";
+import { TiStarFullOutline } from "react-icons/ti";
 
 import noimage from "../../../src/assets/no-image-available.jpg";
-import "./SpotItems.css";
+// import "./ReviewItems.css";
 
-const SpotItems = ({ spot }) => {
+const ReviewItems = ({ spot }) => {
   // console.log(spot);
 
   return (
     <>
-      <div
-        // data-tooltip-id="my-tooltip"
-        // data-tooltip-content={spot.name}
-        // data-tooltip-place="bottom"
-      >
+      <div>
         <div id="spots-container" title={spot.name}>
           <Link to={`/spots/${spot.id}`} style={{ textDecoration: "none" }}>
             <div className="spot-image-container">
@@ -34,8 +29,7 @@ const SpotItems = ({ spot }) => {
               </div>
               <div className="rating">
                 <div className='landing-page-star'>
-                {/* <TiStarFullOutline /> */}
-                <PiFishFill />{" "}
+                <TiStarFullOutline />{" "}
                 </div>
                 {isNaN(spot.avgRating) || spot.avgRating === undefined
                   ? "New"
@@ -58,4 +52,4 @@ const SpotItems = ({ spot }) => {
   );
 };
 
-export default SpotItems;
+export default ReviewItems;

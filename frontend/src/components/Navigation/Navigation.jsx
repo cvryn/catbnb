@@ -4,6 +4,8 @@ import ProfileButton from "./ProfileButton";
 // import OpenModalButton from "../OpenModalButton";
 // import LoginFormModal from "../LoginFormModal";
 // import SignupFormModal from "../SignupFormModal";
+
+
 import "./Navigation.css";
 
 import catbnblogo from "../../../src/assets/catbnb-logo.jpg";
@@ -59,6 +61,7 @@ function Navigation({ isLoaded }) {
           {isLoaded && sessionLinks}
         </div>
       </nav>
+      <hr />
     </>
   );
 }
