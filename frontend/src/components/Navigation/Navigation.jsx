@@ -4,7 +4,6 @@ import ProfileButton from "./ProfileButton";
 // import OpenModalButton from "../OpenModalButton";
 // import LoginFormModal from "../LoginFormModal";
 // import SignupFormModal from "../SignupFormModal";
-import SearchBar from "../Search/SearchBar";
 
 
 import "./Navigation.css";

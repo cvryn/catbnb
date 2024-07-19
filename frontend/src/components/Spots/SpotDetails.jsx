@@ -7,11 +7,13 @@ import { getReviews } from "../../store/reviewReducer";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useModal } from "../../context/Modal";
 
+import StarDisplay from "./StarsDisplay";
+import BookingDetails from "../Booking/BookingDetails";
+
 import DeleteReviewModal from "../Reviews/DeleteReviewModal";
 import CreateReviewModal from "../Reviews/CreateNewReviewModal";
-import StarDisplay from "./StarsDisplay";
 
-import { TiStarFullOutline } from "react-icons/ti";
+// import { TiStarFullOutline } from "react-icons/ti";
 import { PiFishFill } from "react-icons/pi";
 import { LuCat } from "react-icons/lu";
 
@@ -138,7 +140,10 @@ const SpotDetails = () => {
             <h2 className="owner-info">
               Hosted by {currentSpot?.Owner?.firstName}{" "}
               {currentSpot?.Owner?.lastName}
+              <div className='cat-icon'>
               <LuCat />
+
+              </div>
             </h2>
             <p className="description" style={{ width: "90%" }}>
               {currentSpot.description}
@@ -192,11 +197,21 @@ const SpotDetails = () => {
             </div>
           </div>
         </section>
+        <hr />
+
+        <section id='booking-container'>
+          <div>
+            {/* <h1>ʕ*•ﻌ•ʔฅ</h1> */}
+            <BookingDetails />
+          </div>
+
+        </section>
+        <hr />
 
         <section id="reviews-container">
           <div className="star-and-reviews-container">
             {/* <TiStarFullOutline /> */}
-            <PiFishFill style={{ paddingTop: "2px", fontSize: "22px" }} />
+            <StarDisplay numStars={avgRating} style={{ padding: "5px", fontSize: "22px" }} />
             {isNaN(avgRating) || avgRating === undefined
               ? "New"
               : avgRating.toFixed(2)}{" "}

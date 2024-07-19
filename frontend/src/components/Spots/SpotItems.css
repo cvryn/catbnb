@@ -23,9 +23,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  clip-path: polygon(30% 10%, 70% 10%, 100% 0, 100% 70%, 100% 100%, 0 100%, 0% 70%, 0 0);
-
-
+  clip-path: polygon(
+    30% 10%,
+    70% 10%,
+    100% 0,
+    100% 70%,
+    100% 100%,
+    0 100%,
+    0% 70%,
+    0 0
+  );
 }
 
 .spots-image {

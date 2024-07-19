@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { newReview, getReviews, updateReview } from '../../store/reviewReducer';
+import { newReview, getReviews } from '../../store/reviewReducer';
 // import { GoStar } from "react-icons/go";
 // import { GoStarFill } from "react-icons/go";
 // import { IoFish } from "react-icons/io5";

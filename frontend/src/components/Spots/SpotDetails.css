@@ -35,6 +35,7 @@
     object-fit: cover;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    clip-path: polygon(30% 10%, 70% 10%, 100% 0, 100% 70%, 100% 100%, 0 100%, 0% 70%, 0 0);
 }
 
 .images-container-right {
@@ -52,6 +53,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* clip-path: polygon(30% 10%, 70% 10%, 100% 0, 100% 70%, 100% 100%, 0 100%, 0% 70%, 0 0); */
 
 }
 
@@ -61,12 +63,23 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 15px 0;
-  border-bottom: solid 2px #B0B0B0;
+  /* border-bottom: solid 2px #B0B0B0; */
+}
+
+.owner-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cat-icon {
+padding-top: 8px;
 }
 
 .reserve-container {
-  border: solid 2px rgb(25, 25, 25);
+  /* border: solid 2px rgb(25, 25, 25); */
+  border: solid 2px #fba7a6;
   border-radius: 10px;
+  /* box-shadow: 2px 2px 2px 2px #ffdede; */
   display: block;
   width: 300px;
   height: 100%;
@@ -75,8 +88,11 @@
   /* Additional styles to override flex behavior */
   flex: 0 0 auto;
   max-width: 100%;
+}
 
-  
+.reserve-container:hover{
+  box-shadow: 2px 2px 2px 2px #ffdede;
+
 }
 
 
@@ -122,7 +138,7 @@
 
 .reserve-button {
   border: none;
-  box-shadow: 2px 2px 5px black;
+  box-shadow: 2px 2px 2px rgb(222, 189, 189);
   border-radius: 10px;
   width: 280px;
   color: white;
@@ -147,15 +163,16 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  padding-bottom: 10px;
 }
 
 
 .review-from-cats-outer-container {
   padding: 20px;
-  border: dashed 2px #FC807D;
+  border: dashed 2px #fba7a6;
   border-radius: 20px;
   background-color: #fff1f1;
-  clip-path: polygon(10% 15%, 90% 15%, 100% 0, 100% 70%, 100% 100%, 0 100%, 0% 70%, 0 0);
+  /* clip-path: polygon(10% 15%, 90% 15%, 100% 0, 100% 70%, 100% 100%, 0 100%, 0% 70%, 0 0); */
 
   /* outline: 2px solid grey; */
   /* outline-offset: -2px; */
@@ -165,8 +182,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-top:50px;
-  clip-path: polygon(30% 10%, 70% 10%, 100% 0, 100% 70%, 100% 100%, 0 100%, 0% 70%, 0 0);
+  /* padding-top:50px; */
 }
 
 .actual-reviews {
@@ -174,15 +190,22 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    padding: 20px;
+    padding-top: 30px;
+    background: white;
+    border-radius: 20px;
+    clip-path: polygon(5% 15%, 95% 15%, 100% 0, 100% 70%, 100% 100%, 0 100%, 0% 70%, 0 0);
 
 }
 
 
 .spots-review-delete-button{
   border: none;
+  border-radius: 8px;
   background-color: grey;
-  box-shadow: 2px 2px 2px black;
-  font-size: 14px;
+  padding: 6px;
+  box-shadow: 2px 2px 2px rgb(214, 214, 214);
+  font-size: 12px;
   color: white;
   cursor: pointer;
 }

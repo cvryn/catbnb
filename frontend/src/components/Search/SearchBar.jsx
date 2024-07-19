@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import "./SearchBar.css";
@@ -10,7 +10,6 @@ const SearchBar = () => {
   const [checkOutDate, setCheckOutDate] = useState("");
   const [guests, setGuests] = useState(1);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Set custom placeholder text for date inputs

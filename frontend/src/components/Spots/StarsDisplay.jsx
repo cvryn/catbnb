@@ -1,34 +1,44 @@
-import { PiFishFill } from "react-icons/pi";
-import { PiFish } from "react-icons/pi";
-
+import { PiFishFill, PiFishDuotone, PiFish } from "react-icons/pi";
 
 const StarDisplay = ({ numStars }) => {
-    const renderStars = (numStars) => {
-      const stars = [];
-      const maxStars = 5;
+  const showStars = (numStars) => {
+    const stars = [];
+    const maxStars = 5;
 
-      // Determine how many filled and empty icons
-      const numFilledStars = Math.min(numStars, maxStars); // Limit numStars to maxStars
-      const numEmptyStars = maxStars - numFilledStars;
+    // Check how many should be filled, duotone, and empty
+    const rating = Math.min(Math.max(numStars, 0), maxStars);
+    // Fully filled stars
+    const numFilledStars = Math.floor(rating);
 
-      // Filled stars
-      for (let i = 0; i < numFilledStars; i++) {
-        stars.push(<PiFishFill />);
-      }
+    // Duotone star if there's a decimal
+    const duotoneStar = rating - numFilledStars > 0 ? <PiFishDuotone /> : null;
 
-      // Empty stars
-      for (let i = 0; i < numEmptyStars; i++) {
-        stars.push(<PiFish key={`empty-${i}`}  />);
-      }
+    // Empty stars
+    const numEmptyStars = maxStars - numFilledStars - (duotoneStar ? 1 : 0);
 
-      return stars;
-    };
+    // Filled stars
+    for (let i = 0; i < numFilledStars; i++) {
+      stars.push(<PiFishFill key={`filled-${i}`} />);
+    }
 
-    return (
-      <div className="star-display">
-        {renderStars(numStars)}
-      </div>
-    );
+    // Duotone star
+    if (duotoneStar) {
+      stars.push(duotoneStar);
+    }
+
+    // Empty stars
+    for (let i = 0; i < numEmptyStars; i++) {
+      stars.push(<PiFish key={`empty-${i}`} />);
+    }
+
+    return stars;
   };
 
-  export default StarDisplay;
+  return (
+    <div className="star-display">
+      {showStars(numStars)}
+    </div>
+  );
+};
+
+export default StarDisplay;
