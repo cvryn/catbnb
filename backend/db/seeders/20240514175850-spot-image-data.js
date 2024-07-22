@@ -68,7 +68,7 @@ module.exports = {
         },
         {
           spotId: 3,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064565/8-0RhZUtwAMsdYmET_t2iko6.png',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075538/catbnb/8-H519OixpQdiceDX_qxact0.png',
           preview: true,
         },
         {
@@ -170,27 +170,7 @@ module.exports = {
         },
         {
           spotId: 11,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064520/8-vVCNspoNcC5Jevs_ndmh0t.png',
-          preview: true,
-        },
-        {
-          spotId: 11,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064375/8-XiVdMvPw3eIf03j_mbbn82.png',
-          preview: true,
-        },
-        {
-          spotId: 11,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064369/8-6Q9pin276UeZirG_avrzd6.png',
-          preview: true,
-        },
-        {
-          spotId: 11,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721064445/8-aeEpBzgtK11vf6X_dky0oc.png',
-          preview: true,
-        },
-        {
-          spotId: 11,
-          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1717482636/catbnb/8-gw2n7QwDHxtKg4O_jhqf7r.png',
+          url: 'https://res.cloudinary.com/dfj8lsesn/image/upload/v1721075466/catbnb/8-OA1QO4YqbI3IWNv_slp1ry.png',
           preview: true,
         },
         {
